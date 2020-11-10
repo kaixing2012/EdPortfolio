@@ -1,0 +1,16 @@
+.nav-container {
+    display: flex;
+    width: 100%;
+    padding: 40px 100px;
+    background-color: transparent;
+    justify-content: space-between;
+}
+
+.nav-text {
+    color: #ebebeb; 
+    text-shadow: 3px 3px 6px #000000;
+}
+
+.nav-text-right {
+    margin-left: 25px;
+}
