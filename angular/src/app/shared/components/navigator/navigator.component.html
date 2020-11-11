@@ -1,17 +1,17 @@
 <mat-toolbar class="nav-container">
-    <div *ngIf="!isMobileSize">
-        <span class="nav-text mat-headline">Edward Y. Rogers</span>
+    <div>
+        <span *ngIf="!isMobileSize" class="nav-text mat-headline">Edward Y. Rogers</span>
     </div>
 
-    <div *ngIf="!isMobileSize">
+    <div [ngClass]="{'collapsed': isCollapsed}" class="nav-link-container">
         <span class="nav-text nav-text-right mat-headline">Home</span>
+        <span class="nav-text nav-text-right mat-headline">About</span>
+        <span class="nav-text nav-text-right mat-headline">About</span>
         <span class="nav-text nav-text-right mat-headline">About</span>
     </div>
 
-    <div *ngIf="isMobileSize"></div>
-
     <div *ngIf="isMobileSize">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="onCollapse()">
             <mat-icon class="nav-text">menu</mat-icon>
         </button>
     </div>

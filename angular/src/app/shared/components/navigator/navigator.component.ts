@@ -8,6 +8,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class NavigatorComponent implements OnInit {
 
   isMobileSize: boolean = false;
+  isCollapsed: boolean = false;
+
   private innerWidth: number
 
   constructor() { }
@@ -38,5 +40,9 @@ export class NavigatorComponent implements OnInit {
     else {
       this.isMobileSize = true;
     }
+  }
+
+  onCollapse() {
+    this.isCollapsed = !this.isCollapsed
   }
 }
