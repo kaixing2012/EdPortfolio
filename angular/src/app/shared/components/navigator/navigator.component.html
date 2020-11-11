@@ -1,13 +1,12 @@
 <mat-toolbar class="nav-container">
     <div>
-        <span *ngIf="!isMobileSize" class="nav-text mat-headline">Edward Y. Rogers</span>
+        <!-- <span *ngIf="!isMobileSize" class="nav-text mat-headline">Edward Y. Rogers</span> -->
     </div>
 
     <div [ngClass]="{'collapsed': isCollapsed}" class="nav-link-container">
-        <span class="nav-text nav-text-right mat-headline">Home</span>
-        <span class="nav-text nav-text-right mat-headline">About</span>
-        <span class="nav-text nav-text-right mat-headline">About</span>
-        <span class="nav-text nav-text-right mat-headline">About</span>
+        <a [routerLink]="['/portfolio']" class="nav-text nav-text-right mat-headline">Portfolio</a>
+        <a [routerLink]="['/lifestyle']" class="nav-text nav-text-right mat-headline">LifeStyle</a>
+        <a [routerLink]="['/home']" class="nav-text nav-text-right mat-headline">Home</a>
     </div>
 
     <div *ngIf="isMobileSize">

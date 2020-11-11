@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { AppRoutingModule } from './modules/routing/app-routing.module';
 import { MaterialModule } from '../app/modules/material/material.module';
+import { PortfolioModule } from '../app/modules/portfolio/portfolio.module'
+import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module'
+
+import { AppComponent } from './app.component';
 import { NavigatorComponent } from './shared/components/navigator/navigator.component'
 
 @NgModule({
@@ -15,9 +17,11 @@ import { NavigatorComponent } from './shared/components/navigator/navigator.comp
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    BrowserModule,
+    MaterialModule,
+    PortfolioModule,
+    LifestyleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,15 +4,25 @@
     padding: 40px 100px;
     background-color: transparent;
     justify-content: space-between;
+    z-index: 4;
 }
 
 .nav-text {
     color: #ebebeb; 
+    cursor: pointer;
     text-shadow: 3px 3px 6px #000000;
+    text-decoration: none;
 }
 
 .nav-text-right {
     margin: 0px 0px 0px 25px;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.nav-text-right:hover {
+    font-size: 28px;
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
