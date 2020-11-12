@@ -16,7 +16,7 @@ export class NavigatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth >= 767.98) {
+    if (this.innerWidth >= 575.98) {
       this.isMobileSize = false;
     }
     else {
@@ -34,7 +34,7 @@ export class NavigatorComponent implements OnInit {
       this.innerWidth = document.body.clientWidth;
     }
 
-    if (this.innerWidth >= 767.98) {
+    if (this.innerWidth >= 575.98) {
       this.isMobileSize = false;
     }
     else {
