@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navigator',
@@ -7,7 +7,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class NavigatorComponent implements OnInit {
 
-  isMobileSize: boolean = false;
+  @Input() isMobileSize: boolean;
+
   isCollapsed: boolean = false;
 
   private innerWidth: number
@@ -15,31 +16,7 @@ export class NavigatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth >= 575.98) {
-      this.isMobileSize = false;
-    }
-    else {
-      this.isMobileSize = true;
-    }
-  }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-
-    if (event != undefined) {
-      this.innerWidth = event.target.innerWidth;
-    }
-    else {
-      this.innerWidth = document.body.clientWidth;
-    }
-
-    if (this.innerWidth >= 575.98) {
-      this.isMobileSize = false;
-    }
-    else {
-      this.isMobileSize = true;
-    }
   }
 
   onCollapse() {

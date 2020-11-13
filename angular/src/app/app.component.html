@@ -1,13 +1,4 @@
 <section class="app-container">
-	<header>
-		<app-navigator></app-navigator>
-	</header>
-
-	<main class="main-container">
-		<router-outlet></router-outlet>
-	</main>
-
-	<footer>
-
-	</footer>
+	<app-navigator [isMobileSize]="isMobileSize"></app-navigator>
+	<router-outlet></router-outlet>
 </section>
