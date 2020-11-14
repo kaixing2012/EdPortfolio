@@ -2,15 +2,19 @@
     display: flex;
     position: fixed;
     width: 100%;
-    padding: 80px 100px;
+    padding: 70px 80px;
     background-color: transparent;
-    justify-content: space-between;
+    justify-content: space-between;   
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    z-index: 2;
     /* border: 1px solid white; */
 }
 
 .nav-link-container {
     display: flex;
-    width: 380px;
+    width: 360px;
     justify-content: space-between;
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
@@ -26,20 +30,20 @@
 
 .nav-text-right {
     margin: 0;
-    font-size: 30px;
+    font-size: 1.4em;
     -webkit-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
 
 .nav-text-right:hover {
-    font-size: 35px;
+    font-size: 1.6em;
 }
 
 /* Large devices (desktops, less than 1200px) */
 @media (max-width: 1199.98px) { 
     .nav-container {
-        padding: 80px 75px;
+        padding: 60px 65px;
     }
 }
 
@@ -51,7 +55,7 @@
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) { 
     .nav-container {
-        padding: 45px 50px;
+        padding: 45px 45px;
     }
 
     .nav-link-container {
@@ -59,23 +63,24 @@
     }
 
     .nav-text-right {
-        font-size: 23px;
+        font-size: 1em;
     }    
 
     .nav-text-right:hover {
-        font-size: 28px;
+        font-size: 1.2em;
     }
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
     .nav-container {
-        padding: 40px 30px;
+        padding: 40px 25px;
     }
 
     .nav-link-container {
         display: grid;
         position: relative;
+        margin: 0;
         height: 10px;
         top: -1000px;
     }

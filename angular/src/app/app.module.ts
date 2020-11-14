@@ -6,6 +6,7 @@ import { AppRoutingModule } from './modules/routing/app-routing.module';
 import { MaterialModule } from '../app/modules/material/material.module';
 import { PortfolioModule } from '../app/modules/portfolio/portfolio.module'
 import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module'
+import { HomeModule } from '../app/modules/home/home.module'
 
 import { AppComponent } from './app.component';
 import { NavigatorComponent } from './shared/components/navigator/navigator.component'
@@ -20,6 +21,7 @@ import { NavigatorComponent } from './shared/components/navigator/navigator.comp
     BrowserAnimationsModule,
     BrowserModule,
     MaterialModule,
+    HomeModule,
     PortfolioModule,
     LifestyleModule
   ],

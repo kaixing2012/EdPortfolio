@@ -11,8 +11,6 @@ export class NavigatorComponent implements OnInit {
 
   isCollapsed: boolean = false;
 
-  private innerWidth: number
-
   constructor() { }
 
   ngOnInit(): void {
