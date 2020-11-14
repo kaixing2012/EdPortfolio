@@ -1,24 +1,23 @@
 .home-common-container {
 	width: 100%;
 	height: 100%;
+	max-width: 100%;
 	text-align: center;
-	-webkit-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
 }
 
 .home-dark-cover {
 	height: 100%; 
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.45); 
+	background-color: rgba(0, 0, 0, 0.35); 
 }
 
 .home-cover-frame {
+	position: fixed;
 	background-image: url(/assets/images/home-cover.jpg);
 	background-size: cover;
-	background-position: center;
+	background-position: center, center;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background-attachment: scroll;
 	box-shadow: inset 0 0 180px 60px #000000;
 	z-index: -1;
 }
@@ -34,7 +33,11 @@
 }
 
 .home-front-frame {
-	background-color: rgba(0, 0, 0, 0.9);
+	height: 120%;
+	background-color: rgba(0, 0, 0, 1);
+	-webkit-transition: all 0s;
+    -o-transition: all 0s;
+    transition: all 0s;
 }
 
 .home-third-frame {
@@ -91,6 +94,10 @@
 	.home-cover-text {
 		font-size: 35px;
 	}
+
+	.home-third-frame {
+		background-attachment: initial;
+	}
 }
 
 /* Medium devices (tablets, less than 992px) */
@@ -100,12 +107,24 @@
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) { 
-	.home-cover-text {
-		font-size: 2em;
-	}
-
 	.home-container {
 		box-shadow: inset 0 0 180px 50px #000000;
+	}
+
+	.home-cover-frame {
+		position: fixed;
+		background-attachment: scroll;
+	}
+
+	.home-third-frame {
+		position: fixed;
+		top: 100%;
+		background-attachment: scroll;
+		z-index: 4;
+	}
+	
+	.home-cover-text {
+		font-size: 2em;
 	}
 }
 
