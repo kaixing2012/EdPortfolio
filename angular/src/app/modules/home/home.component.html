@@ -1,4 +1,4 @@
-<div id="tes2" class="home-common-container home-cover-frame">
+<div #coverFrame class="home-common-container home-cover-frame">
     <div class="home-dark-cover">
     </div>
 </div>
@@ -11,16 +11,70 @@
     </div>
 </div>
 
-<div id="test" class="home-common-container home-front-frame">
+<div #frontFrame class="home-common-container home-story-front-frame">
+    <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktop">
+        <mat-grid-list cols="1" rowHeight="25%">
+            <mat-grid-tile rowspan="1" style="background-color: transparent;">
+                <div #selfie class="home-story-selfie"></div>
+            </mat-grid-tile>
 
+            <mat-grid-tile rowspan="3" style="background-color: transparent;">
+                <div #detail class="home-story-detail">
+                    <p>
+                        <b>Hello, fellows,</b> <br>
+                        <br>
+                        I'm <b>Edward Rogers</b> (殷浩哲), feel free to call me Ed!
+                        I'm a software engineer and this website is to show what I've made
+                        and therefore, make yourself at home! We are gonna have some fun! <br>
+                        <br>
+                        But the first thing is first! I was born and raised in Taiwan and and I studied my coding skill
+                        when I was in Australia 2 years ago! So basically, I had my career complete change!
+                        It was lucky that I found out what I want do and going to do. It's a cool thing ever! <br>
+                        <br>
+                        Okay, It's too wordy let's just get started!
+                    </p>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </ng-template>
+
+    <ng-template #dosktop>
+        <mat-grid-list class="home-story-grid" cols="2" rowHeight="100%">
+            <mat-grid-tile>
+                <div #selfie class="home-story-selfie"></div>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <div #detail class="home-story-detail">
+                    <p>
+                        <b>Hello, fellows,</b> <br>
+                        <br>
+                        I'm <b>Edward Rogers</b> (殷浩哲), feel free to call me Ed!
+                        I'm a software engineer and this website is to show what I've made
+                        and therefore, make yourself at home! We are gonna have some fun! <br>
+                        <br>
+                        But the first thing is first! I was born and raised in Taiwan and and I studied my coding skill
+                        when I was in Australia 2 years ago! So basically, I had my career complete change!
+                        It was lucky that I found out what I want do and going to do. It's a cool thing ever! <br>
+                        <br>
+                        Okay, It's too wordy let's just get started!
+                    </p>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </ng-template>
 </div>
 
 <div class="home-common-container">
     <div class="home-dark-cover">
+        <div class="home-skill-frame">
+            <h1>So these are what I do</h1>
+        </div>
     </div>
 </div>
 
-<div class="home-common-container home-front-frame">
+
+<div class="home-common-container home-footer-front-frame">
     <div class="home-footer">
         <div style="width:80%; margin: auto; border: 1px solid rgb(223, 223, 223);"></div>
 
