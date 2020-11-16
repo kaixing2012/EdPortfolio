@@ -14,11 +14,11 @@
 <div #frontFrame class="home-common-container home-story-front-frame">
     <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktop">
         <mat-grid-list cols="1" rowHeight="25%">
-            <mat-grid-tile rowspan="1" style="background-color: transparent;">
+            <mat-grid-tile rowspan="1">
                 <div #selfie class="home-story-selfie"></div>
             </mat-grid-tile>
 
-            <mat-grid-tile rowspan="3" style="background-color: transparent;">
+            <mat-grid-tile rowspan="3">
                 <div #detail class="home-story-detail">
                     <p>
                         <b>Hello, fellows,</b> <br>
@@ -68,7 +68,44 @@
 <div class="home-common-container">
     <div class="home-dark-cover">
         <div class="home-skill-frame">
-            <h1>So these are what I do</h1>
+            <mat-grid-list cols="3" rowHeight="45%">
+                <mat-grid-tile style="background-color: transparent">
+                    <div>
+                        <i class="fab fa-angular"></i>
+                        <p>Angular</p>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile style="background-color: transparent;">
+                    <div>
+                        <i class="fab fa-js-square"></i>
+                        <p>JavaScript</p>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile style="background-color: transparent;">
+                    <div>
+                        <i class="fab"><small>.Net</small></i>
+                        <p>ASP.Net</p>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile style="background-color: transparent;">
+                    <div>
+                        <i class="fab"><small>Dj</small></i>
+                        <p>Django</p>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile style="background-color: transparent;">
+                    <div>
+                        <i class="fab fa-python"></i>
+                        <p>Python</p>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile style="background-color: transparent;">
+                    <div>
+                        <i class="fab fa-docker"></i>
+                        <p>Docker</p>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
         </div>
     </div>
 </div>

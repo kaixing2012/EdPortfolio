@@ -69,16 +69,25 @@
 
 .home-skill-frame {
 	color: #ebebeb;
+	height: 100%;
+	width: 80%;
 	padding: 1.5rem;
+	margin: auto;
 }
 
-.home-skill-frame h1 {
-	color: #ebebeb;
-	text-align: left;
-	font-size: 2em;
-	margin-top: 2.5em;
-	margin-left: 3em;
-	text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.4); 
+.home-skill-frame .mat-grid-list{
+	margin-top: 5%;
+}
+
+.home-skill-frame i {
+	font-size: 8em;
+	text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
+}
+
+.home-skill-frame p {
+	font-size: 2.3em;
+	line-height: 1.5em;
+	text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
 }
 
 .home-footer-front-frame {
@@ -183,5 +192,15 @@
 		font-size: 1.5em;
 		line-height: 1.5em;
 		transform: scale(1);
+	}
+
+	.home-skill-frame i {
+		font-size: 4.5em;
+		text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
+	}
+
+	.home-skill-frame p {
+		font-size: 1.5em;
+		line-height: 2em;
 	}
 }
