@@ -15,6 +15,34 @@ export class HomeComponent implements OnInit {
   isMobileMode: boolean
   winInnerWidth: number = window.innerWidth;
 
+  skillIcons = [
+    {
+      class: "fa-angular",
+      name: "Angular"
+    },
+    {
+      class: "fa-js-square",
+      name: "JavaScript"
+    },
+    {
+      font: "C#",
+      name: "ASP.Net"
+    },
+    {
+      font: "Dj",
+      name: "Django"
+    },
+    {
+      class: "fa-python",
+      name: "Python"
+    },
+    {
+      class: "fa-docker",
+      name: "Docker"
+    }
+
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

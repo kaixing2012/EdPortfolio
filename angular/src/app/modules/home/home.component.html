@@ -12,7 +12,7 @@
 </div>
 
 <div #frontFrame class="home-common-container home-story-front-frame">
-    <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktop">
+    <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForDetail">
         <mat-grid-list cols="1" rowHeight="25%">
             <mat-grid-tile rowspan="1">
                 <div #selfie class="home-story-selfie"></div>
@@ -38,7 +38,7 @@
         </mat-grid-list>
     </ng-template>
 
-    <ng-template #dosktop>
+    <ng-template #dosktopForDetail>
         <mat-grid-list class="home-story-grid" cols="2" rowHeight="100%">
             <mat-grid-tile>
                 <div #selfie class="home-story-selfie"></div>
@@ -68,54 +68,64 @@
 <div class="home-common-container">
     <div class="home-dark-cover">
         <div class="home-skill-frame">
-            <mat-grid-list cols="3" rowHeight="45%">
-                <mat-grid-tile style="background-color: transparent">
-                    <div>
-                        <i class="fab fa-angular"></i>
-                        <p>Angular</p>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile style="background-color: transparent;">
-                    <div>
-                        <i class="fab fa-js-square"></i>
-                        <p>JavaScript</p>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile style="background-color: transparent;">
-                    <div>
-                        <i class="fab"><small>.Net</small></i>
-                        <p>ASP.Net</p>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile style="background-color: transparent;">
-                    <div>
-                        <i class="fab"><small>Dj</small></i>
-                        <p>Django</p>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile style="background-color: transparent;">
-                    <div>
-                        <i class="fab fa-python"></i>
-                        <p>Python</p>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile style="background-color: transparent;">
-                    <div>
-                        <i class="fab fa-docker"></i>
-                        <p>Docker</p>
-                    </div>
-                </mat-grid-tile>
-            </mat-grid-list>
+            <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForSkill">
+                <mat-grid-list cols="2" rowHeight="33.5%">
+                    <mat-grid-tile *ngFor="let icon of skillIcons">
+                        <div>
+                            <ng-template [ngIf]="icon.class" [ngIfElse]="noIcon">
+                                <i class="fab {{icon.class}}"></i>
+                                <p>{{ icon.name }}</p>
+                            </ng-template>
+
+                            <ng-template #noIcon>
+                                <i class="fab"><small>{{ icon.font }}</small></i>
+                                <p>{{ icon.name }}</p>
+                            </ng-template>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </ng-template>
+
+            <ng-template #dosktopForSkill>
+                <mat-grid-list cols="3" rowHeight="50%">
+                    <mat-grid-tile *ngFor="let icon of skillIcons">
+                        <div>
+                            <ng-template [ngIf]="icon.font" [ngIfElse]="noIcon">
+                                <i class="fab {{icon.class}}"><small>{{ icon.font }}</small></i>
+                                <p>{{ icon.name }}</p>
+                            </ng-template>
+                            <ng-template #noIcon>
+                                <i class="fab {{icon.class}}"></i>
+                                <p>{{ icon.name }}</p>
+                            </ng-template>
+                        </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </ng-template>
         </div>
     </div>
 </div>
 
 
 <div class="home-common-container home-footer-front-frame">
-    <div class="home-footer">
+    <div class="home-foot-detail">
+        <p>
+            So the kind tools above are what I mainly work with!
+            I also have the basic knowledge of HTML and CSS that are
+            how I build up this site lol~<br>
+            <br>
+            However, I assume you are more likely to be interested in
+            some kind of real projects! I am aware of that
+            and that is why I build this site up to demo something interesting! <br>
+            <br>
+            Aright, you'll find them up in other section! I'll see you there~
+        </p>
+    </div>
+
+    <div class="home-foot-link">
         <div style="width:80%; margin: auto; border: 1px solid rgb(223, 223, 223);"></div>
 
-        <div style="height: 75%;">
+        <div style="height: 70%;">
             <mat-grid-list cols="1" rowHeight="100%">
                 <mat-grid-tile>
                     <span>
@@ -135,7 +145,7 @@
             </mat-grid-list>
         </div>
 
-        <div style="height: 25%;">
+        <div style="height: 30%;">
             <mat-grid-list cols="1" rowHeight="100%" style="background-color: rgba(93, 34, 34, 0.5);">
                 <mat-grid-tile style="color: #ebebeb; font-size: 1.1em;">
                     © 2020 Edward Y. Rogers
