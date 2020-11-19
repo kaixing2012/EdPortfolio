@@ -1,6 +1,8 @@
 import { HostListener, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 
+import { AppService } from './app.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,33 +11,17 @@ import { Component } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'EdPortfolio';
   innerWidth: any;
-  isMobileSize: boolean;
+  isMobileMode: boolean;
+
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-    this.innerWidth = window.innerWidth;
-    if (this.innerWidth >= 575.98) {
-      this.isMobileSize = false;
-    }
-    else {
-      this.isMobileSize = true;
-    }
+    this.isMobileMode = this.appService.checkUpMobileSize(window)
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
-
-    if (event != undefined) {
-      this.innerWidth = event.target.innerWidth;
-    }
-    else {
-      this.innerWidth = document.body.clientWidth;
-    }
-
-    if (this.innerWidth >= 575.98) {
-      this.isMobileSize = false;
-    }
-    else {
-      this.isMobileSize = true;
-    }
+  onResize(event: Event) {
+    let window = event.target as Window
+    this.isMobileMode = this.appService.checkUpMobileSize(window)
   }
 }

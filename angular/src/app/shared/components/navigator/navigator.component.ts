@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavigatorComponent implements OnInit {
 
-  @Input() isMobileSize: boolean;
+  @Input() isMobileMode: boolean;
 
   isCollapsed: boolean = false;
 

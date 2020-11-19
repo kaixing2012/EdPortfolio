@@ -9,7 +9,7 @@
         <a [routerLink]="['/home']" class="nav-text nav-text-right">Home</a>
     </div>
 
-    <div *ngIf="isMobileSize">
+    <div *ngIf="isMobileMode">
         <button mat-icon-button (click)="onCollapse()">
             <mat-icon class="nav-text">menu</mat-icon>
         </button>

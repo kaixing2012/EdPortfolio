@@ -46,7 +46,6 @@
 	background-size: cover;
 	background-position: center, center;
 	background-repeat: no-repeat;
-	box-shadow: inset 0 0 200px 100px #000000;
 	-webkit-transition: all 1s;
     -o-transition: all 1s;
     transition: all 1s;
@@ -56,12 +55,11 @@
 	display: none;
 	overflow: auto;
 	width: 100%; 
-	height: 100%;
+	height: 80%;
 	color: #ebebeb;
 	text-align: left;
 	font-size: 2em;
 	line-height: 1.5em;
-	border-radius: 4rem;
 	transform: scale(1);
 	-webkit-transition: all 1s;
     -o-transition: all 1s;
@@ -107,20 +105,31 @@
 .home-foot-detail {
 	position: relative;
 	height: 80%; 
-	width: 50%;
+	width: 100%;
 	margin: auto;
 	color: #ebebeb;
 	text-align: left;
 }
 
-.home-foot-detail p {
+.home-foot-detail div {
 	position: relative;
+	overflow: auto;
+	height: 70%; 
+	width: 50%;
 	top: 50%;
 	left: 50%;
+	transform: translate(-50%, -50%);
+	vertical-align: middle;
+}
+
+.home-foot-detail div::-webkit-scrollbar { 
+    display: none;
+}
+
+.home-foot-detail p {
 	font-size: 1.6em;
 	line-height: 1.5em;
 	text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
-	transform: translate(-50%, -50%);
 }
 
 .home-foot-link {
@@ -184,9 +193,6 @@
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) { 
-	.home-container {
-		box-shadow: inset 0 0 180px 50px #000000;
-	}
 
 	.home-cover-frame {
 		position: fixed;
@@ -197,8 +203,20 @@
 		font-size: 2em;
 	}
 
-	.home-story-selfie {
-		box-shadow: inset 0 0 100px 20px #000000;
+	.home-skill-frame i {
+		font-size: 4em;
+	}
+
+	.home-foot-detail div {
+		width: 70%;
+	}
+
+	.home-foot-detail {
+		height: 70%; 
+	}
+
+	.home-foot-link {
+		height: 30%; 
 	}
 }
 
@@ -209,15 +227,15 @@
 	}
 
 	.home-story-selfie {
-		display: block;
+		display: initial;
 		width: 30rem; 
 		height: 30rem;
 		border-radius: 50%;
-		transform: scale(.7) rotate(0deg);
+		transform: scale(.7);
 	}
 
 	.home-story-detail {
-		display: block;
+		display: initial;
 		height: 100%;
 		padding: 0 1.7em;
 		font-size: 1.5em;
@@ -227,7 +245,6 @@
 
 	.home-skill-frame i {
 		font-size: 4.5em;
-		text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4); 
 	}
 
 	.home-skill-frame p {
@@ -236,10 +253,20 @@
 	}
 
 	.home-footer-front-frame {
-		height: 130%;
+		height: 140%;
 	}
 
 	.home-foot-detail {
+		height: 85%; 
 		width: 80%;
+	}
+
+	.home-foot-detail div {
+		height: 80%;
+		width: 100%;
+	}
+
+	.home-foot-link {
+		height: 15%; 
 	}
 }

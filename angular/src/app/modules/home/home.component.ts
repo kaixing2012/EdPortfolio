@@ -1,4 +1,5 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AppService } from '../../app.service'
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,6 @@ export class HomeComponent implements OnInit {
   @ViewChild('detail') detail: ElementRef
 
   isMobileMode: boolean
-  winInnerWidth: number = window.innerWidth;
 
   skillIcons = [
     {
@@ -43,15 +43,10 @@ export class HomeComponent implements OnInit {
 
   ]
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-    if (this.winInnerWidth >= 575.98) {
-      this.isMobileMode = false;
-    }
-    else {
-      this.isMobileMode = true;
-    }
+    this.isMobileMode = this.appService.checkUpMobileSize(window)
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -59,11 +54,12 @@ export class HomeComponent implements OnInit {
     if (this.frontFrame.nativeElement.getBoundingClientRect().top < 0) {
       this.coverFrame.nativeElement.style.backgroundImage = "url(/assets/images/home-dark-row.jpg)"
       if (!this.isMobileMode) {
-        this.selfie.nativeElement.style.display = "inline"
-        this.detail.nativeElement.style.display = "inline"
+        this.selfie.nativeElement.style.display = "initial"
+        this.detail.nativeElement.style.display = "initial"
 
         setTimeout(() => {
           this.selfie.nativeElement.style.transform = "scale(.7)"
+          this.selfie.nativeElement.style.boxShadow = "inset 0 0 100px 50px #000000";
           this.detail.nativeElement.style.transform = "scale(.7)"
 
         }, 100);
@@ -76,12 +72,7 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    let target = event.target as Window
-    if (target.innerWidth >= 575.98) {
-      this.isMobileMode = false;
-    }
-    else {
-      this.isMobileMode = true;
-    }
+    let window = event.target as Window
+    this.isMobileMode = this.appService.checkUpMobileSize(window)
   }
 }
