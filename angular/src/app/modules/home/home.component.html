@@ -14,8 +14,9 @@
 <div #frontFrame class="home-common-container home-story-front-frame">
     <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForDetail">
         <mat-grid-list cols="1" rowHeight="25%">
-            <mat-grid-tile rowspan="1">
-                <div #selfie class="home-story-selfie"></div>
+            <mat-grid-tile class="home-story-selfie" rowspan="1">
+                <img #selfie src="/assets/images/selfie-squere.jpg" alt="">
+                <div></div>
             </mat-grid-tile>
 
             <mat-grid-tile rowspan="3">
@@ -40,8 +41,9 @@
 
     <ng-template #dosktopForDetail>
         <mat-grid-list class="home-story-grid" cols="2" rowHeight="100%">
-            <mat-grid-tile>
-                <div #selfie class="home-story-selfie"></div>
+            <mat-grid-tile class="home-story-selfie">
+                <img #selfie src="/assets/images/selfie-tall.jpg" alt="">
+                <div></div>
             </mat-grid-tile>
 
             <mat-grid-tile>

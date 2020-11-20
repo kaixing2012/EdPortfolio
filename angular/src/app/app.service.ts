@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,8 +6,17 @@ import { Injectable } from '@angular/core';
 export class AppService {
 
   private isMobileMode: boolean;
+  private _isfrontFrameTouchTop: boolean;
 
   constructor() { }
+
+  @Input()
+  set isfrontFrameTouchTop(val) {
+    this._isfrontFrameTouchTop = val
+  }
+  get isfrontFrameTouchTop() {
+    return this._isfrontFrameTouchTop
+  }
 
   checkUpMobileSize(window: Window) {
     if (window.innerWidth >= 575.98) {
@@ -18,4 +27,6 @@ export class AppService {
     }
     return this.isMobileMode
   }
+
+
 }

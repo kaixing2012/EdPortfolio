@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AppService } from '../../app.service'
 
 @Component({
@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   onScroll(event: Event) {
     if (this.frontFrame.nativeElement.getBoundingClientRect().top < 0) {
       this.coverFrame.nativeElement.style.backgroundImage = "url(/assets/images/home-dark-row.jpg)"
+      this.appService.isfrontFrameTouchTop = true;
       if (!this.isMobileMode) {
         this.selfie.nativeElement.style.display = "initial"
         this.detail.nativeElement.style.display = "initial"
@@ -67,6 +68,7 @@ export class HomeComponent implements OnInit {
 
     } else {
       this.coverFrame.nativeElement.style.backgroundImage = "url(/assets/images/home-cover.jpg)";
+      this.appService.isfrontFrameTouchTop = false;
     }
   }
 

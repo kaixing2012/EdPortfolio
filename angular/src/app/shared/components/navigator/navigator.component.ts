@@ -1,4 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+
+import { MatToolbar } from '@angular/material/toolbar';
+
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-navigator',
@@ -7,14 +11,25 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavigatorComponent implements OnInit {
 
+  @ViewChild('nav') nav: MatToolbar;
+
   @Input() isMobileMode: boolean;
 
   isCollapsed: boolean = false;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
 
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event) {
+    if (this.appService.isfrontFrameTouchTop) {
+      this.nav._elementRef.nativeElement.style.backgroundColor = "rgb(0, 0, 0, 0.7)"
+    } else {
+      this.nav._elementRef.nativeElement.style.backgroundColor = "transparent"
+    }
   }
 
   onCollapse() {
