@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 import { MatToolbar } from '@angular/material/toolbar';
 
@@ -25,11 +25,11 @@ export class NavigatorComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
-    if (this.appService.isfrontFrameTouchTop) {
-      this.nav._elementRef.nativeElement.style.backgroundColor = "rgb(0, 0, 0, 0.7)"
-    } else {
-      this.nav._elementRef.nativeElement.style.backgroundColor = "transparent"
-    }
+    // if (this.appService.isfrontFrameTouchTop) {
+    //   this.nav._elementRef.nativeElement.style.backgroundColor = "rgba(0, 0, 0, 0.7)"
+    // } else {
+    //   this.nav._elementRef.nativeElement.style.backgroundColor = "transparent"
+    // }
   }
 
   onCollapse() {

@@ -41,8 +41,11 @@
 	width: 80%; 
 	height: 80%;
 	border-radius: 4rem;
-	box-shadow: inset 0px 0px 200px 100px rgba(0, 0, 0, 1);
+	box-shadow: inset 0px 0px 100px 60px rgba(0, 0, 0, 1);
 	transform: scale(.7);
+	-webkit-transition: all .5s;
+    -o-transition: all .5s;
+	transition: all .5s;
 }
 
 .home-story-selfie img {
@@ -194,12 +197,6 @@
 
 /* Medium devices (tablets, less than 992px) */
 @media (max-width: 991.98px) { 
-
-}
-
-/* Small devices (landscape phones, less than 768px) */
-@media (max-width: 767.98px) { 
-
 	.home-cover-frame {
 		position: fixed;
 		background-attachment: scroll;
@@ -207,6 +204,10 @@
 
 	.home-cover-text {
 		font-size: 2em;
+	}
+
+	.home-story-selfie div {
+		box-shadow: inset 0px 0px 75px 40px rgba(0, 0, 0, 1);
 	}
 
 	.home-skill-frame i {
@@ -224,6 +225,11 @@
 	.home-foot-link {
 		height: 30%; 
 	}
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) { 
+
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
