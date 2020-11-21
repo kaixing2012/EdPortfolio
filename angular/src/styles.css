@@ -11,6 +11,11 @@ body {
     margin: 0; 
 }
 
+body::-webkit-scrollbar { 
+    display: none;
+}
+
+
 .center {
     position: absolute;
     top: 50%;

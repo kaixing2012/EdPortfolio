@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 
 import { MatToolbar } from '@angular/material/toolbar';
 
@@ -12,10 +12,11 @@ import { AppService } from 'src/app/app.service';
 export class NavigatorComponent implements OnInit {
 
   @ViewChild('nav') nav: MatToolbar;
+  @ViewChild('navLink') navLink: ElementRef;
 
   @Input() isMobileMode: boolean;
 
-  isCollapsed: boolean = false;
+  isShown: boolean = false;
 
   constructor(private appService: AppService) { }
 
@@ -32,7 +33,7 @@ export class NavigatorComponent implements OnInit {
     // }
   }
 
-  onCollapse() {
-    this.isCollapsed = !this.isCollapsed
+  onShow() {
+    this.isShown = !this.isShown
   }
 }
