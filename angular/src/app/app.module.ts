@@ -7,6 +7,7 @@ import { MaterialModule } from '../app/modules/material/material.module';
 import { ShoppingCarModule } from './modules/shopping-car/shopping-car.module'
 import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module'
 import { HomeModule } from '../app/modules/home/home.module'
+import { MapModule } from '../app/modules/map/map.module'
 
 import { AppComponent } from './app.component';
 import { NavigatorComponent } from './shared/components/navigator/navigator.component'
@@ -22,6 +23,7 @@ import { NavigatorComponent } from './shared/components/navigator/navigator.comp
     BrowserModule,
     MaterialModule,
     HomeModule,
+    MapModule,
     LifestyleModule,
     ShoppingCarModule
   ],
