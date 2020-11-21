@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './modules/routing/app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../app/modules/material/material.module';
 import { ShoppingCarModule } from './modules/shopping-car/shopping-car.module'
 import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module'
@@ -21,6 +22,7 @@ import { NavigatorComponent } from './shared/components/navigator/navigator.comp
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     MaterialModule,
     HomeModule,
     MapModule,

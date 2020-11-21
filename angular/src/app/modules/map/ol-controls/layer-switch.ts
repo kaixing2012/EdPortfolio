@@ -17,6 +17,7 @@ export class LayerSwitch extends Control {
         let element = document.createElement('div');
         element.className = 'ol-unselectable ol-control';
         element.style.right = '0px'
+        element.style.bottom = '0px'
         element.style.margin = '5px'
         element.appendChild(button);
 
