@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './modules/routing/app-routing.module';
 import { MaterialModule } from '../app/modules/material/material.module';
-import { PortfolioModule } from '../app/modules/portfolio/portfolio.module'
+import { ShoppingCarModule } from './modules/shopping-car/shopping-car.module'
 import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module'
 import { HomeModule } from '../app/modules/home/home.module'
 
@@ -22,8 +22,8 @@ import { NavigatorComponent } from './shared/components/navigator/navigator.comp
     BrowserModule,
     MaterialModule,
     HomeModule,
-    PortfolioModule,
-    LifestyleModule
+    LifestyleModule,
+    ShoppingCarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,9 +4,9 @@
     </div>
 
     <div [ngClass]="{'collapsed': isCollapsed}" class="nav-link-container">
-        <a [routerLink]="['/portfolio']" class="nav-text nav-text-right">Portfolio</a>
-        <a [routerLink]="['/lifestyle']" class="nav-text nav-text-right">LifeStyle</a>
         <a [routerLink]="['/home']" class="nav-text nav-text-right">Home</a>
+        <a [matMenuTriggerFor]="partfolioMenu" class="nav-text nav-text-right">Portfolio</a>
+        <a [routerLink]="['/lifestyle']" class="nav-text nav-text-right">LifeStyle</a>
     </div>
 
     <div *ngIf="isMobileMode">
@@ -15,3 +15,8 @@
         </button>
     </div>
 </mat-toolbar>
+
+<mat-menu #partfolioMenu="matMenu" yPosition="below">
+    <a mat-menu-item [routerLink]="['/shopping-car']">Shopping Car</a>
+    <button mat-menu-item>Map</button>
+</mat-menu>
