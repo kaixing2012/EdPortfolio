@@ -5,19 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './modules/routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../app/modules/material/material.module';
-import { ShoppingCarModule } from './modules/shopping-car/shopping-car.module'
-import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module'
-import { HomeModule } from '../app/modules/home/home.module'
-import { MapModule } from '../app/modules/map/map.module'
+import { ShoppingCarModule } from './modules/shopping-car/shopping-car.module';
+import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module';
+import { HomeModule } from '../app/modules/home/home.module';
+import { MapModule } from '../app/modules/map/map.module';
 
 import { AppComponent } from './app.component';
-import { NavigatorComponent } from './shared/components/navigator/navigator.component'
+import { NavigatorComponent } from './shared/components/navigator/navigator.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigatorComponent
-  ],
+  declarations: [AppComponent, NavigatorComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -27,9 +24,9 @@ import { NavigatorComponent } from './shared/components/navigator/navigator.comp
     HomeModule,
     MapModule,
     LifestyleModule,
-    ShoppingCarModule
+    ShoppingCarModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

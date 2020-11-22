@@ -11,19 +11,18 @@ import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { get as getProjection } from 'ol/proj';
 import { getTopLeft, getWidth } from 'ol/extent';
 
-import { fromLonLat as LngLat } from 'ol/proj'
+import { fromLonLat as LngLat } from 'ol/proj';
 import { Zoom, ScaleLine } from 'ol/control';
 
-import { MapService } from './map.service'
+import { MapService } from './map.service';
 
-import { LayerSwitch } from './ol-controls/layer-switch'
-import { SearchBar } from './ol-controls/search-bar'
-
+import { LayerSwitch } from './ol-controls/layer-switch';
+import { SearchBar } from './ol-controls/search-bar';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements OnInit {
   map: Map;
@@ -31,7 +30,7 @@ export class MapComponent implements OnInit {
   lng: number = 120.9605;
   zoom: number = 7;
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService) {}
 
   ngOnInit(): void {
     let projection = getProjection('EPSG:3857');
@@ -48,11 +47,10 @@ export class MapComponent implements OnInit {
     let nlscLayer = new TileLayer({
       opacity: 1,
       source: new WMTS({
-        url:
-          'https://wmts.nlsc.gov.tw/wmts',
+        url: 'https://wmts.nlsc.gov.tw/wmts',
         layer: 'EMAP6',
-        matrixSet: "EPSG:3857",
-        format: "image/png",
+        matrixSet: 'EPSG:3857',
+        format: 'image/png',
         projection: projection,
         tileGrid: new WMTSTileGrid({
           origin: getTopLeft(projectionExtent),
@@ -62,30 +60,27 @@ export class MapComponent implements OnInit {
         style: 'default',
         wrapX: true,
       }),
-    })
+    });
 
     let osmLayer = new TileLayer({
       source: new OSM(),
     });
 
-    let mapLayers = [
-      nlscLayer,
-      osmLayer
-    ]
+    let mapLayers = [nlscLayer, osmLayer];
 
     let mapControls = [
       new Zoom(),
       new ScaleLine(),
       new LayerSwitch(),
       new SearchBar({
-        mapService: this.mapService
+        mapService: this.mapService,
       }),
-    ]
+    ];
 
     this.map = new Map({
       controls: mapControls,
       layers: mapLayers,
-      target: "map",
+      target: 'map',
       view: new View({
         center: LngLat([this.lng, this.lat]),
         zoom: this.zoom,

@@ -1,4 +1,11 @@
-import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 import { MatToolbar } from '@angular/material/toolbar';
 
@@ -7,10 +14,9 @@ import { AppService } from 'src/app/app.service';
 @Component({
   selector: 'app-navigator',
   templateUrl: './navigator.component.html',
-  styleUrls: ['./navigator.component.css']
+  styleUrls: ['./navigator.component.css'],
 })
 export class NavigatorComponent implements OnInit {
-
   @ViewChild('nav') nav: MatToolbar;
   @ViewChild('navLink') navLink: ElementRef;
 
@@ -18,11 +24,9 @@ export class NavigatorComponent implements OnInit {
 
   isShown: boolean = false;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
@@ -34,6 +38,6 @@ export class NavigatorComponent implements OnInit {
   }
 
   onShow() {
-    this.isShown = !this.isShown
+    this.isShown = !this.isShown;
   }
 }

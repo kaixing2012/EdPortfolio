@@ -1,22 +1,28 @@
 <mat-toolbar #nav class="nav-container">
-    <div>
-        <!-- <span *ngIf="!isMobileSize" class="nav-text mat-headline">Edward Y. Rogers</span> -->
-    </div>
+  <div>
+    <!-- <span *ngIf="!isMobileSize" class="nav-text mat-headline">Edward Y. Rogers</span> -->
+  </div>
 
-    <div #navLink [ngClass]="{'shown': isShown}" class="nav-link-container">
-        <a [routerLink]="['/home']" class="nav-text nav-text-right">Home</a>
-        <a [matMenuTriggerFor]="partfolioMenu" class="nav-text nav-text-right">Portfolio</a>
-        <a [routerLink]="['/lifestyle']" class="nav-text nav-text-right">LifeStyle</a>
-    </div>
+  <div #navLink [ngClass]="{ shown: isShown }" class="nav-link-container">
+    <a [routerLink]="['/home']" class="nav-text nav-text-right">Home</a>
+    <a [matMenuTriggerFor]="partfolioMenu" class="nav-text nav-text-right"
+      >Portfolio</a
+    >
+    <a [routerLink]="['/lifestyle']" class="nav-text nav-text-right"
+      >LifeStyle</a
+    >
+  </div>
 
-    <div *ngIf="isMobileMode">
-        <button mat-icon-button (click)="onShow()">
-            <mat-icon class="nav-text">menu</mat-icon>
-        </button>
-    </div>
+  <div *ngIf="isMobileMode">
+    <button mat-icon-button (click)="onShow()">
+      <mat-icon class="nav-text">menu</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 
 <mat-menu #partfolioMenu="matMenu" yPosition="below">
-    <a mat-menu-item class="nav-menu-link" [routerLink]="['/map']">Map</a>
-    <a mat-menu-item class="nav-menu-link" [routerLink]="['/shopping-car']">Shopping Car</a>
+  <a mat-menu-item class="nav-menu-link" [routerLink]="['/map']">Map</a>
+  <a mat-menu-item class="nav-menu-link" [routerLink]="['/shopping-car']"
+    >Shopping Car</a
+  >
 </mat-menu>
