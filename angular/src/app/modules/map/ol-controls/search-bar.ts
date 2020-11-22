@@ -17,10 +17,10 @@ export class SearchBar extends Control {
     let options = opt_options || {};
 
     let input = document.createElement('input');
-    input.style.width = '280px';
+    input.style.width = '200px';
     input.style.height = '30px';
-    input.placeholder = 'Please, enter country name to get to capital';
-    input.setAttribute('list', 'placeNames');
+    input.placeholder = 'Select one wonder';
+    input.setAttribute('list', 'dataNames');
 
     let element = document.createElement('div');
     element.className = 'ol-unselectable ol-control';
@@ -29,10 +29,10 @@ export class SearchBar extends Control {
     element.style.marginTop = '5px';
     element.appendChild(input);
 
-    options.mapService.getCountryNames().subscribe(
+    options.mapService.getDataNames().subscribe(
       (data: any) => {
         let datalist = document.createElement('datalist');
-        datalist.id = 'placeNames';
+        datalist.id = 'dataNames';
 
         data.forEach((element: string) => {
           let option = document.createElement('option');
@@ -61,11 +61,11 @@ export class SearchBar extends Control {
 
   onKeyup(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.keyCode === 13) {
-      this.mapService.getCountryByName(this.inputBox.value).subscribe(
+      this.mapService.getDataByName(this.inputBox.value).subscribe(
         (data: any) => {
           this.getMap()
             .getView()
-            .setCenter(LngLat([data.CapitalLongitude, data.CapitalLatitude]));
+            .setCenter(LngLat([data.lng, data.lat]));
           this.getMap().getView().setZoom(12);
         },
         (err) => {}

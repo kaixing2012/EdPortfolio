@@ -1,0 +1,260 @@
+[
+  {
+    "name": "Great Pyramid of Giza",
+    "lat": 29.97916667,
+    "lng": 31.13416667,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Lighthouse of Alexandria",
+    "lat": 31.21388889,
+    "lng": 29.88555556,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Hanging Gardens of Babylon",
+    "lat": 33.5355,
+    "lng": 44.2475,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Colossus of Rhodes",
+    "lat": 36.4511,
+    "lng": 28.2278,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Mausoleum at Halicarnassus",
+    "lat": 37.03777778,
+    "lng": 27.42416667,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Statue of Zeus at Olympia",
+    "lat": 37.63777778,
+    "lng": 21.63,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Temple of Artemis at Ephesus",
+    "lat": 37.94972222,
+    "lng": 27.36388889,
+    "Type": "Ancient"
+  },
+  {
+    "name": "Golden Gate Bridge",
+    "lat": 37.81972222,
+    "lng": -122.4786111,
+    "Type": "Civil"
+  },
+  {
+    "name": "CN Tower",
+    "lat": 43.6425,
+    "lng": -78.61305556,
+    "Type": "Civil"
+  },
+  {
+    "name": "Channel Tunnel",
+    "lat": 51.0125,
+    "lng": 1.5041,
+    "Type": "Civil"
+  },
+  {
+    "name": "Zuiderzee Works",
+    "lat": 51.65,
+    "lng": 3.72,
+    "Type": "Civil"
+  },
+  {
+    "name": "Panama Canal",
+    "lat": 9.08,
+    "lng": -79.68,
+    "Type": "Civil"
+  },
+  {
+    "name": "Empire State Building",
+    "lat": 40.74833333,
+    "lng": -73.98555556,
+    "Type": "Civil"
+  },
+  {
+    "name": "Itaipu Dam",
+    "lat": -24.59194444,
+    "lng": -54.58888889,
+    "Type": "Civil"
+  },
+  {
+    "name": "Catacombs of Kom el Shoqafa",
+    "lat": 31.178558,
+    "lng": 29.892954,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Great Wall of China",
+    "lat": 40.67693,
+    "lng": 117.23193,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Hagia Sophia",
+    "lat": 41.008548,
+    "lng": 28.979938,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Stonehenge",
+    "lat": 51.17861111,
+    "lng": -1.826111111,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Leaning Tower of Pisa",
+    "lat": 43.72305556,
+    "lng": 10.39638889,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Colosseum",
+    "lat": 41.89,
+    "lng": 12.49222222,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Porcelain Tower of Nanjing",
+    "lat": 32.08027778,
+    "lng": 118.73,
+    "Type": "Medieval"
+  },
+  {
+    "name": "Chichen Itza",
+    "lat": 20.68277778,
+    "lng": -88.56861111,
+    "Type": "New 7 Wonders Foundation"
+  },
+  {
+    "name": "Machu Picchu",
+    "lat": -12.83666667,
+    "lng": -72.54555556,
+    "Type": "New 7 Wonders Foundation"
+  },
+  {
+    "name": "Christ the Redeemer (statue)",
+    "lat": -21.04805556,
+    "lng": -43.21055556,
+    "Type": "New 7 Wonders Foundation"
+  },
+  {
+    "name": "Petra",
+    "lat": 30.32861111,
+    "lng": 35.44194444,
+    "Type": "New 7 Wonders Foundation"
+  },
+  {
+    "name": "Taj Mahal",
+    "lat": 27.175,
+    "lng": 78.04194444,
+    "Type": "New 7 Wonders Foundation"
+  },
+  {
+    "name": "Paricutin",
+    "lat": 19.49277778,
+    "lng": -102.2508333,
+    "Type": "Seven Natural Wonders of the World"
+  },
+  {
+    "name": "Grand Canyon",
+    "lat": 36.1,
+    "lng": -112.1,
+    "Type": "Seven Natural Wonders of the World"
+  },
+  {
+    "name": "Guanabara Bay",
+    "lat": -21.20972222,
+    "lng": -43.15555556,
+    "Type": "Seven Natural Wonders of the World"
+  },
+  {
+    "name": "Victoria Falls",
+    "lat": -16.07555556,
+    "lng": 25.85666667,
+    "Type": "Seven Natural Wonders of the World"
+  },
+  {
+    "name": "Mount Everest",
+    "lat": 27.98805556,
+    "lng": 86.92527778,
+    "Type": "Seven Natural Wonders of the World"
+  },
+  {
+    "name": "Great Barrier Reef",
+    "lat": -17.71388889,
+    "lng": 147.7,
+    "Type": "Seven Natural Wonders of the World"
+  },
+  {
+    "name": "Hoover Dam",
+    "lat": 36.01555556,
+    "lng": -114.7377778,
+    "Type": "Seven Wonders of the Industrial World"
+  },
+  {
+    "name": "Brooklyn Bridge",
+    "lat": 40.70555556,
+    "lng": -73.99638889,
+    "Type": "Seven Wonders of the Industrial World"
+  },
+  {
+    "name": "Bell Rock Lighthouse",
+    "lat": 56.43416667,
+    "lng": -2.387222222,
+    "Type": "Seven Wonders of the Industrial World"
+  },
+  {
+    "name": "SS Great Eastern",
+    "lat": 51.48861111,
+    "lng": -0.005555555556,
+    "Type": "Seven Wonders of the Industrial World"
+  },
+  {
+    "name": "London sewerage system",
+    "lat": 51.50722222,
+    "lng": -0.1058333333,
+    "Type": "Seven Wonders of the Industrial World"
+  },
+  {
+    "name": "First Transcontinental Railroad",
+    "lat": 41.27638889,
+    "lng": 95.86666667,
+    "Type": "Seven Wonders of the Industrial World"
+  },
+  {
+    "name": "Maya civilization",
+    "lat": 20.68277778,
+    "lng": -88.56861111,
+    "Type": "USA Today's New Seven Wonders"
+  },
+  {
+    "name": "Papahānaumokuākea Marine National Monument",
+    "lat": 25.7,
+    "lng": -171.7333333,
+    "Type": "USA Today's New Seven Wonders"
+  },
+  {
+    "name": "Old City (Jerusalem)",
+    "lat": 31.77666667,
+    "lng": 35.23416667,
+    "Type": "USA Today's New Seven Wonders"
+  },
+  {
+    "name": "Maasai Mara",
+    "lat": -0.51,
+    "lng": 35.14388889,
+    "Type": "USA Today's New Seven Wonders"
+  },
+  {
+    "name": "Potala Palace",
+    "lat": 29.65777778,
+    "lng": 91.11694444,
+    "Type": "USA Today's New Seven Wonders"
+  }
+]

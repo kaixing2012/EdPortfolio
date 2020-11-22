@@ -2,45 +2,54 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import placeList from '../../../assets/jsonFiles/placeList.json';
+import capitals from '../../../assets/jsonFiles/capitals.json';
+import wonders from '../../../assets/jsonFiles/wonders.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MapService {
-  private placeList = placeList;
+  private dataList = wonders;
 
   headers: HttpHeaders = new HttpHeaders({});
 
   constructor(private httpClient: HttpClient) {}
 
-  getCountryNames() {
-    const nameListObservable = new Observable((observer) => {
+  getDataSet() {
+    const dataSetObservable = new Observable((observer) => {
       setTimeout(() => {
-        let names = this.placeList.map((place) => place.CountryName);
-        observer.next(names);
+        observer.next(this.dataList);
       }, 100);
     });
 
-    return nameListObservable;
+    return dataSetObservable;
   }
 
-  getCountryByName(countryName: string) {
-    const nameObservable = new Observable((observer) => {
+  getDataNames() {
+    const nameSetObservable = new Observable((observer) => {
       setTimeout(() => {
-        let names = this.placeList.find(
-          (place) => place.CountryName === countryName
-        );
+        let names = this.dataList.map((data) => data.name);
         observer.next(names);
       }, 100);
     });
 
-    return nameObservable;
+    return nameSetObservable;
+  }
+
+  getDataByName(nameIn: string) {
+    const dataObservable = new Observable((observer) => {
+      setTimeout(() => {
+        let names = this.dataList.find((data) => data.name === nameIn);
+        observer.next(names);
+      }, 100);
+    });
+
+    return dataObservable;
   }
 }
 
 // private searchLngLatBaseURL = `https://www.google.com`;
-// let requestingUri = `${this.searchLngLatBaseURL}/search?q=${placeName}`
+// let requestingUri = `${this.searchLngLatBaseURL}/search?q=${dataName}`
 // return this.httpClient.get(requestingUri, {
 //   headers: this.headers,
 // });

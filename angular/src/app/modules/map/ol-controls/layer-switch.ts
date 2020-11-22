@@ -30,9 +30,10 @@ export class LayerSwitch extends Control {
 
   onSwitch(event: Event) {
     let layers = this.getMap().getLayers().getArray();
+
     this.getMap().setLayerGroup(
       new LayerGroup({
-        layers: [layers[1], layers[0]],
+        layers: [layers[1], layers[0], layers[2]],
       })
     );
   }
