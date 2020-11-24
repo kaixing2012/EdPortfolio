@@ -1,170 +1,174 @@
-<div #coverFrame class="home-common-container home-cover-frame">
-  <div class="home-dark-cover"></div>
-</div>
-
-<div class="home-common-container">
-  <div class="center">
-    <h1 class="home-cover-text">Hi, I'm <span>Edward</span></h1>
+<div class="home-common-container" (scroll)="onScroll($event)">
+  <div #coverFrame class="home-common-container home-cover-frame">
+    <div class="home-dark-cover"></div>
   </div>
-</div>
 
-<div #frontFrame class="home-common-container home-story-front-frame">
-  <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForDetail">
-    <mat-grid-list cols="1" rowHeight="25%">
-      <mat-grid-tile class="home-story-selfie" rowspan="1">
-        <img #selfie src="/assets/images/home-selfie-square.jpg" alt="" />
-        <div></div>
-      </mat-grid-tile>
-
-      <mat-grid-tile rowspan="3">
-        <div #detail class="home-story-detail">
-          <p>
-            <b>Hello, fellows,</b> <br />
-            <br />
-            I'm <b>Edward Rogers</b> (殷浩哲), feel free to call me Ed! I'm a
-            software engineer and this website is to show what I've made and
-            therefore, make yourself at home! We are gonna have some fun! <br />
-            <br />
-            But the first thing is first! I was born and raised in Taiwan and
-            and I studied my coding skill when I was in Australia 2 years ago!
-            So basically, I had my career complete change! It was lucky that I
-            found out what I want do and going to do. It's a cool thing ever!
-            <br />
-            <br />
-            Okay, It's too wordy let's just get started!
-          </p>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </ng-template>
-
-  <ng-template #dosktopForDetail>
-    <mat-grid-list class="home-story-grid" cols="2" rowHeight="100%">
-      <mat-grid-tile class="home-story-selfie">
-        <img #selfie src="/assets/images/home-selfie-tall.jpg" alt="" />
-        <div></div>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <div #detail class="home-story-detail">
-          <p>
-            <b>Hello, fellows,</b> <br />
-            <br />
-            I'm <b>Edward Rogers</b> (殷浩哲), feel free to call me Ed! I'm a
-            software engineer and this website is to show what I've made and
-            therefore, make yourself at home! We are gonna have some fun! <br />
-            <br />
-            But the first thing is first! I was born and raised in Taiwan and
-            and I studied my coding skill when I was in Australia 2 years ago!
-            So basically, I had my career complete change! It was lucky that I
-            found out what I want do and going to do. It's a cool thing ever!
-            <br />
-            <br />
-            Okay, It's too wordy let's just get started!
-          </p>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </ng-template>
-</div>
-
-<div class="home-common-container">
-  <div class="home-dark-cover">
-    <div class="home-skill-frame">
-      <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForSkill">
-        <mat-grid-list cols="2" rowHeight="33.5%">
-          <mat-grid-tile *ngFor="let icon of skillIcons">
-            <div>
-              <ng-template [ngIf]="icon.class" [ngIfElse]="noIcon">
-                <i class="fab {{ icon.class }}"></i>
-                <p>{{ icon.name }}</p>
-              </ng-template>
-
-              <ng-template #noIcon>
-                <i class="fab"
-                  ><small>{{ icon.font }}</small></i
-                >
-                <p>{{ icon.name }}</p>
-              </ng-template>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </ng-template>
-
-      <ng-template #dosktopForSkill>
-        <mat-grid-list cols="3" rowHeight="50%">
-          <mat-grid-tile *ngFor="let icon of skillIcons">
-            <div>
-              <ng-template [ngIf]="icon.font" [ngIfElse]="noIcon">
-                <i class="fab {{ icon.class }}"
-                  ><small>{{ icon.font }}</small></i
-                >
-                <p>{{ icon.name }}</p>
-              </ng-template>
-              <ng-template #noIcon>
-                <i class="fab {{ icon.class }}"></i>
-                <p>{{ icon.name }}</p>
-              </ng-template>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </ng-template>
-    </div>
-  </div>
-</div>
-
-<div class="home-common-container home-footer-front-frame">
-  <div class="home-foot-detail">
-    <div>
-      <p>
-        So the kind tools above are what I mainly work with! I also have the
-        basic knowledge of HTML and CSS that are how I build up this site
-        lol~<br />
-        <br />
-        However, I assume you are more likely to be interested in some kind of
-        real projects! I am aware of that and that is why I build this site up
-        to demo something interesting! <br />
-        <br />
-        Aright, you'll find them up in other section! I'll see you there~
-      </p>
+  <div class="home-common-container">
+    <div class="center">
+      <h1 class="home-cover-text">Hi, I'm <span>Edward</span></h1>
     </div>
   </div>
 
-  <div class="home-foot-link">
-    <div
-      style="width: 80%; margin: auto; border: 1px solid rgb(223, 223, 223)"
-    ></div>
+  <div #frontFrame class="home-common-container home-story-front-frame">
+    <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForDetail">
+      <mat-grid-list cols="1" rowHeight="25%">
+        <mat-grid-tile class="home-story-selfie" rowspan="1">
+          <img #selfie src="/assets/images/home-selfie-square.jpg" alt="" />
+          <div></div>
+        </mat-grid-tile>
 
-    <div style="height: 70%">
-      <mat-grid-list cols="1" rowHeight="100%">
+        <mat-grid-tile rowspan="3">
+          <div #detail class="home-story-detail">
+            <p>
+              <b>Hello, fellows,</b> <br />
+              <br />
+              I'm <b>Edward Rogers</b> (殷浩哲), feel free to call me Ed! I'm a
+              software engineer and this website is to show what I've made and
+              therefore, make yourself at home! We are gonna have some fun!
+              <br />
+              <br />
+              But the first thing is first! I was born and raised in Taiwan and
+              and I studied my coding skill when I was in Australia 2 years ago!
+              So basically, I had my career complete change! It was lucky that I
+              found out what I want do and going to do. It's a cool thing ever!
+              <br />
+              <br />
+              Okay, It's too wordy let's just get started!
+            </p>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+
+    <ng-template #dosktopForDetail>
+      <mat-grid-list class="home-story-grid" cols="2" rowHeight="100%">
+        <mat-grid-tile class="home-story-selfie">
+          <img #selfie src="/assets/images/home-selfie-tall.jpg" alt="" />
+          <div></div>
+        </mat-grid-tile>
+
         <mat-grid-tile>
-          <span>
-            <a href="https://github.com/kaixing2012">
-              <i class="fab fa-github"></i>
-            </a>
-
-            <a href="https://www.instagram.com/programmetrickly">
-              <i class="fab fa-instagram-square"></i>
-            </a>
-
-            <a href="https://au.linkedin.com/in/edwardyrogers">
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </span>
+          <div #detail class="home-story-detail">
+            <p>
+              <b>Hello, fellows,</b> <br />
+              <br />
+              I'm <b>Edward Rogers</b> (殷浩哲), feel free to call me Ed! I'm a
+              software engineer and this website is to show what I've made and
+              therefore, make yourself at home! We are gonna have some fun!
+              <br />
+              <br />
+              But the first thing is first! I was born and raised in Taiwan and
+              and I studied my coding skill when I was in Australia 2 years ago!
+              So basically, I had my career complete change! It was lucky that I
+              found out what I want do and going to do. It's a cool thing ever!
+              <br />
+              <br />
+              Okay, It's too wordy let's just get started!
+            </p>
+          </div>
         </mat-grid-tile>
       </mat-grid-list>
+    </ng-template>
+  </div>
+
+  <div class="home-common-container">
+    <div class="home-dark-cover">
+      <div class="home-skill-frame">
+        <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopForSkill">
+          <mat-grid-list cols="2" rowHeight="33.5%">
+            <mat-grid-tile *ngFor="let icon of skillIcons">
+              <div>
+                <ng-template [ngIf]="icon.class" [ngIfElse]="noIcon">
+                  <i class="fab {{ icon.class }}"></i>
+                  <p>{{ icon.name }}</p>
+                </ng-template>
+
+                <ng-template #noIcon>
+                  <i class="fab"
+                    ><small>{{ icon.font }}</small></i
+                  >
+                  <p>{{ icon.name }}</p>
+                </ng-template>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </ng-template>
+
+        <ng-template #dosktopForSkill>
+          <mat-grid-list cols="3" rowHeight="50%">
+            <mat-grid-tile *ngFor="let icon of skillIcons">
+              <div>
+                <ng-template [ngIf]="icon.font" [ngIfElse]="noIcon">
+                  <i class="fab {{ icon.class }}"
+                    ><small>{{ icon.font }}</small></i
+                  >
+                  <p>{{ icon.name }}</p>
+                </ng-template>
+                <ng-template #noIcon>
+                  <i class="fab {{ icon.class }}"></i>
+                  <p>{{ icon.name }}</p>
+                </ng-template>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-common-container home-footer-front-frame">
+    <div class="home-foot-detail">
+      <div>
+        <p>
+          So the kind tools above are what I mainly work with! I also have the
+          basic knowledge of HTML and CSS that are how I build up this site
+          lol~<br />
+          <br />
+          However, I assume you are more likely to be interested in some kind of
+          real projects! I am aware of that and that is why I build this site up
+          to demo something interesting! <br />
+          <br />
+          Aright, you'll find them up in other section! I'll see you there~
+        </p>
+      </div>
     </div>
 
-    <div style="height: 30%">
-      <mat-grid-list
-        cols="1"
-        rowHeight="100%"
-        style="background-color: rgba(93, 34, 34, 0.5)"
-      >
-        <mat-grid-tile style="color: #ebebeb; font-size: 1.1em">
-          © 2020 Edward Y. Rogers
-        </mat-grid-tile>
-      </mat-grid-list>
+    <div class="home-foot-link">
+      <div
+        style="width: 80%; margin: auto; border: 1px solid rgb(223, 223, 223)"
+      ></div>
+
+      <div style="height: 70%">
+        <mat-grid-list cols="1" rowHeight="100%">
+          <mat-grid-tile>
+            <span>
+              <a href="https://github.com/kaixing2012">
+                <i class="fab fa-github"></i>
+              </a>
+
+              <a href="https://www.instagram.com/programmetrickly">
+                <i class="fab fa-instagram-square"></i>
+              </a>
+
+              <a href="https://au.linkedin.com/in/edwardyrogers">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </span>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div style="height: 30%">
+        <mat-grid-list
+          cols="1"
+          rowHeight="100%"
+          style="background-color: rgba(93, 34, 34, 0.5)"
+        >
+          <mat-grid-tile style="color: #ebebeb; font-size: 1.1em">
+            © 2020 Edward Y. Rogers
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
     </div>
   </div>
 </div>

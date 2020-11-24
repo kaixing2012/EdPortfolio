@@ -1,4 +1,44 @@
-<section class="app-container">
-  <app-navigator [isMobileMode]="isMobileMode"></app-navigator>
-  <router-outlet></router-outlet>
-</section>
+<mat-drawer-container class="app-container">
+  <mat-drawer #drawer mode="over" class="side-nav">
+    <p>
+      <a [routerLink]="['/home']">Home</a>
+    </p>
+
+    <p>
+      <a [matMenuTriggerFor]="partfolioMenu">Portfolio</a>
+    </p>
+
+    <p>
+      <a [routerLink]="['/lifestyle']">LifeStyle</a>
+    </p>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+      <div></div>
+
+      <div class="nav-link">
+        <ng-template [ngIf]="isMobileMode" [ngIfElse]="dosktopNav">
+          <div></div>
+          <button mat-icon-button (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </ng-template>
+
+        <ng-template #dosktopNav>
+          <a [routerLink]="['/home']">Home</a>
+          <a [matMenuTriggerFor]="partfolioMenu">Portfolio</a>
+          <a [routerLink]="['/lifestyle']">LifeStyle</a>
+        </ng-template>
+      </div>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<mat-menu #partfolioMenu="matMenu" yPosition="below">
+  <div class="portfolio-menu">
+    <a mat-menu-item [routerLink]="['/map']">Map</a>
+    <a mat-menu-item [routerLink]="['/shopping-car']"> Shopping Car </a>
+  </div>
+</mat-menu>

@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
+    console.log('fff');
     if (this.frontFrame.nativeElement.getBoundingClientRect().top < 0) {
       this.coverFrame.nativeElement.style.backgroundImage =
         'url(/assets/images/home-dark-row.jpg)';

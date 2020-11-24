@@ -6,7 +6,6 @@ import OSM from 'ol/source/OSM';
 import View from 'ol/View';
 import WMTS from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
-import Overlay from 'ol/Overlay';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
@@ -69,30 +68,6 @@ export class MapComponent implements OnInit {
 
             icon.setScale(0.1);
             feature.setStyle(style);
-
-            let element = document.createElement('div');
-            element.id = 'popup';
-
-            document.getElementById('map').appendChild(element);
-
-            let popup = new Overlay({
-              element: element,
-              stopEvent: false,
-              offset: [0, -50],
-            });
-
-            this.map.addOverlay(popup);
-
-            let geometry = feature.getGeometry() as Point;
-            let coordinate = geometry.getCoordinates();
-            popup.setPosition(coordinate);
-
-            element.style.padding = '5px 5px';
-            element.style.fontSize = '16px';
-            element.style.backgroundColor = 'white';
-            element.style.borderRadius = '2px';
-            element.style.left = '0%';
-            element.innerHTML = 'Click to go to google street view';
           } else {
             if (this.lastFeature) {
               let lastStyle = this.lastFeature.getStyle() as Style;
@@ -101,11 +76,6 @@ export class MapComponent implements OnInit {
               lastIcon.setScale(0.08);
               this.lastFeature.setStyle(lastStyle);
               this.lastFeature = null;
-            }
-
-            let element = document.getElementById('popup');
-            if (element) {
-              element.parentElement.removeChild(element);
             }
 
             this.map.getTargetElement().style.cursor = '';

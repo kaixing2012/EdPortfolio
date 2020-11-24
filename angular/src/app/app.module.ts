@@ -11,10 +11,9 @@ import { HomeModule } from '../app/modules/home/home.module';
 import { MapModule } from '../app/modules/map/map.module';
 
 import { AppComponent } from './app.component';
-import { NavigatorComponent } from './shared/components/navigator/navigator.component';
 
 @NgModule({
-  declarations: [AppComponent, NavigatorComponent],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
