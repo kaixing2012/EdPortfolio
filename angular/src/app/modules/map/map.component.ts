@@ -10,7 +10,7 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 
-import { Icon, Style } from 'ol/style';
+import { Fill, Icon, Stroke, Style } from 'ol/style';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { get as getProjection } from 'ol/proj';
 import { getTopLeft, getWidth } from 'ol/extent';
@@ -29,82 +29,87 @@ import { SearchBar } from './ol-controls/search-bar';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements OnInit {
-  map: Map;
-  lat: number = 23.6978;
-  lng: number = 120.9605;
-  zoom: number = 7;
-  lastFeature: any = null;
+  private map: Map;
+  private lat: number = 23.6978;
+  private lng: number = 120.9605;
+  private zoom: number = 7;
+
+  private initMarkerStyle = new Style({
+    image: new Icon({
+      src: 'assets/icons/placeholder.png',
+      scale: 0.08,
+    }),
+  });
+
+  private highlightMarkerStyle = new Style({
+    image: new Icon({
+      src: 'assets/icons/placeholder.png',
+      scale: 0.1,
+    }),
+  });
 
   constructor(private mapService: MapService) {}
 
   ngOnInit(): void {
+    let mapLayers = this.initMapLayers();
+    let mapControls = this.initMapControls();
+    let mapView = this.initMapView();
+
+    this.map = new Map({
+      controls: mapControls,
+      layers: mapLayers,
+      target: 'map',
+      view: mapView,
+    });
+
     this.mapService.getDataSet().subscribe(
       (data: any) => {
-        let mapLayers = this.initMapLayers(data);
-        let mapControls = this.initMapControls();
-        let mapView = this.initMapView();
-
-        this.map = new Map({
-          controls: mapControls,
-          layers: mapLayers,
-          target: 'map',
-          view: mapView,
-        });
-
-        this.map.on('pointermove', (event) => {
-          let feature = this.map.forEachFeatureAtPixel(
-            event.pixel,
-            (feature) => {
-              return feature as Feature;
-            }
-          );
-
-          if (feature) {
-            this.map.getTargetElement().style.cursor = 'pointer';
-            this.lastFeature = feature;
-
-            let style = feature.getStyle() as Style;
-            let icon = style.getImage();
-
-            icon.setScale(0.1);
-            feature.setStyle(style);
-          } else {
-            if (this.lastFeature) {
-              let lastStyle = this.lastFeature.getStyle() as Style;
-              let lastIcon = lastStyle.getImage();
-
-              lastIcon.setScale(0.08);
-              this.lastFeature.setStyle(lastStyle);
-              this.lastFeature = null;
-            }
-
-            this.map.getTargetElement().style.cursor = '';
-          }
-        });
-
-        this.map.on('click', (event) => {
-          let feature = this.map.forEachFeatureAtPixel(
-            event.pixel,
-            (feature) => {
-              return feature;
-            }
-          );
-
-          if (feature) {
-            let geometry = feature.getGeometry() as Point;
-            let coordinate = geometry.getCoordinates();
-            let lnglat = TransCoords(coordinate, 'EPSG:3857', 'EPSG:4326');
-            let url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lnglat[1]},${lnglat[0]}`;
-            window.open(url, '_blank');
-          } else {
-          }
-        });
+        this.map.addLayer(this.generateMarkerLayer(data));
       },
-      (err) => {}
+      (err) => {
+        console.log(err);
+      }
     );
+
+    var selected = null;
+    var status = document.getElementById('status');
+
+    this.map.on('pointermove', (event) => {
+      if (selected !== null) {
+        selected.setStyle(this.initMarkerStyle);
+        selected = null;
+      }
+
+      this.map.forEachFeatureAtPixel(event.pixel, (feature: Feature) => {
+        selected = feature;
+        feature.setStyle(this.highlightMarkerStyle);
+        return true;
+      });
+
+      if (selected) {
+        status.innerHTML = '&nbsp;Hovering: ' + selected.get('name');
+      } else {
+        status.innerHTML = '&nbsp;';
+      }
+    });
+
+    this.map.on('click', (event) => {
+      let feature = this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+        return feature;
+      });
+
+      if (feature) {
+        let geometry = feature.getGeometry() as Point;
+        let coordinate = geometry.getCoordinates();
+        let lnglat = TransCoords(coordinate, 'EPSG:3857', 'EPSG:4326');
+        let url = `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lnglat[1]},${lnglat[0]}`;
+        window.open(url, '_blank');
+      } else {
+      }
+    });
   }
 
-  initMapLayers(dataSet: any) {
+  initMapLayers() {
     let projection = getProjection('EPSG:3857');
     let projectionExtent = projection.getExtent();
     let size = getWidth(projectionExtent) / 256;
@@ -137,31 +142,7 @@ export class MapComponent implements OnInit {
       source: new OSM(),
     });
 
-    let markerFeatures = [];
-
-    dataSet.forEach((data) => {
-      let feature = new Feature({
-        geometry: new Point(LngLat([data.lng, data.lat])),
-      });
-      feature.setStyle(
-        new Style({
-          image: new Icon({
-            src: 'assets/icons/placeholder.png',
-            scale: 0.08,
-          }),
-        })
-      );
-
-      markerFeatures.push(feature);
-    });
-
-    let markerLayer = new VectorLayer({
-      source: new VectorSource({
-        features: markerFeatures,
-      }),
-    });
-
-    return [nlscLayer, osmLayer, markerLayer];
+    return [nlscLayer, osmLayer];
   }
 
   initMapControls() {
@@ -173,6 +154,27 @@ export class MapComponent implements OnInit {
         mapService: this.mapService,
       }),
     ];
+  }
+
+  generateMarkerLayer(data) {
+    let markerFeatures = [];
+
+    data.forEach((data) => {
+      let feature = new Feature({
+        geometry: new Point(LngLat([data.lng, data.lat])),
+      });
+      feature.setStyle(this.initMarkerStyle);
+
+      markerFeatures.push(feature);
+    });
+
+    let markerLayer = new VectorLayer({
+      source: new VectorSource({
+        features: markerFeatures,
+      }),
+    });
+
+    return markerLayer;
   }
 
   initMapView() {

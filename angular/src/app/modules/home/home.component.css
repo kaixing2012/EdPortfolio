@@ -85,7 +85,7 @@
   height: 100%;
   color: #ebebeb;
   text-align: left;
-  font-size: 2em;
+  font-size: 1.7em;
   line-height: 1.5em;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
@@ -191,7 +191,7 @@
 }
 
 .home-foot-detail p {
-  font-size: 1.6em;
+  font-size: 1.7em;
   line-height: 1.5em;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
 }
@@ -272,7 +272,7 @@
     position: relative;
     left: 50%;
     width: 80%;
-    font-size: 1.7em;
+    font-size: 1.6em;
     line-height: 1.5em;
     transform: translateX(-50%);
   }
@@ -288,6 +288,10 @@
   .home-foot-detail div {
     height: auto;
     width: 80%;
+  }
+
+  .home-foot-detail p {
+    font-size: 1.6em;
   }
 }
 
@@ -308,5 +312,9 @@
 
   .home-room-skill i {
     font-size: 5em;
+  }
+
+  .home-foot-detail p {
+    font-size: 1.5em;
   }
 }

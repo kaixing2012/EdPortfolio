@@ -45,7 +45,9 @@ export class SearchBar extends Control {
 
         element.appendChild(datalist);
       },
-      (err) => {}
+      (err) => {
+        console.log(err);
+      }
     );
 
     super({
@@ -56,11 +58,17 @@ export class SearchBar extends Control {
     this.inputBox = input;
     this.mapService = options.mapService;
 
-    input.addEventListener('keyup', this.onKeyup.bind(this), false);
+    input.addEventListener('keyup', this.onSearch.bind(this), false);
+    input.addEventListener('focusout', this.onSearch.bind(this), false);
   }
 
-  onKeyup(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.keyCode === 13) {
+  onSearch(event: KeyboardEvent) {
+    if (
+      this.inputBox.value &&
+      (event.key === 'Enter' ||
+        event.code === 'Enter' ||
+        event.type === 'focusout')
+    ) {
       this.mapService.getDataByName(this.inputBox.value).subscribe(
         (data: any) => {
           this.getMap()
@@ -68,7 +76,9 @@ export class SearchBar extends Control {
             .setCenter(LngLat([data.lng, data.lat]));
           this.getMap().getView().setZoom(12);
         },
-        (err) => {}
+        (err) => {
+          console.log(err);
+        }
       );
     }
   }

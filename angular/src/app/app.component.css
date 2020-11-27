@@ -52,6 +52,7 @@
 }
 
 .side-nav p {
+  cursor: pointer;
   margin: 2.5em 0em;
 }
 
