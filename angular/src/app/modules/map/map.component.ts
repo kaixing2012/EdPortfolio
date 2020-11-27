@@ -10,7 +10,7 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 
-import { Fill, Icon, Stroke, Style } from 'ol/style';
+import { Icon, Style } from 'ol/style';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { get as getProjection } from 'ol/proj';
 import { getTopLeft, getWidth } from 'ol/extent';
@@ -22,6 +22,8 @@ import { MapService } from './map.service';
 
 import { LayerSwitch } from './ol-controls/layer-switch';
 import { SearchBar } from './ol-controls/search-bar';
+
+import { Wonder } from 'src/app/shared/models/wonder.model';
 
 @Component({
   selector: 'app-map',
@@ -63,7 +65,7 @@ export class MapComponent implements OnInit {
     });
 
     this.mapService.getDataSet().subscribe(
-      (data: any) => {
+      (data: Wonder) => {
         this.map.addLayer(this.generateMarkerLayer(data));
       },
       (err) => {
@@ -156,10 +158,10 @@ export class MapComponent implements OnInit {
     ];
   }
 
-  generateMarkerLayer(data) {
+  generateMarkerLayer(dataSet: any) {
     let markerFeatures = [];
 
-    data.forEach((data) => {
+    dataSet.forEach((data: any) => {
       let feature = new Feature({
         geometry: new Point(LngLat([data.lng, data.lat])),
       });

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { Wonder } from '../../shared/models/wonder.model';
+
 import capitals from '../../../assets/jsonFiles/capitals.json';
 import wonders from '../../../assets/jsonFiles/wonders.json';
 
@@ -9,7 +11,7 @@ import wonders from '../../../assets/jsonFiles/wonders.json';
   providedIn: 'root',
 })
 export class MapService {
-  private dataList = wonders;
+  private wonderList: Wonder[] = wonders;
 
   headers: HttpHeaders = new HttpHeaders({});
 
@@ -18,7 +20,7 @@ export class MapService {
   getDataSet() {
     const dataSetObservable = new Observable((observer) => {
       setTimeout(() => {
-        observer.next(this.dataList);
+        observer.next(this.wonderList);
       }, 100);
     });
 
@@ -28,7 +30,7 @@ export class MapService {
   getDataNames() {
     const nameSetObservable = new Observable((observer) => {
       setTimeout(() => {
-        let names = this.dataList.map((data) => data.name);
+        let names = this.wonderList.map((data) => data.name);
         observer.next(names);
       }, 100);
     });
@@ -39,7 +41,7 @@ export class MapService {
   getDataByName(nameIn: string) {
     const dataObservable = new Observable((observer) => {
       setTimeout(() => {
-        let names = this.dataList.find((data) => data.name === nameIn);
+        let names = this.wonderList.find((data) => data.name === nameIn);
         observer.next(names);
       }, 100);
     });
@@ -47,9 +49,3 @@ export class MapService {
     return dataObservable;
   }
 }
-
-// private searchLngLatBaseURL = `https://www.google.com`;
-// let requestingUri = `${this.searchLngLatBaseURL}/search?q=${dataName}`
-// return this.httpClient.get(requestingUri, {
-//   headers: this.headers,
-// });
