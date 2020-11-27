@@ -18,7 +18,7 @@ export class AppService {
   }
 
   checkUpMobileSize(window: Window) {
-    if (window.innerWidth >= 575.98) {
+    if (window.innerWidth >= 768) {
       this.isMobileMode = false;
     } else {
       this.isMobileMode = true;

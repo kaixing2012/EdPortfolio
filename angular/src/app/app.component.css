@@ -1,9 +1,9 @@
 .app-container {
   height: 100%;
-  overflow: auto;
+  width: 100%;
 }
 
-.app-container::-webkit-scrollbar {
+.app-container mat-drawer-content::-webkit-scrollbar {
   display: none;
 }
 
@@ -19,6 +19,7 @@
   -webkit-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
+  z-index: 5;
 }
 
 .nav-link {
@@ -45,9 +46,8 @@
 }
 
 .side-nav {
-  /* height: calc(100vh - 60px); */
   top: 60px;
-  padding: 2em;
+  padding: 2em 4em;
   background-color: rgba(0, 0, 0, 0.5);
 }
 

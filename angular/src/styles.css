@@ -5,20 +5,12 @@
 
 html,
 body {
-  height: calc(100vh);
+  height: 100%;
+  width: 100%;
 }
 
 body {
-  margin: 0;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-.center {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
 }

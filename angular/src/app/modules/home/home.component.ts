@@ -53,30 +53,30 @@ export class HomeComponent implements OnInit {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: Event) {
-    console.log('fff');
-    if (this.frontFrame.nativeElement.getBoundingClientRect().top < 0) {
-      this.coverFrame.nativeElement.style.backgroundImage =
-        'url(/assets/images/home-dark-row.jpg)';
-      this.appService.isfrontFrameTouchTop = true;
-      if (!this.isMobileMode) {
-        this.selfie.nativeElement.style.display = 'initial';
-        this.detail.nativeElement.style.display = 'initial';
+  // @HostListener('window:scroll', ['$event'])
+  // onScroll(event: Event) {
+  //   console.log('fff');
+  //   if (this.frontFrame.nativeElement.getBoundingClientRect().top < 0) {
+  //     this.coverFrame.nativeElement.style.backgroundImage =
+  //       'url(/assets/images/home-dark-row.jpg)';
+  //     this.appService.isfrontFrameTouchTop = true;
+  //     if (!this.isMobileMode) {
+  //       this.selfie.nativeElement.style.display = 'initial';
+  //       this.detail.nativeElement.style.display = 'initial';
 
-        setTimeout(() => {
-          this.selfie.nativeElement.style.transform = 'scale(.7)';
-          this.selfie.nativeElement.style.boxShadow =
-            'inset 0 0 100px 50px #000000';
-          this.detail.nativeElement.style.transform = 'scale(.7)';
-        }, 100);
-      }
-    } else {
-      this.coverFrame.nativeElement.style.backgroundImage =
-        'url(/assets/images/home-cover.jpg)';
-      this.appService.isfrontFrameTouchTop = false;
-    }
-  }
+  //       setTimeout(() => {
+  //         this.selfie.nativeElement.style.transform = 'scale(.7)';
+  //         this.selfie.nativeElement.style.boxShadow =
+  //           'inset 0 0 100px 50px #000000';
+  //         this.detail.nativeElement.style.transform = 'scale(.7)';
+  //       }, 100);
+  //     }
+  //   } else {
+  //     this.coverFrame.nativeElement.style.backgroundImage =
+  //       'url(/assets/images/home-cover.jpg)';
+  //     this.appService.isfrontFrameTouchTop = false;
+  //   }
+  // }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
