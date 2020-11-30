@@ -1,0 +1,51 @@
+version: "3.7"
+
+x-service-volumes: &service-volumes
+  - ./:/usr/src/app/:rw,cached
+
+x-database-variables: &database-variables
+  DEBUG: 1
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+
+x-app-variables: &app-variables
+  <<: *database-variables
+  POSTGRES_HOST: postgres
+
+services:
+  webapp:
+    image: edangular:latest
+    depends_on:
+      - "webapi"
+    ports:
+      - "80:80"
+
+  webapi:
+    image: eddjango:latest
+    command: gunicorn -w 2 -b 0.0.0.0:8000 --chdir /usr/src/app/django app.wsgi:application --reload --timeout 900
+    volumes: *service-volumes
+    environment: *app-variables
+    depends_on:
+      - "db-migrate"
+    ports:
+      - "8000:8000"
+
+  db-migrate:
+    image: eddjango:latest
+    command: python django/manage.py migrate
+    volumes: *service-volumes
+    environment: *app-variables
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment: *database-variables
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
