@@ -12,10 +12,10 @@ class Wonder(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = 'wonder'
+        db_table = "wonder"
 
         # Set default ordering
-        ordering = ['name']
+        ordering = ["name"]
 
     # Define what to output when the model is printed as a string.
     def __str__(self):

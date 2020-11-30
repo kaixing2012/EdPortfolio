@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import { Wonder } from '../../shared/models/wonder.model';
 
-import capitals from '../../../assets/jsonFiles/capitals.json';
 import wonders from '../../../assets/jsonFiles/wonders.json';
 
 @Injectable({
@@ -12,6 +11,7 @@ import wonders from '../../../assets/jsonFiles/wonders.json';
 })
 export class MapService {
   private wonderList: Wonder[] = wonders;
+  private baseUri = `http://${window.location.hostname}:8000/api/employee/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 
@@ -27,15 +27,19 @@ export class MapService {
     return dataSetObservable;
   }
 
-  getDataNames() {
-    const nameSetObservable = new Observable((observer) => {
-      setTimeout(() => {
-        let names = this.wonderList.map((data) => data.name);
-        observer.next(names);
-      }, 100);
-    });
+  getDataNames(useMockService: boolean) {
+    if (useMockService) {
+      const nameSetObservable = new Observable((observer) => {
+        setTimeout(() => {
+          let names = this.wonderList.map((data) => data.name);
+          observer.next(names);
+        }, 100);
+      });
 
-    return nameSetObservable;
+      return nameSetObservable;
+    } else {
+      return this.httpClient.get(this.baseUri);
+    }
   }
 
   getDataByName(nameIn: string) {

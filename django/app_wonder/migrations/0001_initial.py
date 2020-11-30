@@ -12,17 +12,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Wonder',
+            name="Wonder",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('lat', models.DecimalField(decimal_places=10, max_digits=19)),
-                ('lng', models.DecimalField(decimal_places=10, max_digits=19)),
-                ('category', models.CharField(max_length=50)),
+                ("id", models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=50)),
+                ("lat", models.DecimalField(decimal_places=10, max_digits=19)),
+                ("lng", models.DecimalField(decimal_places=10, max_digits=19)),
+                ("category", models.CharField(max_length=50)),
             ],
             options={
-                'db_table': 'wonder',
-                'ordering': ['name'],
+                "db_table": "wonder",
+                "ordering": ["name"],
             },
         ),
     ]
