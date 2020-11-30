@@ -2,15 +2,15 @@ import Control from 'ol/control/Control';
 
 import { fromLonLat as LngLat } from 'ol/proj';
 
-import { MapService } from '../map.service';
+import { WonderService } from 'src/app/shared/services/wonder/wonder.service';
 
 interface Options {
-  mapService?: MapService;
+  wonderService?: WonderService;
   target?: HTMLElement | string;
 }
 
 export class SearchBar extends Control {
-  private mapService: MapService;
+  private wonderService: WonderService;
   private inputBox: HTMLInputElement;
 
   constructor(opt_options?: Options) {
@@ -29,16 +29,17 @@ export class SearchBar extends Control {
     element.style.marginTop = '5px';
     element.appendChild(input);
 
-    options.mapService.getDataNames().subscribe(
-      (data: any) => {
+    options.wonderService.getWonderList(false).subscribe(
+      (dataList: any[]) => {
         let datalist = document.createElement('datalist');
         datalist.id = 'dataNames';
 
-        data.forEach((element: string) => {
+        dataList.forEach((data: any) => {
           let option = document.createElement('option');
           option.style.fontSize = '18px';
           option.style.marginBottom = '5px';
-          option.value = element;
+          option.value = data.name;
+          option.setAttribute('data-value', data.id);
 
           datalist.appendChild(option);
         });
@@ -56,7 +57,7 @@ export class SearchBar extends Control {
     });
 
     this.inputBox = input;
-    this.mapService = options.mapService;
+    this.wonderService = options.wonderService;
 
     input.addEventListener('keyup', this.onSearch.bind(this), false);
     input.addEventListener('focusout', this.onSearch.bind(this), false);
@@ -69,17 +70,27 @@ export class SearchBar extends Control {
         event.code === 'Enter' ||
         event.type === 'focusout')
     ) {
-      this.mapService.getDataByName(this.inputBox.value).subscribe(
-        (data: any) => {
-          this.getMap()
-            .getView()
-            .setCenter(LngLat([data.lng, data.lat]));
-          this.getMap().getView().setZoom(12);
-        },
-        (err) => {
-          console.log(err);
-        }
+      let datalist = document.querySelectorAll(
+        `#${this.inputBox.getAttribute('list')} option`
       );
+
+      datalist.forEach((element) => {
+        if (element.getAttribute('value') === this.inputBox.value) {
+          this.wonderService
+            .getWonderDetail(element.getAttribute('data-value'), false)
+            .subscribe(
+              (data: any) => {
+                this.getMap()
+                  .getView()
+                  .setCenter(LngLat([data.lng, data.lat]));
+                this.getMap().getView().setZoom(12);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+        }
+      });
     }
   }
 }

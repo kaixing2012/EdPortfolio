@@ -4,7 +4,7 @@ WORKDIR /usr/proj/angular
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm install -g npm@7.0.15
+# RUN npm install -g npm@7.0.15
 RUN npm run build
 
 # Stage 2

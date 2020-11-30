@@ -18,7 +18,7 @@ import { getTopLeft, getWidth } from 'ol/extent';
 import { fromLonLat as LngLat, transform as TransCoords } from 'ol/proj';
 import { Zoom, ScaleLine } from 'ol/control';
 
-import { MapService } from './map.service';
+import { WonderService } from '../../shared/services/wonder/wonder.service';
 
 import { LayerSwitch } from './ol-controls/layer-switch';
 import { SearchBar } from './ol-controls/search-bar';
@@ -50,7 +50,7 @@ export class MapComponent implements OnInit {
     }),
   });
 
-  constructor(private mapService: MapService) {}
+  constructor(private wonderService: WonderService) {}
 
   ngOnInit(): void {
     let mapLayers = this.initMapLayers();
@@ -64,7 +64,9 @@ export class MapComponent implements OnInit {
       view: mapView,
     });
 
-    this.mapService.getDataSet().subscribe(
+    let useMockService = false;
+
+    this.wonderService.getWonderList(useMockService).subscribe(
       (data: Wonder) => {
         this.map.addLayer(this.generateMarkerLayer(data));
       },
@@ -153,7 +155,7 @@ export class MapComponent implements OnInit {
       new ScaleLine(),
       new LayerSwitch(),
       new SearchBar({
-        mapService: this.mapService,
+        wonderService: this.wonderService,
       }),
     ];
   }

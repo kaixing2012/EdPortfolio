@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .models import Wonder
-from .serializers import WonderListSerializer, WonderDetailSerializer
+from .serializers import WonderSerializer
 
 
 class WonderListAPI(APIView):
@@ -18,14 +18,14 @@ class WonderListAPI(APIView):
         Return a list of all Wonders.
         """
         wonders = Wonder.objects.all()
-        serializer = WonderListSerializer(wonders, many=True)
+        serializer = WonderSerializer(wonders, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
         """
         Create a Wonder.
         """
-        serializer = WonderDetailSerializer(data=request.data)
+        serializer = WonderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -45,12 +45,12 @@ class WonderDetailAPI(APIView):
 
     def get(self, request, wonder_id, format=None):
         wonder = self.get_object(wonder_id)
-        serializer = WonderDetailSerializer(wonder)
+        serializer = WonderSerializer(wonder)
         return Response(serializer.data)
 
     def put(self, request, wonder_id, format=None):
         wonder = self.get_object(wonder_id)
-        serializer = WonderDetailSerializer(wonder, data=request.data)
+        serializer = WonderSerializer(wonder, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

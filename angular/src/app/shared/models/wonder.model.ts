@@ -1,6 +1,7 @@
 export class Wonder {
-  name: string;
-  lat: number;
-  lng: number;
-  type: string;
+  id?: number;
+  name?: string;
+  lat?: string;
+  lng?: string;
+  type?: string;
 }
