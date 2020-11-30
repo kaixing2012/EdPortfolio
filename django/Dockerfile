@@ -1,7 +1,7 @@
 # Stage 1
 FROM python:3.7 as production
 ENV PYTHONUNBUFFERED=1
-WORKDIR /usr/proj/
+WORKDIR /usr/proj/django
 RUN apt-get update && \
     apt-get install -y \
     bash \
@@ -16,7 +16,7 @@ COPY requirements/prod.txt ./requirements/prod.txt
 RUN pip install -r ./requirements/prod.txt
 COPY manage.py ./manage.py
 # COPY setup.cfg ./setup.cfg
-# COPY django ./django
+COPY root ./root
 EXPOSE 8000
 
 # Stage 2

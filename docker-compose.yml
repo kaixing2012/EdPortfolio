@@ -33,7 +33,7 @@ services:
 
   db-migrate:
     image: eddjango:latest
-    command: python django/manage.py migrate
+    command: python manage.py migrate
     volumes: *service-volumes
     environment: *app-variables
     depends_on:
