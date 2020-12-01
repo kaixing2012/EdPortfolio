@@ -1,4 +1,4 @@
-# Angular
+#Angular
 # compiled output
 /dist
 /tmp
@@ -7,7 +7,7 @@
 /bazel-out
 
 # dependencies
-/node_modules
+node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -41,6 +41,7 @@ testem.log
 /typings
 
 # System Files
+.DS_Store
 Thumbs.db
 
 # Django
