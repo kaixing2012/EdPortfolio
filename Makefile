@@ -11,7 +11,7 @@ build-ng:
 	docker build --force-rm $(options) -t edangular:latest ./angular
 
 tag-ng:
-	docker tag $(id) kaixing2012/eddjango:latest
+	docker tag $(id) kaixing2012/edangular:latest
 
 push-ng:
 	docker push kaixing2012/edangular:latest

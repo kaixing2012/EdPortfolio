@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.4"
 
 x-service-volumes: &service-volumes
   - ./:/usr/proj/:rw,cached
@@ -15,14 +15,14 @@ x-app-variables: &app-variables
 
 services:
   webapp:
-    image: edangular:latest
+    image: kaixing2012/edangular:latest
     depends_on:
       - "webapi"
     ports:
       - "80:80"
 
   webapi:
-    image: eddjango:latest
+    image: kaixing2012/eddjango:latest
     command: gunicorn -w 2 -b 0.0.0.0:8000 --chdir /usr/proj/django root.wsgi:application --reload --timeout 900
     volumes: *service-volumes
     environment: *app-variables
@@ -32,7 +32,7 @@ services:
       - "8000:8000"
 
   db-migrate:
-    image: eddjango:latest
+    image: kaixing2012/eddjango:latest
     command: python manage.py migrate
     volumes: *service-volumes
     environment: *app-variables
