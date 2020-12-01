@@ -55,6 +55,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
+    "http://www.apstree.com"
     "http://localhost",
     "http://localhost:4200",
 )
