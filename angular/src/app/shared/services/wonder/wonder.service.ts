@@ -21,8 +21,7 @@ export class WonderService {
     if (useMockService) {
       const nameSetObservable = new Observable((observer) => {
         setTimeout(() => {
-          let names = this.wonderList.map((data) => data.name);
-          observer.next(names);
+          observer.next(this.wonderList);
         }, 100);
       });
 
@@ -37,7 +36,8 @@ export class WonderService {
     if (useMockService) {
       const dataObservable = new Observable((observer) => {
         setTimeout(() => {
-          let names = this.wonderList.find((data) => data.name === '');
+          let parsedId = parseInt(id);
+          let names = this.wonderList.find((data) => data.id === parsedId);
           observer.next(names);
         }, 100);
       });
