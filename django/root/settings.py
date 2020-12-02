@@ -26,7 +26,9 @@ SECRET_KEY = "oo+d*-g^ei&cpwm^#=kd134$av^$(_&s_-e*^wj)ecv3#wuc4)"
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'www.apstree.com',
+]
 
 
 # Application definition
