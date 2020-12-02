@@ -5,17 +5,9 @@ import { Injectable, Input } from '@angular/core';
 })
 export class AppService {
   private isMobileMode: boolean;
-  private _isfrontFrameTouchTop: boolean;
+  private useMockService: boolean = true;
 
   constructor() {}
-
-  @Input()
-  set isfrontFrameTouchTop(val) {
-    this._isfrontFrameTouchTop = val;
-  }
-  get isfrontFrameTouchTop() {
-    return this._isfrontFrameTouchTop;
-  }
 
   checkUpMobileSize(window: Window) {
     if (window.innerWidth >= 768) {
@@ -24,5 +16,9 @@ export class AppService {
       this.isMobileMode = true;
     }
     return this.isMobileMode;
+  }
+
+  getUseMockeService() {
+    return this.useMockService;
   }
 }

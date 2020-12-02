@@ -2,14 +2,17 @@ import Control from 'ol/control/Control';
 
 import { fromLonLat as LngLat } from 'ol/proj';
 
+import { AppService } from 'src/app/app.service';
 import { WonderService } from 'src/app/shared/services/wonder/wonder.service';
 
 interface Options {
   wonderService?: WonderService;
+  appService?: AppService;
   target?: HTMLElement | string;
 }
 
 export class SearchBar extends Control {
+  private appService: AppService;
   private wonderService: WonderService;
   private inputBox: HTMLInputElement;
 
@@ -29,27 +32,29 @@ export class SearchBar extends Control {
     element.style.marginTop = '5px';
     element.appendChild(input);
 
-    options.wonderService.getWonderList(false).subscribe(
-      (dataList: any[]) => {
-        let datalist = document.createElement('datalist');
-        datalist.id = 'dataNames';
+    options.wonderService
+      .getWonderList(options.appService.getUseMockeService())
+      .subscribe(
+        (dataList: any[]) => {
+          let datalist = document.createElement('datalist');
+          datalist.id = 'dataNames';
 
-        dataList.forEach((data: any) => {
-          let option = document.createElement('option');
-          option.style.fontSize = '18px';
-          option.style.marginBottom = '5px';
-          option.value = data.name;
-          option.setAttribute('data-value', data.id);
+          dataList.forEach((data: any) => {
+            let option = document.createElement('option');
+            option.style.fontSize = '18px';
+            option.style.marginBottom = '5px';
+            option.value = data.name;
+            option.setAttribute('data-value', data.id);
 
-          datalist.appendChild(option);
-        });
+            datalist.appendChild(option);
+          });
 
-        element.appendChild(datalist);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+          element.appendChild(datalist);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
 
     super({
       element: element,
@@ -58,6 +63,7 @@ export class SearchBar extends Control {
 
     this.inputBox = input;
     this.wonderService = options.wonderService;
+    this.appService = options.appService;
 
     input.addEventListener('keyup', this.onSearch.bind(this), false);
     input.addEventListener('focusout', this.onSearch.bind(this), false);
@@ -77,7 +83,10 @@ export class SearchBar extends Control {
       datalist.forEach((element) => {
         if (element.getAttribute('value') === this.inputBox.value) {
           this.wonderService
-            .getWonderDetail(element.getAttribute('data-value'), false)
+            .getWonderDetail(
+              element.getAttribute('data-value'),
+              this.appService.getUseMockeService()
+            )
             .subscribe(
               (data: any) => {
                 this.getMap()
