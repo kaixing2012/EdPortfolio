@@ -1,20 +1,20 @@
 ::ng-deep .mat-tab-label {
-  font-size: 16px;
+  font-size: 1.2em;
   font-weight: 900;
 }
 
 .product-frame {
   position: relative;
-  top: 7.5rem;
-  padding: 0rem 0.8rem;
+  top: 4.3em;
+  padding: 0em 0.8em;
 }
 
 .product-frame mat-tab-group {
-  height: calc(100vh - 18rem);
+  height: calc((var(--vh, 1vh) * 100) - 9.5em);
 }
 
 .product-frame div {
-  height: calc(100vh - 24.2rem);
+  height: calc((var(--vh, 1vh) * 100) - 13em);
 }
 
 .product-frame p {

@@ -2,13 +2,14 @@
   width: 100%;
   height: 100%;
   background-color: #303030;
+  overflow: hidden;
 }
 
 .shop {
   position: relative;
-  top: 8.5rem;
-  height: calc(100vh - 9.5rem);
-  margin: 0 1rem;
+  top: 4.7em;
+  height: calc((var(--vh, 1vh) * 100) - 5.1em);
+  margin: 0em 0.4em;
   background-color: rgb(255, 255, 255);
 }
 
@@ -19,9 +20,8 @@
 .shop mat-toolbar {
   display: flex;
   position: fixed;
-  height: 60px;
-  width: 98%;
-  margin: 0;
+  height: 2.9em;
+  width: calc(100vw - 0.6em);
   padding: 10px 25px;
   background-color: transparent;
   justify-content: space-between;

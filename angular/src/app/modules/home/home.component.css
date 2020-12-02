@@ -1,7 +1,7 @@
 .home-tree-frame {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: table;
   z-index: -1;
 }
@@ -68,7 +68,7 @@
 .home-story-selfie {
   width: 70%;
   height: 100%;
-  border-radius: 4rem;
+  border-radius: 1.5em;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -260,10 +260,10 @@
   .home-story-selfie {
     position: relative;
     left: 50%;
-    width: 30rem;
-    height: 30rem;
+    width: 16em;
+    height: 16em;
     border-radius: 50%;
-    margin-bottom: 5rem;
+    margin-bottom: 5em;
     box-shadow: inset 0px 0px 50px 20px rgba(0, 0, 0, 1);
     transform: translateX(-50%);
   }
@@ -302,8 +302,8 @@
   }
 
   .home-story-selfie {
-    width: 20rem;
-    height: 20rem;
+    width: 13em;
+    height: 13em;
   }
 
   .home-story-detail {

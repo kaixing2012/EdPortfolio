@@ -1,11 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-:root {
-  font-size: 8px;
-}
 
 html,
 body {
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
 }
 

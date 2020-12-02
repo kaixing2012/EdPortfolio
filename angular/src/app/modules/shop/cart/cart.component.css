@@ -1,21 +1,9 @@
 .cart-frame {
   position: relative;
-  top: 9rem;
-  margin: 0rem 0.8rem;
+  top: 5em;
+  margin: 0em 0.8em;
 }
-
-/* .cart-frame mat-tab-group {
-  height: calc(100vh - 145px);
-} */
 
 .cart-frame table {
-  height: calc(100vh - 19.5rem);
-}
-
-.cart-frame p {
-  position: relative;
-  font-size: 30px;
-  top: 50%;
-  text-align: center;
-  transform: translateY(-50%);
+  height: calc((var(--vh, 1vh) * 100) - 11em);
 }

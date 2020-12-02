@@ -84,4 +84,7 @@
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
+  .side-nav {
+    padding: 2em 2em;
+  }
 }
