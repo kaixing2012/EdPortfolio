@@ -1,9 +1,65 @@
 .shop-frame {
-  position: relative;
   width: 100%;
   height: 100%;
   background-color: #303030;
-  z-index: -1;
+}
+
+.shop {
+  position: relative;
+  height: 89%;
+  width: 98%;
+  top: 8.5rem;
+  margin: auto auto;
+  background-color: rgb(255, 255, 255);
+}
+
+.shop mat-drawer-content::-webkit-scrollbar {
+  display: none;
+}
+
+.shop mat-toolbar {
+  display: flex;
+  position: fixed;
+  height: 60px;
+  width: 98%;
+  margin: 0;
+  padding: 10px 25px;
+  background-color: transparent;
+  justify-content: space-between;
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+  z-index: 5;
+}
+
+.nav-link {
+  display: flex;
+  width: 80px;
+  padding: 0 10px;
+  justify-content: space-between;
+}
+
+.nav-brand a {
+  color: rgb(90, 90, 90);
+  cursor: pointer;
+  font-size: x-large;
+  font-weight: bolder;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.nav-link a {
+  cursor: pointer;
+  color: rgb(90, 90, 90);
+  font-size: 1.2em;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.nav-link a:hover {
+  font-size: 1.6em;
 }
 
 /* Large devices (desktops, less than 1200px) */
@@ -16,6 +72,9 @@
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
+  .shop mat-toolbar {
+    padding: 10px 10px;
+  }
 }
 
 /* Extra small devices (portrait phones, less than 576px) */

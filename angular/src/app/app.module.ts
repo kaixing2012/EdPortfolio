@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './modules/routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../app/modules/material/material.module';
-import { ShoppingCarModule } from './modules/shopping-car/shopping-car.module';
+import { ShopModule } from './modules/shop/shop.module';
 import { LifestyleModule } from '../app/modules/lifestyle/lifestyle.module';
 import { HomeModule } from '../app/modules/home/home.module';
 import { MapModule } from '../app/modules/map/map.module';
@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
     HomeModule,
     MapModule,
     LifestyleModule,
-    ShoppingCarModule,
+    ShopModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

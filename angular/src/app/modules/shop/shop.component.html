@@ -1,5 +1,19 @@
 <div class="shop-frame">
-  <h1>
-    <span>Coming soon...</span>
-  </h1>
+  <div class="shop">
+    <mat-toolbar>
+      <div class="nav-brand">
+        <a [routerLink]="['./product']">My Shop</a>
+      </div>
+
+      <div class="nav-link">
+        <a [routerLink]="['./product']">
+          <i class="fas fa-store-alt"></i>
+        </a>
+        <a [routerLink]="['./cart']">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
 </div>
