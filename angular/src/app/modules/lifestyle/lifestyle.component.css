@@ -1,17 +1,17 @@
-.lifestyle-container {
-  position: absolute;
+.lifestyle-frame {
+  position: relative;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #303030;
-  z-index: -1;
 }
 
-.lifestyle-cover-text {
-  color: #ebebeb;
-  font-size: 40px;
-  text-shadow: 3px 3px 6px #000000;
+.lifestyle-frame h1 {
+  position: relative;
+  top: 50%;
+  text-align: center;
+  margin-left: auto;
+  transform: translateY(-50%);
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
@@ -19,7 +19,7 @@
 
 /* Large devices (desktops, less than 1200px) */
 @media (max-width: 1199.98px) {
-  .lifestyle-cover-text {
+  .lifestyle-frame h1 {
     font-size: 35px;
   }
 }
@@ -30,7 +30,7 @@
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
-  .lifestyle-cover-text {
+  .lifestyle-frame h1 {
     font-size: 30px;
   }
 }

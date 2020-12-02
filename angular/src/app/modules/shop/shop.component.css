@@ -40,7 +40,7 @@
 }
 
 .nav-brand a {
-  color: rgb(90, 90, 90);
+  color: rgb(120, 120, 120);
   cursor: pointer;
   font-size: x-large;
   font-weight: bolder;
@@ -50,7 +50,7 @@
 
 .nav-link a {
   cursor: pointer;
-  color: rgb(90, 90, 90);
+  color: rgb(120, 120, 120);
   font-size: 1.2em;
   text-decoration: none;
   -webkit-transition: all 0.3s;
