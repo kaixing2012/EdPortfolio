@@ -6,8 +6,7 @@
 
 .map {
   position: relative;
-  height: 89%;
-  width: 98%;
   top: 8.5rem;
-  margin: auto auto;
+  height: calc(100vh - 9.5rem);
+  margin: 0 1rem;
 }
