@@ -3,7 +3,8 @@
     "item": {
       "id": 1,
       "name": "M-1",
-      "price": 399
+      "price": 399,
+      "imagePath": "/assets/images/product-m1.jpeg"
     },
     "gender": {
       "id": 1,
@@ -26,8 +27,9 @@
   {
     "item": {
       "id": 2,
-      "name": "M-2",
-      "price": 399
+      "name": "B-8",
+      "price": 399,
+      "imagePath": "/assets/images/product-b8.jpeg"
     },
     "gender": {
       "id": 2,

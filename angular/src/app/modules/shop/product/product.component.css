@@ -57,6 +57,9 @@
   overflow: hidden;
   justify-content: space-between;
 }
+.product-collection mat-tab-group {
+  width: 100%;
+}
 
 .product-collection .row-wrap {
   overflow: auto;
