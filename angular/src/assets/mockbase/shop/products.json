@@ -1,0 +1,50 @@
+[
+  {
+    "item": {
+      "id": 1,
+      "name": "M-1",
+      "price": 399
+    },
+    "gender": {
+      "id": 1,
+      "name": "women"
+    },
+    "color": {
+      "id": 1,
+      "name": "red"
+    },
+    "size": {
+      "id": 3,
+      "name": "l"
+    },
+    "category": {
+      "id": 1,
+      "name": "indoor"
+    },
+    "stock": 8
+  },
+  {
+    "item": {
+      "id": 2,
+      "name": "M-2",
+      "price": 399
+    },
+    "gender": {
+      "id": 2,
+      "name": "men"
+    },
+    "color": {
+      "id": 2,
+      "name": "blue"
+    },
+    "size": {
+      "id": 2,
+      "name": "m"
+    },
+    "category": {
+      "id": 2,
+      "name": "outdoor"
+    },
+    "stock": 10
+  }
+]

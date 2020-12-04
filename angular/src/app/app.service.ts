@@ -1,11 +1,11 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
   private isMobileMode: boolean;
-  private useMockService: boolean = false;
+  private useMockService: boolean = true;
 
   constructor() {}
 

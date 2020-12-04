@@ -1,19 +1,103 @@
 <div class="product-frame">
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Women">
-      <div>
-        <p>Coming soon...</p>
-      </div>
-    </mat-tab>
-    <mat-tab label="Men"
-      ><div>
-        <p>Coming soon...</p>
-      </div></mat-tab
+  <button class="filter-btn" mat-icon-button (click)="onOpenFilter()">
+    <ng-template [ngIf]="isMobileMode" [ngIfElse]="desktopForFilterBtn">
+      <i class="fas fa-filter"></i>
+    </ng-template>
+
+    <ng-template #desktopForFilterBtn>
+      <span> FILTER </span>
+    </ng-template>
+  </button>
+
+  <mat-drawer-container class="product-display">
+    <mat-drawer
+      class="product-filter"
+      [opened]="isFilterOpened"
+      mode="side"
+      position="end"
     >
-    <mat-tab label="Kids"
-      ><div>
-        <p>Coming soon...</p>
-      </div></mat-tab
-    >
-  </mat-tab-group>
+      <ul>
+        <h1>Color</h1>
+
+        <li *ngFor="let color of colors">
+          <mat-checkbox
+            #checkbox
+            color="primary"
+            [value]="color.id"
+            [name]="color.name"
+            (change)="onChange($event)"
+          >
+            {{ color.name | titlecase }}
+          </mat-checkbox>
+        </li>
+      </ul>
+
+      <ul>
+        <h1>Size</h1>
+
+        <li *ngFor="let size of sizes">
+          <mat-checkbox
+            #checkbox
+            color="primary"
+            [value]="size.id"
+            [name]="size.name"
+            (change)="onChange($event.checked)"
+          >
+            {{ size.name | titlecase }}
+          </mat-checkbox>
+        </li>
+      </ul>
+
+      <ul>
+        <h1>Category</h1>
+
+        <li *ngFor="let category of categories">
+          <mat-checkbox
+            #checkbox
+            color="primary"
+            [value]="category.id"
+            [name]="category.name"
+            (change)="onChange($event.checked)"
+          >
+            {{ category.name | titlecase }}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </mat-drawer>
+
+    <mat-drawer-content class="product-collection">
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab
+          *ngFor="let label of genders"
+          label="{{ label.name | titlecase }}"
+        >
+          <div fxLayout="row wrap" class="row-wrap">
+            <div
+              fxFlex="25%"
+              fxFlex.sm="33%"
+              fxFlex.xs="100%"
+              *ngFor="let item of displayList"
+            >
+              <mat-card class="mat-elevation-z4">
+                <img
+                  mat-card-image
+                  src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                  alt="Photo of a Shiba Inu"
+                />
+
+                <mat-card-header>
+                  <mat-card-title>
+                    {{ item.item.name }}
+                  </mat-card-title>
+                  <mat-card-subtitle>
+                    NT {{ item.item.price }}
+                  </mat-card-subtitle>
+                </mat-card-header>
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

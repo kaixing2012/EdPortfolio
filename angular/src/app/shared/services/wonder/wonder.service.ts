@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Wonder } from '../../models/wonder.model';
 
-import wonders from '../../../../assets/jsonFiles/wonders.json';
+import wonders from '../../../../assets/mockbase/map/wonders.json';
 
 @Injectable({
   providedIn: 'root',

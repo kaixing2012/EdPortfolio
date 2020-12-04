@@ -3,18 +3,40 @@
   font-weight: 900;
 }
 
+::ng-deep .mat-checkbox-inner-container {
+  /* display: none !important; */
+}
+
+::ng-deep .mat-tab-body-content::-webkit-scrollbar {
+  display: none;
+}
+
+::ng-deep .mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-btn {
+  position: absolute;
+  right: 2.5em;
+  font-size: 1.1em;
+  z-index: 5;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.filter-btn:hover {
+  transform: scale(1.1);
+}
+
+.filter-btn i {
+  color: rgb(120, 120, 120);
+}
+
 .product-frame {
   position: relative;
   top: 4.3em;
   padding: 0em 0.8em;
-}
-
-.product-frame mat-tab-group {
-  height: calc((var(--vh, 1vh) * 100) - 9.5em);
-}
-
-.product-frame div {
-  height: calc((var(--vh, 1vh) * 100) - 13em);
 }
 
 .product-frame p {
@@ -23,4 +45,91 @@
   top: 50%;
   text-align: center;
   transform: translateY(-50%);
+}
+
+.product-display {
+  overflow: hidden;
+  height: calc((var(--vh, 1vh) * 100) - 9.5em);
+}
+
+.product-collection {
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+.product-collection .row-wrap {
+  overflow: auto;
+  margin: auto;
+  padding: 0 1.5em 2.5em;
+}
+
+.product-collection mat-card {
+  cursor: pointer;
+  width: 80%;
+  margin: 2.5em auto 0em;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.product-collection mat-card:hover {
+  transform: scale(1.03);
+}
+
+.product-filter {
+  padding: 2.5em 5em 0em 3em;
+}
+
+.product-filter h1 {
+  margin: 1.5em 0em 0.3em;
+}
+
+.product-filter ul {
+  margin: 0em;
+  padding: 0em;
+}
+
+.product-filter li {
+  list-style-type: none;
+  padding-left: 1.2em;
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+  .filter-btn {
+    right: 0.8em;
+  }
+
+  .product-filter h1 {
+    font-size: 1.3em;
+  }
+
+  .product-filter {
+    padding: 2.5em 2em 0em 2em;
+  }
+
+  .product-filter li {
+    /* padding-left: 0.5em; */
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  ::ng-deep .mat-tab-label {
+    font-size: 1em;
+    padding: 0 1em !important;
+  }
+
+  .product-filter {
+    padding: 2.5em 0em 0em 1.5em;
+  }
 }
