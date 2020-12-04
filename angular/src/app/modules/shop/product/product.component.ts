@@ -6,6 +6,10 @@ import {
   ViewChildren,
 } from '@angular/core';
 
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+
+import { MatDialog } from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 
 import { AppService } from 'src/app/app.service';
@@ -14,7 +18,6 @@ import { ColorService } from 'src/app/shared/services/color/color.service';
 import { GenderService } from 'src/app/shared/services/gender/gender.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-product',
@@ -37,6 +40,7 @@ export class ProductComponent implements OnInit {
   tabChangeEvent: MatTabChangeEvent;
 
   constructor(
+    public dialog: MatDialog,
     private appService: AppService,
     private sizeService: SizeService,
     private colorService: ColorService,
@@ -143,6 +147,12 @@ export class ProductComponent implements OnInit {
 
   onOpenFilter() {
     this.isFilterOpened = !this.isFilterOpened;
+  }
+
+  openDialog(item) {
+    const dialogRef = this.dialog.open(ProductDetailComponent, {
+      data: { productItem: item },
+    });
   }
 
   onTabChange(event: MatTabChangeEvent) {

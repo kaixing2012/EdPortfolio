@@ -12,6 +12,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const matModules = [
   FlexLayoutModule,
@@ -25,6 +26,7 @@ const matModules = [
   MatTableModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDialogModule,
 ];
 
 @NgModule({
