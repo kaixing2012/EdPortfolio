@@ -14,6 +14,7 @@ import { ColorService } from 'src/app/shared/services/color/color.service';
 import { GenderService } from 'src/app/shared/services/gender/gender.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-product',
@@ -28,10 +29,12 @@ export class ProductComponent implements OnInit {
   sizes = [];
   colors = [];
   categories = [];
-
   displayList: any[] = [];
+
   isFilterOpened: boolean = true;
   isMobileMode: boolean;
+
+  tabChangeEvent: MatTabChangeEvent;
 
   constructor(
     private appService: AppService,
@@ -109,7 +112,6 @@ export class ProductComponent implements OnInit {
       .subscribe(
         (products: any[]) => {
           this.products = products;
-          this.displayList = this.products;
         },
         (err) => {
           console.log(err);
@@ -117,8 +119,35 @@ export class ProductComponent implements OnInit {
       );
   }
 
+  getDisplayItems(event: MatTabChangeEvent) {
+    let result = [];
+    this.products
+      .filter(
+        (product) => product.gender.name === event.tab.textLabel.toLowerCase()
+      )
+      .forEach((product) => {
+        let itemAlreadyIn = result.find(
+          (item) => item.item.id === product.item.id
+        );
+        if (itemAlreadyIn) {
+          itemAlreadyIn.attribute += `-${product.color.name}-${product.size.name}-${product.category.name}`;
+        } else {
+          result.push({
+            item: product.item,
+            attribute: `${product.color.name}-${product.size.name}-${product.category.name}`,
+          });
+        }
+      });
+    return result;
+  }
+
   onOpenFilter() {
     this.isFilterOpened = !this.isFilterOpened;
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    this.tabChangeEvent = event;
+    this.displayList = this.getDisplayItems(this.tabChangeEvent);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -127,27 +156,27 @@ export class ProductComponent implements OnInit {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
-  onChange(event: MatCheckboxChange) {
+  onCheckChange(event: MatCheckboxChange) {
     let allUnchecked = this.checkboxes.filter(
       (box: MatCheckbox) => box.checked === false
     );
 
     if (allUnchecked.length === this.checkboxes.length) {
-      this.displayList = this.products;
+      this.displayList = this.getDisplayItems(this.tabChangeEvent);
     } else {
-      this.displayList = this.products.filter((product) => {
-        let box: MatCheckbox;
-        for (box of this.checkboxes) {
-          if (
-            (product.color.name === box.name ||
-              product.size.name === box.name ||
-              product.category.name === box.name) &&
-            box.checked === true
-          ) {
-            return true;
+      this.displayList = this.getDisplayItems(this.tabChangeEvent).filter(
+        (displayItem) => {
+          let box: MatCheckbox;
+          let attributes = displayItem.attribute.split('-');
+          for (let attr of attributes) {
+            for (box of this.checkboxes) {
+              if (attr === box.name && box.checked === true) {
+                return true;
+              }
+            }
           }
         }
-      });
+      );
     }
   }
 }

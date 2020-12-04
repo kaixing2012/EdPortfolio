@@ -25,7 +25,7 @@
             color="primary"
             [value]="color.id"
             [name]="color.name"
-            (change)="onChange($event)"
+            (change)="onCheckChange($event)"
           >
             {{ color.name | titlecase }}
           </mat-checkbox>
@@ -41,7 +41,7 @@
             color="primary"
             [value]="size.id"
             [name]="size.name"
-            (change)="onChange($event.checked)"
+            (change)="onCheckChange($event)"
           >
             {{ size.name | titlecase }}
           </mat-checkbox>
@@ -57,7 +57,7 @@
             color="primary"
             [value]="category.id"
             [name]="category.name"
-            (change)="onChange($event.checked)"
+            (change)="onCheckChange($event)"
           >
             {{ category.name | titlecase }}
           </mat-checkbox>
@@ -66,7 +66,10 @@
     </mat-drawer>
 
     <mat-drawer-content class="product-collection">
-      <mat-tab-group mat-align-tabs="center">
+      <mat-tab-group
+        mat-align-tabs="center"
+        (selectedTabChange)="onTabChange($event)"
+      >
         <mat-tab
           *ngFor="let label of genders"
           label="{{ label.name | titlecase }}"

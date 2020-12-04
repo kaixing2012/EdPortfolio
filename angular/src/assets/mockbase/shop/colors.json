@@ -10,5 +10,13 @@
   {
     "id": 3,
     "name": "green"
+  },
+  {
+    "id": 4,
+    "name": "grey"
+  },
+  {
+    "id": 5,
+    "name": "pink"
   }
 ]

@@ -7,12 +7,37 @@
       "imagePath": "/assets/images/product-m1.jpeg"
     },
     "gender": {
+      "id": 2,
+      "name": "men"
+    },
+    "color": {
+      "id": 4,
+      "name": "grey"
+    },
+    "size": {
+      "id": 3,
+      "name": "l"
+    },
+    "category": {
+      "id": 1,
+      "name": "indoor"
+    },
+    "stock": 8
+  },
+  {
+    "item": {
+      "id": 1,
+      "name": "M-1",
+      "price": 399,
+      "imagePath": "/assets/images/product-m1.jpeg"
+    },
+    "gender": {
       "id": 1,
       "name": "women"
     },
     "color": {
-      "id": 1,
-      "name": "red"
+      "id": 5,
+      "name": "pink"
     },
     "size": {
       "id": 3,
@@ -32,8 +57,33 @@
       "imagePath": "/assets/images/product-b8.jpeg"
     },
     "gender": {
+      "id": 1,
+      "name": "women"
+    },
+    "color": {
+      "id": 1,
+      "name": "red"
+    },
+    "size": {
       "id": 2,
-      "name": "men"
+      "name": "m"
+    },
+    "category": {
+      "id": 2,
+      "name": "outdoor"
+    },
+    "stock": 10
+  },
+  {
+    "item": {
+      "id": 2,
+      "name": "B-8",
+      "price": 399,
+      "imagePath": "/assets/images/product-b8.jpeg"
+    },
+    "gender": {
+      "id": 1,
+      "name": "women"
     },
     "color": {
       "id": 2,
