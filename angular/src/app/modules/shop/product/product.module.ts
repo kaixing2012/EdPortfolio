@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from '../../../modules/material/material.module';
@@ -8,6 +9,6 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 
 @NgModule({
   declarations: [ProductComponent, ProductDetailComponent],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
 })
 export class ProductModule {}

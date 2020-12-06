@@ -13,6 +13,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const matModules = [
   FlexLayoutModule,
@@ -27,6 +30,9 @@ const matModules = [
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
+  MatRadioModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 @NgModule({

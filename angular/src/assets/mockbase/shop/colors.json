@@ -1,22 +1,27 @@
 [
   {
     "id": 1,
-    "name": "red"
+    "name": "red jazz",
+    "code": "#5b3337"
   },
   {
     "id": 2,
-    "name": "blue"
+    "name": "blue bunker",
+    "code": "#282F36"
   },
   {
     "id": 3,
-    "name": "green"
+    "name": "green",
+    "code": "#008000"
   },
   {
     "id": 4,
-    "name": "grey"
+    "name": "grey nevada",
+    "code": "#5E6A6B"
   },
   {
     "id": 5,
-    "name": "pink"
+    "name": "pink mandy",
+    "code": "#C2465D"
   }
 ]

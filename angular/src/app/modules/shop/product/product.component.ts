@@ -138,6 +138,7 @@ export class ProductComponent implements OnInit {
         } else {
           result.push({
             item: product.item,
+            category: product.category,
             attribute: `${product.color.name}-${product.size.name}-${product.category.name}`,
           });
         }
@@ -149,9 +150,14 @@ export class ProductComponent implements OnInit {
     this.isFilterOpened = !this.isFilterOpened;
   }
 
-  openDialog(item) {
+  openDialog(item: any, category: any, gender: any) {
     const dialogRef = this.dialog.open(ProductDetailComponent, {
-      data: { productItem: item },
+      width: '100%',
+      data: {
+        productItem: item,
+        category: category,
+        gender: gender,
+      },
     });
   }
 

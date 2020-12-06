@@ -1,8 +1,78 @@
-<h1 mat-dialog-title>Hi {{ data.productItem.name }}</h1>
+<div mat-dialog-content [ngClass]="productDetailCls()">
+  <div [ngClass]="productDetailImgCls()">
+    <img src="{{ imagePath }}" alt="" width="100%" />
+  </div>
 
-<div mat-dialog-content></div>
+  <div [ngClass]="productDetailDescriptionCls()">
+    <div class="product-detail-description-title">
+      <h1>{{ data.productItem.name }}</h1>
+      <p>NT${{ data.productItem.price }}</p>
+    </div>
 
-<div mat-dialog-actions>
-  <button mat-button>No Thanks</button>
-  <button mat-button cdkFocusInitial>Add to Cart</button>
+    <form #productForm="ngForm" action="">
+      <input type="hidden" name="item" [ngModel]="productModel.item.id" />
+      <input type="hidden" name="gender" [ngModel]="productModel.gender.id" />
+      <input
+        type="hidden"
+        name="category"
+        [ngModel]="productModel.category.id"
+      />
+
+      <div class="product-detail-option-frame">
+        <p>Choose your Color</p>
+
+        <mat-radio-group
+          aria-label="Select an option"
+          name="color"
+          [(ngModel)]="productModel.color"
+        >
+          <div
+            class="product-detail-option-color"
+            *ngFor="let color of colors"
+            [ngClass]="dynamicAddActiveCls(productModel.color, color.object)"
+          >
+            <mat-radio-button
+              [ngStyle]="dynamicColorCls(color.object.code)"
+              [value]="color.object"
+              disableRipple="true"
+              (click)="onColorClick(color.imagePath)"
+            >
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+
+      <div class="product-detail-option-frame">
+        <p>Choose your Size</p>
+
+        <mat-radio-group
+          aria-label="Select an option"
+          name="size"
+          [(ngModel)]="productModel.size"
+        >
+          <div
+            class="product-detail-option-size"
+            *ngFor="let size of sizes"
+            [ngClass]="dynamicAddActiveCls(productModel.size, size.object)"
+          >
+            <mat-radio-button [value]="size.object" disableRipple="true">
+              {{ size.object.name | uppercase }}
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>No Thanks</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="onAddToCart()"
+  >
+    Add to Cart (Coming Soon...)
+  </button>
 </div>

@@ -16,9 +16,9 @@
       mode="side"
       position="end"
     >
-      <ul>
-        <h1>Color</h1>
+      <h1>Color</h1>
 
+      <ul>
         <li *ngFor="let color of colors">
           <mat-checkbox
             #checkbox
@@ -32,9 +32,9 @@
         </li>
       </ul>
 
-      <ul>
-        <h1>Size</h1>
+      <h1>Size</h1>
 
+      <ul>
         <li *ngFor="let size of sizes">
           <mat-checkbox
             #checkbox
@@ -48,9 +48,9 @@
         </li>
       </ul>
 
-      <ul>
-        <h1>Category</h1>
+      <h1>Category</h1>
 
+      <ul>
         <li *ngFor="let category of categories">
           <mat-checkbox
             #checkbox
@@ -71,8 +71,8 @@
         (selectedTabChange)="onTabChange($event)"
       >
         <mat-tab
-          *ngFor="let label of genders"
-          label="{{ label.name | titlecase }}"
+          *ngFor="let gender of genders"
+          label="{{ gender.name | titlecase }}"
         >
           <div fxLayout="row wrap" class="row-wrap">
             <div
@@ -83,7 +83,7 @@
             >
               <mat-card
                 class="mat-elevation-z4"
-                (click)="openDialog(product.item)"
+                (click)="openDialog(product.item, product.category, gender)"
               >
                 <img
                   mat-card-image

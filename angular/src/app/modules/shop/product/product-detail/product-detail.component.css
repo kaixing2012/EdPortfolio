@@ -1,0 +1,126 @@
+::ng-deep .mat-radio-label {
+  display: inline-block !important;
+  text-align: center;
+  vertical-align: middle;
+  height: 100%;
+}
+
+::ng-deep .mat-radio-label-content {
+  margin-bottom: 0.3em;
+  padding: 0em !important;
+}
+::ng-deep .mat-radio-button .mat-radio-container {
+  width: 0;
+}
+
+::ng-deep .mat-radio-container .mat-radio-outer-circle,
+::ng-deep .mat-radio-container .mat-radio-inner-circle {
+  border: none;
+  width: 0;
+}
+
+.desktop-product-detail {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.desktop-product-detail-img {
+  width: 60%;
+  overflow: auto;
+}
+
+.desktop-product-detail-img::-webkit-scrollbar {
+  display: none;
+}
+
+.desktop-product-detail-description {
+  width: 40%;
+  overflow: auto;
+  padding: 0.5em 1.5em;
+}
+
+.mobile-product-detail {
+  display: block;
+}
+
+.mobile-product-detail-img {
+  position: sticky;
+  top: 0em;
+
+  width: 100%;
+}
+
+.mobile-product-detail-description {
+  width: 100%;
+}
+
+.product-detail-description-title {
+  margin-bottom: 1.8em;
+}
+
+.product-detail-description-title h1 {
+  font-size: 3em;
+  font-weight: 900;
+}
+
+.product-detail-description-title p {
+  color: grey;
+  font-size: 1.3em;
+  margin-left: 0.1em;
+}
+
+.product-detail-option-frame {
+  /* border-bottom: 0.1em solid black; */
+}
+
+.product-detail-option-frame mat-radio-group {
+  margin-left: 0.4em;
+}
+
+.product-detail-option-frame p {
+  font-size: 1em;
+  font-weight: 900;
+  margin: 0.5em 0em 0.5em 0.2em;
+  padding: 0;
+}
+
+.product-detail-option-frame div {
+  display: inline-block;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  border: 1px solid transparent;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.product-detail-option-frame div:hover {
+  border-color: grey;
+}
+
+.product-detail-option-frame div.active {
+  border-color: grey;
+}
+
+.product-detail-option-color {
+  border-radius: 50%;
+}
+
+.product-detail-option-color mat-radio-button {
+  cursor: pointer;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 50%;
+}
+
+.product-detail-option-size {
+  border-radius: 15%;
+}
+
+.product-detail-option-size mat-radio-button {
+  cursor: pointer;
+  width: 3em;
+  border: 1px solid lightgray;
+  border-radius: 15%;
+}

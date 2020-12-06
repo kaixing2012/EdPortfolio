@@ -12,7 +12,8 @@
     },
     "color": {
       "id": 4,
-      "name": "grey"
+      "name": "grey nevada",
+      "code": "#5E6A6B"
     },
     "size": {
       "id": 3,
@@ -22,6 +23,7 @@
       "id": 1,
       "name": "indoor"
     },
+    "imagePath": "/assets/images/product-m1-grey.jpeg",
     "stock": 8
   },
   {
@@ -37,7 +39,8 @@
     },
     "color": {
       "id": 5,
-      "name": "pink"
+      "name": "pink mandy",
+      "code": "#C2465D"
     },
     "size": {
       "id": 3,
@@ -47,6 +50,7 @@
       "id": 1,
       "name": "indoor"
     },
+    "imagePath": "/assets/images/product-m1-pink.jpeg",
     "stock": 8
   },
   {
@@ -62,7 +66,8 @@
     },
     "color": {
       "id": 1,
-      "name": "red"
+      "name": "red jazz",
+      "code": "#5b3337"
     },
     "size": {
       "id": 2,
@@ -72,6 +77,7 @@
       "id": 2,
       "name": "outdoor"
     },
+    "imagePath": "/assets/images/product-b8-red.jpeg",
     "stock": 10
   },
   {
@@ -87,7 +93,8 @@
     },
     "color": {
       "id": 2,
-      "name": "blue"
+      "name": "blue bunker",
+      "code": "#282F36"
     },
     "size": {
       "id": 2,
@@ -97,6 +104,61 @@
       "id": 2,
       "name": "outdoor"
     },
+    "imagePath": "/assets/images/product-b8-blue.jpeg",
+    "stock": 10
+  },
+  {
+    "item": {
+      "id": 2,
+      "name": "B-8",
+      "price": 399,
+      "imagePath": "/assets/images/product-b8.jpeg"
+    },
+    "gender": {
+      "id": 1,
+      "name": "women"
+    },
+    "color": {
+      "id": 2,
+      "name": "blue bunker",
+      "code": "#282F36"
+    },
+    "size": {
+      "id": 3,
+      "name": "l"
+    },
+    "category": {
+      "id": 2,
+      "name": "outdoor"
+    },
+    "imagePath": "/assets/images/product-b8-blue.jpeg",
+    "stock": 10
+  },
+  {
+    "item": {
+      "id": 2,
+      "name": "B-8",
+      "price": 399,
+      "imagePath": "/assets/images/product-b8.jpeg"
+    },
+    "gender": {
+      "id": 1,
+      "name": "women"
+    },
+    "color": {
+      "id": 1,
+      "name": "red jazz",
+      "code": "#5b3337"
+    },
+    "size": {
+      "id": 4,
+      "name": "ll"
+    },
+    "category": {
+      "id": 2,
+      "name": "outdoor"
+    },
+    "imagePath": "/assets/images/product-b8-red.jpeg",
     "stock": 10
   }
 ]
