@@ -92,10 +92,6 @@
   transition: all 1s;
 }
 
-.home-story-detail::-webkit-scrollbar {
-  display: none;
-}
-
 .home-room-frame {
   position: relative;
   height: 100%;
@@ -131,7 +127,7 @@
 .home-room-skill {
   width: 100%;
   height: 100%;
-  color: white;
+  color: #ebebeb;
   background-color: rgba(0, 0, 0, 0.75);
 }
 
@@ -150,7 +146,7 @@
 
 .home-room-skill i {
   font-size: 7em;
-  color: white;
+  color: #ebebeb;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -167,39 +163,25 @@
 }
 
 .home-foot-detail {
-  position: relative;
-  height: 80%;
-  width: 100%;
-  margin: auto;
-  color: #ebebeb;
-  text-align: left;
-}
-
-.home-foot-detail div {
-  position: relative;
   overflow: auto;
-  height: 60%;
-  width: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  vertical-align: middle;
-}
-
-.home-foot-detail div::-webkit-scrollbar {
-  display: none;
+  height: calc(100% - 27.1em);
+  width: 80%;
+  margin: auto;
+  padding: 10em 0em;
 }
 
 .home-foot-detail p {
+  color: #ebebeb;
   font-size: 1.7em;
   line-height: 1.5em;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+  margin: 0;
+  padding: 0;
 }
 
 .home-foot-link {
-  position: relative;
-  height: 20%;
   width: 100%;
+  text-align: center;
 }
 
 .home-foot-link i {
@@ -208,11 +190,11 @@
 
 .home-foot-link span {
   display: flex;
-  height: 100%;
   width: 200px;
   color: #ebebeb;
   justify-content: space-between;
-  align-items: center;
+  margin: auto;
+  padding: 0.7em 0em;
 }
 
 .home-foot-link a {
@@ -233,6 +215,14 @@
 
 .home-foot-link a:active {
   color: inherit;
+}
+
+.home-foot-bottom {
+  color: #ebebeb;
+  font-size: 1.1em;
+  text-align: center;
+  background-color: rgba(93, 34, 34, 0.5);
+  padding: 0.5em 0;
 }
 
 /* Large devices (desktops, less than 1200px) */
@@ -285,14 +275,19 @@
     font-size: 2em;
   }
 
-  .home-foot-detail div {
+  /* 
+  .home-foot-detail {
+    height: auto;
+  } */
+
+  /* .home-foot-detail div {
     height: auto;
     width: 80%;
   }
 
   .home-foot-detail p {
     font-size: 1.6em;
-  }
+  } */
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -312,6 +307,14 @@
 
   .home-room-skill i {
     font-size: 5em;
+  }
+
+  .home-footer-frame {
+    height: auto;
+  }
+
+  .home-foot-detail {
+    padding: 5em 0em;
   }
 
   .home-foot-detail p {
