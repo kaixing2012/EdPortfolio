@@ -104,15 +104,23 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onAddToCart() {
-    alert(`
-      The following is your order:
+    console.log(this.productModel.color);
+    if (!this.productModel.color && !this.productModel.size) {
+      alert(`
+        Please, select your 
+        Color or Size or Both
+      `);
+    } else {
+      alert(`
+        The following is your order:
 
-      item: ${this.productModel.item.name}
-      category: ${this.productModel.category.name}
-      gender: ${this.productModel.gender.name}
-      color: ${this.productModel.color.name}
-      size: ${this.productModel.size.name.toUpperCase()}
-    `);
+        item: ${this.productModel.item.name}
+        category: ${this.productModel.category.name}
+        gender: ${this.productModel.gender.name}
+        color: ${this.productModel.color.name}
+        size: ${this.productModel.size.name.toUpperCase()}
+      `);
+    }
   }
 
   productDetailCls() {

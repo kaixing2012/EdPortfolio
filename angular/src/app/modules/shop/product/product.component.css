@@ -117,18 +117,18 @@
 
   .product-filter h1 {
     font-size: 1.3em;
-    margin: 0.5em 2.5em 0em 1.5em;
+    margin: 0.5em 1.5em 0em 0.8em;
   }
 
   .product-filter ul {
-    padding: 1em 0em 1.8em 3.6em;
+    padding: 0.5em 0em 0.5em 1.8em;
   }
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
   ::ng-deep .mat-tab-label {
-    font-size: 1em;
-    padding: 0 0.6em !important;
+    font-size: 0.9em;
+    padding: 0 0.1em !important;
   }
 }
