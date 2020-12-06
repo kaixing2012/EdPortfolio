@@ -21,45 +21,49 @@
       <div class="product-detail-option-frame">
         <p>Choose your Color</p>
 
-        <mat-radio-group
-          aria-label="Select an option"
-          name="color"
-          [(ngModel)]="productModel.color"
-        >
-          <div
-            class="product-detail-option-color"
-            *ngFor="let color of colors"
-            [ngClass]="dynamicAddActiveCls(productModel.color, color.object)"
+        <div class="product-detail-option-wrapper">
+          <mat-radio-group
+            aria-label="Select an option"
+            name="color"
+            [(ngModel)]="productModel.color"
           >
-            <mat-radio-button
-              [ngStyle]="dynamicColorCls(color.object.code)"
-              [value]="color.object"
-              disableRipple="true"
-              (click)="onColorClick(color.imagePath)"
+            <div
+              class="product-detail-option-color"
+              *ngFor="let color of colors"
+              [ngClass]="dynamicAddActiveCls(productModel.color, color.object)"
             >
-            </mat-radio-button>
-          </div>
-        </mat-radio-group>
+              <mat-radio-button
+                [ngStyle]="dynamicColorCls(color.object.code)"
+                [value]="color.object"
+                disableRipple="true"
+                (click)="onColorClick(color.imagePath)"
+              >
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
       </div>
 
       <div class="product-detail-option-frame">
         <p>Choose your Size</p>
 
-        <mat-radio-group
-          aria-label="Select an option"
-          name="size"
-          [(ngModel)]="productModel.size"
-        >
-          <div
-            class="product-detail-option-size"
-            *ngFor="let size of sizes"
-            [ngClass]="dynamicAddActiveCls(productModel.size, size.object)"
+        <div class="product-detail-option-wrapper">
+          <mat-radio-group
+            aria-label="Select an option"
+            name="size"
+            [(ngModel)]="productModel.size"
           >
-            <mat-radio-button [value]="size.object" disableRipple="true">
-              {{ size.object.name | uppercase }}
-            </mat-radio-button>
-          </div>
-        </mat-radio-group>
+            <div
+              class="product-detail-option-size"
+              *ngFor="let size of sizes"
+              [ngClass]="dynamicAddActiveCls(productModel.size, size.object)"
+            >
+              <mat-radio-button [value]="size.object" disableRipple="true">
+                {{ size.object.name | uppercase }}
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
       </div>
     </form>
   </div>
