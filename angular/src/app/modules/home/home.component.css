@@ -79,13 +79,17 @@
   transition: all 0.5s;
 }
 
+.home-story-selfie:hover {
+  box-shadow: inset 0px 0px 100px 30px rgba(0, 0, 0, 1);
+}
+
 .home-story-detail {
   overflow: auto;
   width: 100%;
   height: 100%;
   color: #ebebeb;
   text-align: left;
-  font-size: 1.7em;
+  font-size: 1.5em;
   line-height: 1.5em;
   -webkit-transition: all 1s;
   -o-transition: all 1s;
@@ -141,16 +145,26 @@
 }
 
 .home-room-skill div {
+  cursor: pointer;
   text-align: center;
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+
+.home-room-skill div:hover {
+  transform: scale(1.1);
 }
 
 .home-room-skill i {
+  cursor: pointer;
   font-size: 7em;
   color: #ebebeb;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .home-room-skill p {
+  cursor: pointer;
   font-size: 2.3em;
   line-height: 1.8em;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
@@ -164,7 +178,7 @@
 
 .home-foot-detail {
   overflow: auto;
-  height: calc(100% - 27.1em);
+  height: calc(100% - 27.7em);
   width: 80%;
   margin: auto;
   padding: 10em 0em;
@@ -172,7 +186,7 @@
 
 .home-foot-detail p {
   color: #ebebeb;
-  font-size: 1.7em;
+  font-size: 1.5em;
   line-height: 1.5em;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
   margin: 0;
@@ -182,6 +196,7 @@
 .home-foot-link {
   width: 100%;
   text-align: center;
+  padding: 1em 0em;
 }
 
 .home-foot-link i {
@@ -194,7 +209,6 @@
   color: #ebebeb;
   justify-content: space-between;
   margin: auto;
-  padding: 0.7em 0em;
 }
 
 .home-foot-link a {
@@ -210,7 +224,7 @@
 }
 
 .home-foot-link a:hover {
-  font-size: 1.2em;
+  color: #cca872;
 }
 
 .home-foot-link a:active {
@@ -258,55 +272,25 @@
     transform: translateX(-50%);
   }
 
+  .home-story-selfie:hover {
+    box-shadow: inset 0px 0px 50px 10px rgba(0, 0, 0, 1);
+  }
+
   .home-story-detail {
     position: relative;
     left: 50%;
     width: 80%;
-    font-size: 1.6em;
+    font-size: 1.4em;
     line-height: 1.5em;
     transform: translateX(-50%);
   }
 
   .home-room-skill i {
-    font-size: 6em;
+    font-size: 5em;
   }
 
   .home-room-skill p {
     font-size: 2em;
-  }
-
-  /* 
-  .home-foot-detail {
-    height: auto;
-  } */
-
-  /* .home-foot-detail div {
-    height: auto;
-    width: 80%;
-  }
-
-  .home-foot-detail p {
-    font-size: 1.6em;
-  } */
-}
-
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
-  .home-story-frame {
-    padding: 5em 0;
-  }
-
-  .home-story-selfie {
-    width: 13em;
-    height: 13em;
-  }
-
-  .home-story-detail {
-    font-size: 1.5em;
-  }
-
-  .home-room-skill i {
-    font-size: 5em;
   }
 
   .home-footer-frame {
@@ -318,6 +302,18 @@
   }
 
   .home-foot-detail p {
-    font-size: 1.5em;
+    font-size: 1.4em;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .home-story-frame {
+    padding: 5em 0;
+  }
+
+  .home-story-selfie {
+    width: 13em;
+    height: 13em;
   }
 }
