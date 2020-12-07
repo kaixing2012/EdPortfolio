@@ -96,6 +96,10 @@
   transition: all 1s;
 }
 
+.home-story-detail::-webkit-scrollbar {
+  display: none;
+}
+
 .home-room-frame {
   position: relative;
   height: 100%;
@@ -179,9 +183,13 @@
 .home-foot-detail {
   overflow: auto;
   height: calc(100% - 27.7em);
-  width: 80%;
+  width: 60%;
   margin: auto;
   padding: 10em 0em;
+}
+
+.home-foot-detail::-webkit-scrollbar {
+  display: none;
 }
 
 .home-foot-detail p {
@@ -298,6 +306,7 @@
   }
 
   .home-foot-detail {
+    width: 80%;
     padding: 5em 0em;
   }
 

@@ -131,13 +131,13 @@ export class ProductComponent implements OnInit {
       )
       .forEach((product) => {
         let itemAlreadyIn = result.find(
-          (item) => item.item.id === product.item.id
+          (item) => item.productItem.id === product.productItem.id
         );
         if (itemAlreadyIn) {
           itemAlreadyIn.attribute += `-${product.color.name}-${product.size.name}-${product.category.name}`;
         } else {
           result.push({
-            item: product.item,
+            productItem: product.productItem,
             category: product.category,
             attribute: `${product.color.name}-${product.size.name}-${product.category.name}`,
           });
@@ -150,11 +150,11 @@ export class ProductComponent implements OnInit {
     this.isFilterOpened = !this.isFilterOpened;
   }
 
-  openDialog(item: any, category: any, gender: any) {
+  openDialog(productItem: any, category: any, gender: any) {
     const dialogRef = this.dialog.open(ProductDetailComponent, {
       width: '100%',
       data: {
-        productItem: item,
+        productItem: productItem,
         category: category,
         gender: gender,
       },

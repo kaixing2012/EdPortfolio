@@ -10,7 +10,11 @@
     </div>
 
     <form #productForm="ngForm" action="">
-      <input type="hidden" name="item" [ngModel]="productModel.item.id" />
+      <input
+        type="hidden"
+        name="productItem"
+        [ngModel]="productModel.productItem.id"
+      />
       <input type="hidden" name="gender" [ngModel]="productModel.gender.id" />
       <input
         type="hidden"

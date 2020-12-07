@@ -13,7 +13,7 @@ export interface DialogData {
 }
 
 export interface ProductModel {
-  item: any;
+  productItem: any;
   category: any;
   gender: any;
   color: any;
@@ -53,7 +53,7 @@ export class ProductDetailComponent implements OnInit {
     this.imagePath = this.data.productItem.imagePath;
 
     this.productModel = {
-      item: this.data.productItem,
+      productItem: this.data.productItem,
       category: this.data.category,
       gender: this.data.gender,
       color: this.clientColorOptions[this.currentColorIndex],
@@ -68,7 +68,7 @@ export class ProductDetailComponent implements OnInit {
         (products: any) => {
           this.products = products.filter(
             (product) =>
-              product.item.id === this.data.productItem.id &&
+              product.productItem.id === this.data.productItem.id &&
               product.gender.name === this.data.gender.name
           );
 
@@ -114,7 +114,7 @@ export class ProductDetailComponent implements OnInit {
     } else {
       alert(`
         The following is your order:
-          item: ${this.productModel.item.name}
+          Product Item: ${this.productModel.productItem.name}
           category: ${this.productModel.category.name}
           gender: ${this.productModel.gender.name}
           color: ${this.productModel.color.name}

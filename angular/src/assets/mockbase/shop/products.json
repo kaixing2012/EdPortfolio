@@ -1,6 +1,6 @@
 [
   {
-    "item": {
+    "productItem": {
       "id": 1,
       "name": "M-1",
       "price": 399,
@@ -27,7 +27,7 @@
     "stock": 8
   },
   {
-    "item": {
+    "productItem": {
       "id": 1,
       "name": "M-1",
       "price": 399,
@@ -54,7 +54,7 @@
     "stock": 8
   },
   {
-    "item": {
+    "productItem": {
       "id": 2,
       "name": "B-8",
       "price": 399,
@@ -81,7 +81,7 @@
     "stock": 10
   },
   {
-    "item": {
+    "productItem": {
       "id": 2,
       "name": "B-8",
       "price": 399,
@@ -108,7 +108,7 @@
     "stock": 10
   },
   {
-    "item": {
+    "productItem": {
       "id": 2,
       "name": "B-8",
       "price": 399,
@@ -135,7 +135,7 @@
     "stock": 10
   },
   {
-    "item": {
+    "productItem": {
       "id": 2,
       "name": "B-8",
       "price": 399,
