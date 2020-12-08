@@ -17,13 +17,13 @@ export class SizeService {
 
   getSizeList(useMockService: boolean) {
     if (useMockService) {
-      const nameSetObservable = new Observable((observer) => {
+      const sizeObservable = new Observable((observer) => {
         setTimeout(() => {
           observer.next(this.sizeList);
         }, 100);
       });
 
-      return nameSetObservable;
+      return sizeObservable;
     } else {
       let requestUri = `${this.baseUri}wonder/`;
       return this.httpClient.get(requestUri);

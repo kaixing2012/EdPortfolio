@@ -152,7 +152,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  dynamicColorCls(color: string) {
+  dynamicBackgroundColor(color: string) {
     return {
       backgroundColor: color,
     };

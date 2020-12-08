@@ -2,28 +2,28 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import genders from '../../../../assets/mockbase/shop/genders.json';
+import shoppingItems from '../../../../assets/mockbase/shop/shopping-items.json';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GenderService {
-  private genderList: any[] = genders;
+export class ShoppingItemService {
+  private shoppingItemList: any[] = shoppingItems;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 
   constructor(private httpClient: HttpClient) {}
 
-  getGenderList(useMockService: boolean) {
+  getShoppingItemList(useMockService: boolean) {
     if (useMockService) {
-      const genderObservable = new Observable((observer) => {
+      const shoppingItem = new Observable((observer) => {
         setTimeout(() => {
-          observer.next(this.genderList);
+          observer.next(this.shoppingItemList);
         }, 100);
       });
 
-      return genderObservable;
+      return shoppingItem;
     } else {
       let requestUri = `${this.baseUri}wonder/`;
       return this.httpClient.get(requestUri);

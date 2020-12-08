@@ -37,7 +37,7 @@
               [ngClass]="dynamicAddActiveCls(productModel.color, color.object)"
             >
               <mat-radio-button
-                [ngStyle]="dynamicColorCls(color.object.code)"
+                [ngStyle]="dynamicBackgroundColor(color.object.code)"
                 [value]="color.object"
                 disableRipple="true"
                 (click)="onColorClick(color.imagePath)"

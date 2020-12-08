@@ -17,13 +17,13 @@ export class ColorService {
 
   getColorList(useMockService: boolean) {
     if (useMockService) {
-      const nameSetObservable = new Observable((observer) => {
+      const colorObservable = new Observable((observer) => {
         setTimeout(() => {
           observer.next(this.colorList);
         }, 100);
       });
 
-      return nameSetObservable;
+      return colorObservable;
     } else {
       let requestUri = `${this.baseUri}wonder/`;
       return this.httpClient.get(requestUri);

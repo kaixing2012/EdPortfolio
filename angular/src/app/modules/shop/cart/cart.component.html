@@ -1,42 +1,81 @@
-<div class="cart-frame mat-elevation-z8">
-  <p
-    style="
-      position: absolute;
-      font-size: 25px;
-      width: auto;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    "
-  >
-    Coming soon...
-  </p>
-  <table mat-table>
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-    </ng-container>
+<div class="cart-frame">
+  <div class="cart">
+    <div class="cart-list" *ngFor="let shoppingItem of shoppingItems">
+      <div class="cart-list-img">
+        <img src="{{ shoppingItem.product.imagePath }}" alt="" width="100%" />
+      </div>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+      <div class="cart-list-detail">
+        <h1>
+          <div>{{ shoppingItem.product.productItem.name }}</div>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef>Weight</th>
-      <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-    </ng-container>
+          <div>
+            <button mat-icon-button (click)="subtractAmount(shoppingItem)">
+              <i class="fas fa-minus"></i>
+            </button>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
-      <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-    </ng-container>
+            <small>{{ shoppingItem.amount }}</small>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+            <button mat-icon-button (click)="addAmount(shoppingItem)">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          <small>NT${{ shoppingItem.product.productItem.price }}</small>
+        </h1>
+
+        <h2>
+          <div>Color:</div>
+
+          <div
+            class="cart-list-detail-color"
+            [ngStyle]="dynamicBackgroundColor(shoppingItem.product.color.code)"
+          ></div>
+        </h2>
+
+        <h2>
+          <div>Size:</div>
+
+          <div class="cart-list-detail-size">
+            <span>{{ shoppingItem.product.size.name | uppercase }}</span>
+          </div>
+        </h2>
+
+        <h2 class="cart-list-detail-sub">
+          <span>
+            Sub:
+            <b>{{
+              getProductSubtotal(
+                shoppingItem.product.productItem.price,
+                shoppingItem.amount
+              )
+            }}</b>
+          </span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="cart-pay">
+      <div>
+        <h2>
+          <span> Product Total: </span>
+          <span> {{ getProductTotal() }} </span>
+        </h2>
+
+        <h2>
+          <span> Delivery Fee: </span>
+          <span> {{ getDeliveryFee() }} </span>
+        </h2>
+
+        <mat-divider></mat-divider>
+
+        <h1>
+          <span> Total: </span>
+          <span> {{ getTotal() }} </span>
+        </h1>
+
+        <button mat-raised-button (click)="onCheckOut()">Check Out</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -17,13 +17,13 @@ export class CategoryService {
 
   getCategoryList(useMockService: boolean) {
     if (useMockService) {
-      const nameSetObservable = new Observable((observer) => {
+      const categoryObservable = new Observable((observer) => {
         setTimeout(() => {
           observer.next(this.categoryList);
         }, 100);
       });
 
-      return nameSetObservable;
+      return categoryObservable;
     } else {
       let requestUri = `${this.baseUri}wonder/`;
       return this.httpClient.get(requestUri);

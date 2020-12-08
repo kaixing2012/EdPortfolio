@@ -17,13 +17,13 @@ export class ProductService {
 
   getProductList(useMockService: boolean) {
     if (useMockService) {
-      const nameSetObservable = new Observable((observer) => {
+      const productObservable = new Observable((observer) => {
         setTimeout(() => {
           observer.next(this.productList);
         }, 100);
       });
 
-      return nameSetObservable;
+      return productObservable;
     } else {
       let requestUri = `${this.baseUri}wonder/`;
       return this.httpClient.get(requestUri);
