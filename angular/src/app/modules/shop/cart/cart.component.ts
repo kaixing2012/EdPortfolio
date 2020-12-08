@@ -10,8 +10,8 @@ import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopp
 })
 export class CartComponent implements OnInit {
   shoppingItems: [] = [];
-  productTotal: number;
-  deliveryFee: number = 60;
+  subtotal: number;
+  shipping: number = 60;
   total: number;
 
   constructor(
@@ -34,32 +34,32 @@ export class CartComponent implements OnInit {
       );
   }
 
-  getProductSubtotal(price: number, amount: number) {
+  getItemSub(price: number, amount: number) {
     return `NT$${price * amount}`;
   }
 
-  getProductTotal() {
+  getSubtotal() {
     if (this.shoppingItems.length > 1)
-      this.productTotal = this.shoppingItems
+      this.subtotal = this.shoppingItems
         .map((item: any) => {
           return item.product.productItem.price * item.amount;
         })
         .reduce((prev, next) => prev + next);
     else
-      [this.productTotal] = this.shoppingItems.map((item: any) => {
+      [this.subtotal] = this.shoppingItems.map((item: any) => {
         return item.product.productItem.price * item.amount;
       });
 
-    return `NT$${this.productTotal}`;
+    return `NT$${this.subtotal}`;
   }
 
-  getDeliveryFee() {
-    if (this.productTotal > 1000) return 'Free';
-    else return `NT$${this.deliveryFee}`;
+  getShipping() {
+    if (this.subtotal > 1000) return 'Free';
+    else return `NT$${this.shipping}`;
   }
 
   getTotal() {
-    this.total = this.productTotal + this.deliveryFee;
+    this.total = this.subtotal + this.shipping;
     return `NT$${this.total}`;
   }
 

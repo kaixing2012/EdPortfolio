@@ -43,9 +43,9 @@
 
         <h2 class="cart-list-detail-sub">
           <span>
-            Sub:
+            Item Sub:
             <b>{{
-              getProductSubtotal(
+              getItemSub(
                 shoppingItem.product.productItem.price,
                 shoppingItem.amount
               )
@@ -58,13 +58,13 @@
     <div class="cart-pay">
       <div>
         <h2>
-          <span> Product Total: </span>
-          <span> {{ getProductTotal() }} </span>
+          <span> Subtotal: </span>
+          <span> {{ getSubtotal() }} </span>
         </h2>
 
         <h2>
-          <span> Delivery Fee: </span>
-          <span> {{ getDeliveryFee() }} </span>
+          <span> Shipping: </span>
+          <span> {{ getShipping() }} </span>
         </h2>
 
         <mat-divider></mat-divider>
