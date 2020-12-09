@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const matModules = [
   FlexLayoutModule,
@@ -35,6 +36,7 @@ const matModules = [
   MatFormFieldModule,
   MatInputModule,
   MatDividerModule,
+  MatBadgeModule,
 ];
 
 @NgModule({
