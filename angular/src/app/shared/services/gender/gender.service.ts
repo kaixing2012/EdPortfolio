@@ -25,7 +25,7 @@ export class GenderService {
 
       return genderObservable;
     } else {
-      let requestUri = `${this.baseUri}wonder/`;
+      let requestUri = `${this.baseUri}gender/`;
       return this.httpClient.get(requestUri);
     }
   }

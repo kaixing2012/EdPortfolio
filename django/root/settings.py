@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "app_wonder",
+    "app_gender",
     "app_color",
     "app_size"
 ]
