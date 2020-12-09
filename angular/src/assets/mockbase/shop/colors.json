@@ -11,17 +11,22 @@
   },
   {
     "id": 3,
-    "name": "green",
-    "code": "#008000"
-  },
-  {
-    "id": 4,
     "name": "grey nevada",
     "code": "#5E6A6B"
   },
   {
-    "id": 5,
+    "id": 4,
     "name": "pink mandy",
     "code": "#C2465D"
+  },
+  {
+    "id": 5,
+    "name": "blue pearl",
+    "code": "#21282c"
+  },
+  {
+    "id": 6,
+    "name": "white ottoman",
+    "code": "#D5D8D1"
   }
 ]
