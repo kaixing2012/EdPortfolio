@@ -25,7 +25,7 @@ export class ColorService {
 
       return colorObservable;
     } else {
-      let requestUri = `${this.baseUri}wonder/`;
+      let requestUri = `${this.baseUri}color/`;
       return this.httpClient.get(requestUri);
     }
   }
