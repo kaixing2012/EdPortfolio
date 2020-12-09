@@ -25,7 +25,7 @@ export class CategoryService {
 
       return categoryObservable;
     } else {
-      let requestUri = `${this.baseUri}wonder/`;
+      let requestUri = `${this.baseUri}category/`;
       return this.httpClient.get(requestUri);
     }
   }

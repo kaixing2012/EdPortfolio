@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
+    "app_category",
     "app_wonder",
     "app_gender",
     "app_color",
