@@ -25,7 +25,7 @@ export class SizeService {
 
       return sizeObservable;
     } else {
-      let requestUri = `${this.baseUri}wonder/`;
+      let requestUri = `${this.baseUri}size/`;
       return this.httpClient.get(requestUri);
     }
   }

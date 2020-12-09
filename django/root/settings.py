@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "app_wonder",
-    "app_color"
+    "app_color",
+    "app_size"
 ]
 
 MIDDLEWARE = [
