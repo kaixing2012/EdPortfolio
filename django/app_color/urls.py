@@ -6,7 +6,7 @@ from .views_api import ColorDetailAPI
 
 urlpatterns = [
     path("", ColorListAPI.as_view()),
-    path("<int:Color_id>/", ColorDetailAPI.as_view()),
+    path("<int:color_id>/", ColorDetailAPI.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

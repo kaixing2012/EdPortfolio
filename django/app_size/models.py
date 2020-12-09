@@ -9,7 +9,7 @@ class Size(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "Size"
+        db_table = "size"
 
         # Set default ordering
         ordering = ["name"]

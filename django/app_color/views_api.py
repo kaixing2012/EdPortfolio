@@ -17,8 +17,8 @@ class ColorListAPI(APIView):
         """
         Return a list of all Colors.
         """
-        Colors = Color.objects.all()
-        serializer = ColorSerializer(Colors, many=True)
+        colors = Color.objects.all()
+        serializer = ColorSerializer(colors, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -37,26 +37,26 @@ class ColorDetailAPI(APIView):
     Returns a single Color and allows updates and deletion of a Color.
     """
 
-    def get_object(self, Color_id):
+    def get_object(self, color_id):
         try:
-            return Color.objects.get(pk=Color_id)
+            return Color.objects.get(pk=color_id)
         except Color.DoesNotExist:
             raise Http404
 
-    def get(self, request, Color_id, format=None):
-        Color = self.get_object(Color_id)
-        serializer = ColorSerializer(Color)
+    def get(self, request, color_id, format=None):
+        color = self.get_object(color_id)
+        serializer = ColorSerializer(color)
         return Response(serializer.data)
 
-    def put(self, request, Color_id, format=None):
-        Color = self.get_object(Color_id)
-        serializer = ColorSerializer(Color, data=request.data)
+    def put(self, request, color_id, format=None):
+        color = self.get_object(color_id)
+        serializer = ColorSerializer(color, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, Color_id, format=None):
-        Color = self.get_object(Color_id)
-        Color.delete()
+    def delete(self, request, color_id, format=None):
+        color = self.get_object(color_id)
+        color.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -17,8 +17,8 @@ class SizeListAPI(APIView):
         """
         Return a list of all Sizes.
         """
-        Sizes = Size.objects.all()
-        serializer = SizeSerializer(Sizes, many=True)
+        sizes = Size.objects.all()
+        serializer = SizeSerializer(sizes, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -37,26 +37,26 @@ class SizeDetailAPI(APIView):
     Returns a single Size and allows updates and deletion of a Size.
     """
 
-    def get_object(self, Size_id):
+    def get_object(self, size_id):
         try:
-            return Size.objects.get(pk=Size_id)
+            return Size.objects.get(pk=size_id)
         except Size.DoesNotExist:
             raise Http404
 
-    def get(self, request, Size_id, format=None):
-        Size = self.get_object(Size_id)
-        serializer = SizeSerializer(Size)
+    def get(self, request, size_id, format=None):
+        size = self.get_object(size_id)
+        serializer = SizeSerializer(size)
         return Response(serializer.data)
 
-    def put(self, request, Size_id, format=None):
-        Size = self.get_object(Size_id)
-        serializer = SizeSerializer(Size, data=request.data)
+    def put(self, request, size_id, format=None):
+        size = self.get_object(size_id)
+        serializer = SizeSerializer(size, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, Size_id, format=None):
-        Size = self.get_object(Size_id)
-        Size.delete()
+    def delete(self, request, size_id, format=None):
+        size = self.get_object(size_id)
+        size.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

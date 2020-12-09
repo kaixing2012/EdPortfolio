@@ -6,7 +6,7 @@ from .views_api import SizeDetailAPI
 
 urlpatterns = [
     path("", SizeListAPI.as_view()),
-    path("<int:Size_id>/", SizeDetailAPI.as_view()),
+    path("<int:size_id>/", SizeDetailAPI.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
