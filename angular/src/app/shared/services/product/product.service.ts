@@ -25,7 +25,7 @@ export class ProductService {
 
       return productObservable;
     } else {
-      let requestUri = `${this.baseUri}wonder/`;
+      let requestUri = `${this.baseUri}shop/product/`;
       return this.httpClient.get(requestUri);
     }
   }

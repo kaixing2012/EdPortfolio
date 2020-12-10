@@ -25,7 +25,7 @@ export class SizeService {
 
       return sizeObservable;
     } else {
-      let requestUri = `${this.baseUri}size/`;
+      let requestUri = `${this.baseUri}shop/size/`;
       return this.httpClient.get(requestUri);
     }
   }

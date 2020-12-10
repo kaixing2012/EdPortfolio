@@ -27,7 +27,7 @@ export class WonderService {
 
       return nameSetObservable;
     } else {
-      let requestUri = `${this.baseUri}wonder/`;
+      let requestUri = `${this.baseUri}map/wonder/`;
       return this.httpClient.get(requestUri);
     }
   }

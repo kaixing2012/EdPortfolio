@@ -25,7 +25,7 @@ export class CategoryService {
 
       return categoryObservable;
     } else {
-      let requestUri = `${this.baseUri}category/`;
+      let requestUri = `${this.baseUri}shop/category/`;
       return this.httpClient.get(requestUri);
     }
   }

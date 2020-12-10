@@ -25,7 +25,7 @@ export class ColorService {
 
       return colorObservable;
     } else {
-      let requestUri = `${this.baseUri}color/`;
+      let requestUri = `${this.baseUri}shop/color/`;
       return this.httpClient.get(requestUri);
     }
   }
