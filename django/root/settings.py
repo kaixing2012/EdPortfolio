@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "app_category",
-    "app_wonder",
-    "app_gender",
-    "app_color",
-    "app_size"
+    "modules.map.app_wonder",
+    "modules.shop.app_product_item",
+    "modules.shop.app_category",
+    "modules.shop.app_gender",
+    "modules.shop.app_color",
+    "modules.shop.app_size"
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

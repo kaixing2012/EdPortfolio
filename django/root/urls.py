@@ -21,11 +21,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/category/", include("app_category.urls")),
-    path("api/wonder/", include("app_wonder.urls")),
-    path("api/gender/", include("app_gender.urls")),
-    path("api/color/", include("app_color.urls")),
-    path("api/size/", include("app_size.urls")),
+    path("api/wonder/", include("modules.map.app_wonder.urls")),
+    path("api/product-item/", include("modules.shop.app_product_item.urls")),
+    path("api/category/", include("modules.shop.app_category.urls")),
+    path("api/gender/", include("modules.shop.app_gender.urls")),
+    path("api/color/", include("modules.shop.app_color.urls")),
+    path("api/size/", include("modules.shop.app_size.urls")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
