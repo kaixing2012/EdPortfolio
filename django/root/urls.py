@@ -21,12 +21,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/wonder/", include("modules.map.app_wonder.urls")),
-    path("api/product-item/", include("modules.shop.app_product_item.urls")),
-    path("api/category/", include("modules.shop.app_category.urls")),
-    path("api/gender/", include("modules.shop.app_gender.urls")),
-    path("api/color/", include("modules.shop.app_color.urls")),
-    path("api/size/", include("modules.shop.app_size.urls")),
+    path("api/shop/", include("modules.shop.router")),
+    path("api/map/", include("modules.map.router")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
