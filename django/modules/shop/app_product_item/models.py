@@ -6,7 +6,7 @@ class ProductItem(models.Model):
 
     name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(default="default.jpeg", upload_to="product_imgs")
+    image = models.ImageField(upload_to="product_covers")
 
     # Meta data about the database table.
     class Meta:

@@ -3,6 +3,8 @@ from .models import ProductItem
 
 
 class ProductItemSerializer(serializers.ModelSerializer):
+    imagePath = serializers.ImageField(source="image")
+
     class Meta:
         model = ProductItem
-        fields = "__all__"
+        fields = ["name", "price", "imagePath"]

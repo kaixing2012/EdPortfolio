@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "modules.map.app_wonder",
+    "modules.shop.app_product",
     "modules.shop.app_product_item",
     "modules.shop.app_category",
     "modules.shop.app_gender",

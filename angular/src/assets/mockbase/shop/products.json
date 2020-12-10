@@ -255,8 +255,8 @@
     },
     "color": {
       "id": 7,
-      "name": "pattens white",
-      "code": "#e1e6e8"
+      "name": "white ottoman",
+      "code": "#D5D8D1"
     },
     "size": {
       "id": 2,
@@ -282,8 +282,8 @@
     },
     "color": {
       "id": 7,
-      "name": "pattens white",
-      "code": "#e1e6e8"
+      "name": "white ottoman",
+      "code": "#D5D8D1"
     },
     "size": {
       "id": 3,
@@ -309,8 +309,8 @@
     },
     "color": {
       "id": 7,
-      "name": "pattens white",
-      "code": "#e1e6e8"
+      "name": "white ottoman",
+      "code": "#D5D8D1"
     },
     "size": {
       "id": 4,
@@ -470,9 +470,9 @@
       "name": "women"
     },
     "color": {
-      "id": 1,
-      "name": "red jazz",
-      "code": "#5b3337"
+      "id": 2,
+      "name": "blue bunker",
+      "code": "#282F36"
     },
     "size": {
       "id": 4,
