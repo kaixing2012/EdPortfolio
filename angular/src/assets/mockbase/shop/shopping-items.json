@@ -7,11 +7,11 @@
         "id": 1,
         "name": "M-1",
         "price": 399,
-        "imagePath": "/assets/images/product-m1.jpeg"
+        "coverUrl": "/assets/images/product-m1.jpeg"
       },
       "gender": {
-        "id": 2,
-        "name": "men"
+        "id": 3,
+        "name": "both"
       },
       "color": {
         "id": 4,
@@ -19,14 +19,18 @@
         "code": "#5E6A6B"
       },
       "size": {
-        "id": 3,
-        "name": "l"
+        "id": 2,
+        "name": "m"
       },
       "category": {
-        "id": 1,
-        "name": "indoor"
+        "id": 2,
+        "name": "outdoor"
       },
-      "imagePath": "/assets/images/product-m1-grey.jpeg",
+      "productImage": {
+        "id": 1,
+        "name": "grey nevada",
+        "imageUrl": "/assets/images/product-m1-grey-nevada.jpeg"
+      },
       "stock": 8
     },
     "amount": 1,
@@ -41,8 +45,8 @@
       "productItem": {
         "id": 2,
         "name": "B-8",
-        "price": 399,
-        "imagePath": "/assets/images/product-b8.jpeg"
+        "price": 299,
+        "coverUrl": "/assets/images/product-b8.jpeg"
       },
       "gender": {
         "id": 1,
@@ -61,7 +65,11 @@
         "id": 2,
         "name": "outdoor"
       },
-      "imagePath": "/assets/images/product-b8-red.jpeg",
+      "productImage": {
+        "id": 5,
+        "name": "red jazz",
+        "imageUrl": "/assets/images/product-b8-red-jazz.jpeg"
+      },
       "stock": 10
     },
     "amount": 1,
