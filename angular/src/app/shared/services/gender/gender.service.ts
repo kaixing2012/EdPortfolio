@@ -9,7 +9,7 @@ import genders from '../../../../assets/mockbase/shop/genders.json';
 })
 export class GenderService {
   private genderList: any[] = genders;
-  private baseUri = `http://${window.location.hostname}:8990/api/`;
+  private baseUri = `http://${window.location.hostname}:8000/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 

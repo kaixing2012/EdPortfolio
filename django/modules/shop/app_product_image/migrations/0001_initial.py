@@ -12,13 +12,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name='ProductImage',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
+                ('image', models.ImageField(upload_to='product_images')),
             ],
             options={
-                'db_table': 'shop_category',
+                'db_table': 'shop_product_image',
                 'ordering': ['name'],
             },
         ),

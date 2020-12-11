@@ -9,7 +9,7 @@ import shoppingItems from '../../../../assets/mockbase/shop/shopping-items.json'
 })
 export class ShoppingItemService {
   private shoppingItemList: any[] = shoppingItems;
-  private baseUri = `http://${window.location.hostname}:8990/api/`;
+  private baseUri = `http://${window.location.hostname}:8000/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 

@@ -3,12 +3,12 @@
     "id": 1,
     "name": "M-1",
     "price": 399,
-    "imagePath": "/assets/images/product-m1.jpeg"
+    "coverUrl": "/assets/images/product-m1.jpeg"
   },
   {
     "id": 2,
     "name": "B-8",
     "price": 299,
-    "imagePath": "/assets/images/product-b8.jpeg"
+    "coverUrl": "/assets/images/product-b8.jpeg"
   }
 ]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "grey nevada",
+    "image": "/assets/images/product-m1-grey-nevada.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "pink mandy",
+    "image": "/assets/images/product-m1-pink-mandy.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "blue pearl",
+    "image": "/assets/images/product-m1-blue-pearl.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "white ottoman",
+    "image": "/assets/images/product-m1-white-ottoman.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "red jazz",
+    "image": "/assets/images/product-b8-red-jazz.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "blue bunker",
+    "image": "/assets/images/product-b8-blue-bunker.jpeg"
+  }
+]

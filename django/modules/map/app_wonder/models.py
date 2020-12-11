@@ -12,7 +12,7 @@ class Wonder(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "wonder"
+        db_table = "map_wonder"
 
         # Set default ordering
         ordering = ["name"]

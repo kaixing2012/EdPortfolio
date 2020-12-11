@@ -9,7 +9,7 @@ import colors from '../../../../assets/mockbase/shop/colors.json';
 })
 export class ColorService {
   private colorList: any[] = colors;
-  private baseUri = `http://${window.location.hostname}:8990/api/`;
+  private baseUri = `http://${window.location.hostname}:8000/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 

@@ -11,7 +11,7 @@ import wonders from '../../../../assets/mockbase/map/wonders.json';
 })
 export class WonderService {
   private wonderList: Wonder[] = wonders;
-  private baseUri = `http://${window.location.hostname}:8990/api/`;
+  private baseUri = `http://${window.location.hostname}:8000/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 
