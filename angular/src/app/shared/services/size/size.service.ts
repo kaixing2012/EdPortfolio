@@ -9,7 +9,7 @@ import sizes from '../../../../assets/mockbase/shop/sizes.json';
 })
 export class SizeService {
   private sizeList: any[] = sizes;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
+  private baseUri = `http://${window.location.hostname}:8990/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 

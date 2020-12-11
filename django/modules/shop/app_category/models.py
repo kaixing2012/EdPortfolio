@@ -9,7 +9,7 @@ class Category(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "category"
+        db_table = "shop_category"
 
         # Set default ordering
         ordering = ["name"]

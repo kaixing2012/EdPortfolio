@@ -21,13 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "oo+d*-g^ei&cpwm^#=kd134$av^$(_&s_-e*^wj)ecv3#wuc4)"
+SECRET_KEY = os.environ.get("SECRET_KEY", default="")
 
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
+HOST_DOMAIN = os.environ.get("HOST_DOMAIN", default="")
+
 ALLOWED_HOSTS = [
-    'www.apstree.com',
+    HOST_DOMAIN,
     'localhost'
 ]
 
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "modules.map.app_wonder",
     "modules.shop.app_product",
     "modules.shop.app_product_item",
+    "modules.shop.app_product_image",
     "modules.shop.app_category",
     "modules.shop.app_gender",
     "modules.shop.app_color",
@@ -63,8 +66,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+CORS_ORIGIN_DOMAIN = os.environ.get("CORS_ORIGIN_DOMAIN", default="")
+
 CORS_ORIGIN_WHITELIST = (
-    "http://www.apstree.com",
+    CORS_ORIGIN_DOMAIN,
     "http://localhost",
     "http://localhost:4200",
 )
@@ -93,10 +98,11 @@ WSGI_APPLICATION = "root.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-POSTGRES_DB = os.environ.get("POSTGRES_HOST", default="")
-POSTGRES_USER = os.environ.get("POSTGRES_DB", default="")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_USER", default="")
-POSTGRES_HOST = os.environ.get("POSTGRES_PASSWORD", default="")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", default="")
+POSTGRES_USER = os.environ.get("POSTGRES_USER", default="")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", default="")
+POSTGRES_HOST = os.environ.get("POSTGRES_HOST", default="")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT", default="")
 
 DATABASES = {
     "default": {
@@ -105,7 +111,7 @@ DATABASES = {
         "USER": POSTGRES_USER,
         "PASSWORD": POSTGRES_PASSWORD,
         "HOST": POSTGRES_HOST,
-        "PORT": 5432,
+        "PORT": POSTGRES_PORT,
     }
 }
 

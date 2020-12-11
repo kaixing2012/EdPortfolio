@@ -22,7 +22,7 @@ class Product(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "product"
+        db_table = "shop_product"
 
         # Set default ordering
         ordering = ["id"]

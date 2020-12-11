@@ -10,7 +10,7 @@ class Color(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "color"
+        db_table = "shop_color"
 
         # Set default ordering
         ordering = ["name"]

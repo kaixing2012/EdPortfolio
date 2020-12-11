@@ -6,12 +6,12 @@ class ProductItem(models.Model):
 
     name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to="product_covers")
+    cover = models.ImageField(upload_to="product_covers")
 
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "product_item"
+        db_table = "shop_product_item"
 
         # Set default ordering
         ordering = ["name"]

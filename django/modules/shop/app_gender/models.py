@@ -9,7 +9,7 @@ class Gender(models.Model):
     # Meta data about the database table.
     class Meta:
         # Set the table name.
-        db_table = "gender"
+        db_table = "shop_gender"
 
         # Set default ordering
         ordering = ["name"]

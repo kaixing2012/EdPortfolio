@@ -9,7 +9,7 @@ import categories from '../../../../assets/mockbase/shop/categories.json';
 })
 export class CategoryService {
   private categoryList: any[] = categories;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
+  private baseUri = `http://${window.location.hostname}:8990/api/`;
 
   headers: HttpHeaders = new HttpHeaders({});
 
