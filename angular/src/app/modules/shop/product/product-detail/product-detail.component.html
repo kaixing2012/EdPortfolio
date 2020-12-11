@@ -1,6 +1,6 @@
 <div mat-dialog-content [ngClass]="productDetailCls()">
   <div [ngClass]="productDetailImgCls()">
-    <img src="{{ imagePath }}" alt="" width="100%" />
+    <img src="{{ imageUrl }}" alt="" width="100%" />
   </div>
 
   <div [ngClass]="productDetailDescriptionCls()">
@@ -40,7 +40,7 @@
                 [ngStyle]="dynamicBackgroundColor(color.object.code)"
                 [value]="color.object"
                 disableRipple="true"
-                (click)="onColorClick(color.imagePath)"
+                (click)="onColorClick(color.image.imageUrl)"
               >
               </mat-radio-button>
             </div>

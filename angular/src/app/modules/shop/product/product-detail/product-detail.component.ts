@@ -32,7 +32,7 @@ export class ProductDetailComponent implements OnInit {
   products: any[];
   colors: object[];
   sizes: object[];
-  imagePath: string;
+  imageUrl: string;
 
   clientColorOptions = [];
   currentColorIndex = 0;
@@ -50,7 +50,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getRelatedModels();
     this.isMobileMode = this.appService.checkUpMobileSize(window);
-    this.imagePath = this.data.productItem.imagePath;
+    this.imageUrl = this.data.productItem.coverUrl;
 
     this.productModel = {
       productItem: this.data.productItem,
@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
             ...new Map(
               this.products.map((obj) => [
                 obj.color.name,
-                { object: obj.color, imagePath: obj.imagePath },
+                { object: obj.color, image: obj.productImage },
               ])
             ).values(),
           ];
@@ -99,8 +99,8 @@ export class ProductDetailComponent implements OnInit {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
-  onColorClick(imagePathIn) {
-    this.imagePath = imagePathIn;
+  onColorClick(imageUrlIn: string) {
+    this.imageUrl = imageUrlIn;
   }
 
   onAddToCart() {
