@@ -5,7 +5,7 @@ class ProductImage(models.Model):
     """ProductImage attributes"""
 
     name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="product_images")
+    image = models.ImageField(upload_to="product-images")
 
     # Meta data about the database table.
     class Meta:
