@@ -27,7 +27,7 @@ RUN mkdir /usr/proj/django/static
 RUN mkdir /usr/proj/django/media
 
 # Upgrade pip 
-# RUN pip install --upgrade pip
+RUN pip install --upgrade pip
 
 # Install dependencies
 COPY requirements/prod.txt ./requirements/prod.txt
