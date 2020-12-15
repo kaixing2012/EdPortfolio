@@ -1,257 +1,300 @@
 [
   {
+    "id": 35,
     "name": "Bell Rock Lighthouse",
     "lat": "56.4341666700",
     "lng": "-2.3872222220",
     "category": "Seven Wonders of the Industrial World"
   },
   {
+    "id": 34,
     "name": "Brooklyn Bridge",
     "lat": "40.7055555600",
     "lng": "-73.9963888900",
     "category": "Seven Wonders of the Industrial World"
   },
   {
+    "id": 15,
     "name": "Catacombs of Kom el Shoqafa",
     "lat": "31.1785580000",
     "lng": "29.8929540000",
     "category": "Medieval"
   },
   {
+    "id": 10,
     "name": "Channel Tunnel",
     "lat": "51.0125000000",
     "lng": "1.5041000000",
     "category": "Civil"
   },
   {
+    "id": 22,
     "name": "Chichen Itza",
     "lat": "20.6827777800",
     "lng": "-88.5686111100",
     "category": "New 7 Wonders Foundation"
   },
   {
+    "id": 24,
     "name": "Christ the Redeemer (statue)",
     "lat": "-21.0480555600",
     "lng": "-43.2105555600",
     "category": "New 7 Wonders Foundation"
   },
   {
+    "id": 9,
     "name": "CN Tower",
     "lat": "43.6425000000",
     "lng": "-78.6130555600",
     "category": "Civil"
   },
   {
+    "id": 20,
     "name": "Colosseum",
     "lat": "41.8900000000",
     "lng": "12.4922222200",
     "category": "Medieval"
   },
   {
+    "id": 4,
     "name": "Colossus of Rhodes",
     "lat": "36.4511000000",
     "lng": "28.2278000000",
     "category": "Ancient"
   },
   {
+    "id": 13,
     "name": "Empire State Building",
     "lat": "40.7483333300",
     "lng": "-73.9855555600",
     "category": "Civil"
   },
   {
+    "id": 38,
     "name": "First Transcontinental Railroad",
     "lat": "41.2763888900",
     "lng": "95.8666666700",
     "category": "Seven Wonders of the Industrial World"
   },
   {
+    "id": 8,
     "name": "Golden Gate Bridge",
     "lat": "37.8197222200",
     "lng": "-122.4786111000",
     "category": "Civil"
   },
   {
+    "id": 28,
     "name": "Grand Canyon",
     "lat": "36.1000000000",
     "lng": "-112.1000000000",
     "category": "Seven Natural Wonders of the World"
   },
   {
+    "id": 32,
     "name": "Great Barrier Reef",
     "lat": "-17.7138888900",
     "lng": "147.7000000000",
     "category": "Seven Natural Wonders of the World"
   },
   {
+    "id": 1,
     "name": "Great Pyramid of Giza",
     "lat": "29.9791666700",
     "lng": "31.1341666700",
     "category": "Ancient"
   },
   {
+    "id": 16,
     "name": "Great Wall of China",
     "lat": "40.6769300000",
     "lng": "117.2319300000",
     "category": "Medieval"
   },
   {
+    "id": 29,
     "name": "Guanabara Bay",
     "lat": "-21.2097222200",
     "lng": "-43.1555555600",
     "category": "Seven Natural Wonders of the World"
   },
   {
+    "id": 17,
     "name": "Hagia Sophia",
     "lat": "41.0085480000",
     "lng": "28.9799380000",
     "category": "Medieval"
   },
   {
+    "id": 3,
     "name": "Hanging Gardens of Babylon",
     "lat": "33.5355000000",
     "lng": "44.2475000000",
     "category": "Ancient"
   },
   {
+    "id": 33,
     "name": "Hoover Dam",
     "lat": "36.0155555600",
     "lng": "-114.7377778000",
     "category": "Seven Wonders of the Industrial World"
   },
   {
+    "id": 14,
     "name": "Itaipu Dam",
     "lat": "-24.5919444400",
     "lng": "-54.5888888900",
     "category": "Civil"
   },
   {
+    "id": 19,
     "name": "Leaning Tower of Pisa",
     "lat": "43.7230555600",
     "lng": "10.3963888900",
     "category": "Medieval"
   },
   {
+    "id": 2,
     "name": "Lighthouse of Alexandria",
     "lat": "31.2138888900",
     "lng": "29.8855555600",
     "category": "Ancient"
   },
   {
+    "id": 37,
     "name": "London sewerage system",
     "lat": "51.5072222200",
     "lng": "-0.1058333333",
     "category": "Seven Wonders of the Industrial World"
   },
   {
+    "id": 42,
     "name": "Maasai Mara",
     "lat": "-0.5100000000",
     "lng": "35.1438888900",
     "category": "USA Today's New Seven Wonders"
   },
   {
+    "id": 23,
     "name": "Machu Picchu",
     "lat": "-12.8366666700",
     "lng": "-72.5455555600",
     "category": "New 7 Wonders Foundation"
   },
   {
+    "id": 5,
     "name": "Mausoleum at Halicarnassus",
     "lat": "37.0377777800",
     "lng": "27.4241666700",
     "category": "Ancient"
   },
   {
+    "id": 39,
     "name": "Maya civilization",
     "lat": "20.6827777800",
     "lng": "-88.5686111100",
     "category": "USA Today's New Seven Wonders"
   },
   {
+    "id": 31,
     "name": "Mount Everest",
     "lat": "27.9880555600",
     "lng": "86.9252777800",
     "category": "Seven Natural Wonders of the World"
   },
   {
+    "id": 41,
     "name": "Old City (Jerusalem)",
     "lat": "31.7766666700",
     "lng": "35.2341666700",
     "category": "USA Today's New Seven Wonders"
   },
   {
+    "id": 12,
     "name": "Panama Canal",
     "lat": "9.0800000000",
     "lng": "-79.6800000000",
     "category": "Civil"
   },
   {
+    "id": 40,
     "name": "Papahānaumokuākea Marine National Monument",
     "lat": "25.7000000000",
     "lng": "-171.7333333000",
     "category": "USA Today's New Seven Wonders"
   },
   {
+    "id": 27,
     "name": "Paricutin",
     "lat": "19.4927777800",
     "lng": "-102.2508333000",
     "category": "Seven Natural Wonders of the World"
   },
   {
+    "id": 25,
     "name": "Petra",
     "lat": "30.3286111100",
     "lng": "35.4419444400",
     "category": "New 7 Wonders Foundation"
   },
   {
+    "id": 21,
     "name": "Porcelain Tower of Nanjing",
     "lat": "32.0802777800",
     "lng": "118.7300000000",
     "category": "Medieval"
   },
   {
+    "id": 43,
     "name": "Potala Palace",
     "lat": "29.6577777800",
     "lng": "91.1169444400",
     "category": "USA Today's New Seven Wonders"
   },
   {
+    "id": 36,
     "name": "SS Great Eastern",
     "lat": "51.4886111100",
     "lng": "-0.0055555556",
     "category": "Seven Wonders of the Industrial World"
   },
   {
+    "id": 6,
     "name": "Statue of Zeus at Olympia",
     "lat": "37.6377777800",
     "lng": "21.6300000000",
     "category": "Ancient"
   },
   {
+    "id": 18,
     "name": "Stonehenge",
     "lat": "51.1786111100",
     "lng": "-1.8261111110",
     "category": "Medieval"
   },
   {
+    "id": 26,
     "name": "Taj Mahal",
     "lat": "27.1750000000",
     "lng": "78.0419444400",
     "category": "New 7 Wonders Foundation"
   },
   {
+    "id": 7,
     "name": "Temple of Artemis at Ephesus",
     "lat": "37.9497222200",
     "lng": "27.3638888900",
     "category": "Ancient"
   },
   {
+    "id": 30,
     "name": "Victoria Falls",
     "lat": "-16.0755555600",
     "lng": "25.8566666700",
     "category": "Seven Natural Wonders of the World"
   },
   {
+    "id": 11,
     "name": "Zuiderzee Works",
     "lat": "51.6500000000",
     "lng": "3.7200000000",
