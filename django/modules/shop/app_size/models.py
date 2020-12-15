@@ -12,7 +12,7 @@ class Size(models.Model):
         db_table = "shop_size"
 
         # Set default ordering
-        ordering = ["name"]
+        ordering = ["id"]
 
     # Define what to output when the model is printed as a string.
     def __str__(self):

@@ -1,8 +1,12 @@
 import {
+  AfterViewInit,
   Component,
   HostListener,
+  Input,
+  OnChanges,
   OnInit,
   QueryList,
+  SimpleChanges,
   ViewChildren,
 } from '@angular/core';
 
@@ -38,6 +42,7 @@ export class ProductComponent implements OnInit {
   isMobileMode: boolean;
 
   tabChangeEvent: MatTabChangeEvent;
+  genderStr: string;
 
   constructor(
     public dialog: MatDialog,
@@ -116,6 +121,7 @@ export class ProductComponent implements OnInit {
       .subscribe(
         (products: any[]) => {
           this.products = products;
+          this.getDisplayItemsByCheckboxFilter();
         },
         (err) => {
           console.log(err);
@@ -123,16 +129,16 @@ export class ProductComponent implements OnInit {
       );
   }
 
-  getDisplayItems(event: MatTabChangeEvent) {
+  getDisplayItemsByGender(genderStr: string) {
     let result = [];
+
     this.products
-      .filter(
-        (product) => product.gender.name === event.tab.textLabel.toLowerCase()
-      )
+      .filter((product) => product.gender.name === genderStr)
       .forEach((product) => {
         let itemAlreadyIn = result.find(
           (item) => item.productItem.id === product.productItem.id
         );
+
         if (itemAlreadyIn) {
           itemAlreadyIn.attribute += `-${product.color.name}-${product.size.name}-${product.category.name}`;
         } else {
@@ -143,44 +149,19 @@ export class ProductComponent implements OnInit {
           });
         }
       });
+
     return result;
   }
 
-  onOpenFilter() {
-    this.isFilterOpened = !this.isFilterOpened;
-  }
-
-  openDialog(productItem: any, category: any, gender: any) {
-    const dialogRef = this.dialog.open(ProductDetailComponent, {
-      width: '100%',
-      data: {
-        productItem: productItem,
-        category: category,
-        gender: gender,
-      },
-    });
-  }
-
-  onTabChange(event: MatTabChangeEvent) {
-    this.tabChangeEvent = event;
-    this.displayList = this.getDisplayItems(this.tabChangeEvent);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    let window = event.target as Window;
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
-  }
-
-  onCheckChange(event: MatCheckboxChange) {
+  getDisplayItemsByCheckboxFilter() {
     let allUnchecked = this.checkboxes.filter(
       (box: MatCheckbox) => box.checked === false
     );
 
     if (allUnchecked.length === this.checkboxes.length) {
-      this.displayList = this.getDisplayItems(this.tabChangeEvent);
+      this.displayList = this.getDisplayItemsByGender(this.genderStr);
     } else {
-      this.displayList = this.getDisplayItems(this.tabChangeEvent).filter(
+      this.displayList = this.getDisplayItemsByGender(this.genderStr).filter(
         (displayItem) => {
           let box: MatCheckbox;
           let attributes = displayItem.attribute.split('-');
@@ -194,5 +175,35 @@ export class ProductComponent implements OnInit {
         }
       );
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    let window = event.target as Window;
+    this.isMobileMode = this.appService.checkUpMobileSize(window);
+  }
+
+  onOpenFilter() {
+    this.isFilterOpened = !this.isFilterOpened;
+  }
+
+  onOpenDialog(productItem: any, category: any, gender: any) {
+    const dialogRef = this.dialog.open(ProductDetailComponent, {
+      width: '100%',
+      data: {
+        productItem: productItem,
+        category: category,
+        gender: gender,
+      },
+    });
+  }
+
+  onTabChange(event?: MatTabChangeEvent) {
+    this.genderStr = event.tab.textLabel.toLowerCase();
+    this.getDisplayItemsByCheckboxFilter();
+  }
+
+  onCheckChange(event?: MatCheckboxChange) {
+    this.getDisplayItemsByCheckboxFilter();
   }
 }

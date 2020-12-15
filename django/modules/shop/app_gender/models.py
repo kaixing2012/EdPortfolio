@@ -12,7 +12,7 @@ class Gender(models.Model):
         db_table = "shop_gender"
 
         # Set default ordering
-        ordering = ["name"]
+        ordering = ["id"]
 
     # Define what to output when the model is printed as a string.
     def __str__(self):
