@@ -12,6 +12,7 @@ export class LayerSwitch extends Control {
     let button = document.createElement('button');
     button.style.width = '100%';
     button.style.padding = '0 5px';
+    button.style.fontSize = '15px';
     button.innerHTML = 'Map Switch';
 
     let element = document.createElement('div');

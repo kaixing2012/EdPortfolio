@@ -22,15 +22,25 @@ export class SearchBar extends Control {
     let input = document.createElement('input');
     input.style.width = '200px';
     input.style.height = '30px';
+    input.style.marginRight = '2px';
     input.placeholder = 'Select one wonder';
     input.setAttribute('list', 'dataNames');
 
+    let searchBtn = document.createElement('button');
+    searchBtn.innerHTML = '<i class="fas fa-search-location"></i>';
+    searchBtn.style.height = '33px';
+    searchBtn.style.width = '33px';
+    searchBtn.style.margin = 'auto';
+
     let element = document.createElement('div');
     element.className = 'ol-unselectable ol-control';
+    element.style.display = 'flex';
     element.style.left = '50%';
     element.style.transform = 'translateX(-50%)';
     element.style.marginTop = '5px';
+
     element.appendChild(input);
+    element.appendChild(searchBtn);
 
     options.wonderService
       .getWonderList(options.appService.getUseMockeService())
@@ -67,39 +77,43 @@ export class SearchBar extends Control {
 
     input.addEventListener('keyup', this.onSearch.bind(this), false);
     input.addEventListener('focusout', this.onSearch.bind(this), false);
+    searchBtn.addEventListener('click', this.onSearch.bind(this), false);
   }
 
   onSearch(event: KeyboardEvent) {
-    if (
-      this.inputBox.value &&
-      (event.key === 'Enter' ||
+    if (this.inputBox.value) {
+      if (
+        event.key === 'Enter' ||
         event.code === 'Enter' ||
-        event.type === 'focusout')
-    ) {
-      let datalist = document.querySelectorAll(
-        `#${this.inputBox.getAttribute('list')} option`
-      );
+        event.type === 'focusout'
+      ) {
+        let datalist = document.querySelectorAll(
+          `#${this.inputBox.getAttribute('list')} option`
+        );
 
-      datalist.forEach((element) => {
-        if (element.getAttribute('value') === this.inputBox.value) {
-          this.wonderService
-            .getWonderDetail(
-              element.getAttribute('data-value'),
-              this.appService.getUseMockeService()
-            )
-            .subscribe(
-              (data: any) => {
-                this.getMap()
-                  .getView()
-                  .setCenter(LngLat([data.lng, data.lat]));
-                this.getMap().getView().setZoom(12);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-        }
-      });
+        datalist.forEach((element) => {
+          if (element.getAttribute('value') === this.inputBox.value) {
+            this.wonderService
+              .getWonderDetail(
+                element.getAttribute('data-value'),
+                this.appService.getUseMockeService()
+              )
+              .subscribe(
+                (data: any) => {
+                  this.getMap()
+                    .getView()
+                    .setCenter(LngLat([data.lng, data.lat]));
+                  this.getMap().getView().setZoom(12);
+                },
+                (err) => {
+                  console.log(err);
+                }
+              );
+          }
+        });
+      }
+    } else {
+      alert('Please, select your wonder place');
     }
   }
 }
