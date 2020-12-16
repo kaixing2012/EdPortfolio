@@ -12,8 +12,7 @@ import colors from '../../../../assets/mockbase/shop/colors.json';
 export class ColorService {
   private colorList: Color[] = colors;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
-
-  headers: HttpHeaders = new HttpHeaders({});
+  private headers: HttpHeaders = new HttpHeaders({});
 
   constructor(private httpClient: HttpClient) {}
 

@@ -2,22 +2,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Gender } from '../../models/shop/gender.model';
+
 import genders from '../../../../assets/mockbase/shop/genders.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GenderService {
-  private genderList: any[] = genders;
+  private genderList: Gender[] = genders;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
-
-  headers: HttpHeaders = new HttpHeaders({});
+  private headers: HttpHeaders = new HttpHeaders({});
 
   constructor(private httpClient: HttpClient) {}
 
   getGenderList(useMockService: boolean) {
     if (useMockService) {
-      const genderObservable = new Observable((observer) => {
+      const genderObservable = new Observable<Gender[]>((observer) => {
         setTimeout(() => {
           observer.next(this.genderList);
         }, 100);
@@ -26,7 +27,7 @@ export class GenderService {
       return genderObservable;
     } else {
       let requestUri = `${this.baseUri}shop/gender/`;
-      return this.httpClient.get(requestUri);
+      return this.httpClient.get<Gender[]>(requestUri);
     }
   }
 }
