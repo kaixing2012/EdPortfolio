@@ -25,6 +25,7 @@ import { ColorService } from 'src/app/shared/services/color/color.service';
 import { GenderService } from 'src/app/shared/services/gender/gender.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
+import { ProductItem } from 'src/app/shared/models/shop/product-item.model';
 
 @Component({
   selector: 'app-product',
@@ -191,7 +192,7 @@ export class ProductComponent implements OnInit {
     this.isFilterOpened = !this.isFilterOpened;
   }
 
-  onOpenDialog(productItem: any, category: any, gender: any) {
+  onOpenDialog(productItem: ProductItem, category: Category, gender: Gender) {
     const dialogRef = this.dialog.open(ProductDetailComponent, {
       width: '100%',
       data: {

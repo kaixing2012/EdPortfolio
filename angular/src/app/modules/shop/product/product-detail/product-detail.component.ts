@@ -4,15 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Product } from 'src/app/shared/models/shop/product.model';
 import { ProductDesign } from 'src/app/shared/models/shop/product-design.model';
+import { ProductDialog } from 'src/app/shared/models/shop/product-dialog.model';
 
 import { AppService } from 'src/app/app.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
-
-export interface DialogDat {
-  productItem: any;
-  category: any;
-  gender: any;
-}
 
 @Component({
   selector: 'app-product-detail',
@@ -37,7 +32,7 @@ export class ProductDetailComponent implements OnInit {
   currentSizeIndex = 0;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogDat,
+    @Inject(MAT_DIALOG_DATA) public data: ProductDialog,
     public dialogRef: MatDialogRef<ProductDetailComponent>,
     private appService: AppService,
     private productSetvice: ProductService
@@ -79,7 +74,10 @@ export class ProductDetailComponent implements OnInit {
 
           this.productDesign.sizes = [
             ...new Map(
-              filteredProducts.map((obj) => [obj.size.name, obj.size])
+              filteredProducts.map((product) => [
+                product.productItem.name,
+                product.size,
+              ])
             ).values(),
           ];
         },
