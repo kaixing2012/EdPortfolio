@@ -13,14 +13,10 @@
       <input
         type="hidden"
         name="productItem"
-        [ngModel]="productModel.productItem.id"
+        [ngModel]="product.productItem.id"
       />
-      <input type="hidden" name="gender" [ngModel]="productModel.gender.id" />
-      <input
-        type="hidden"
-        name="category"
-        [ngModel]="productModel.category.id"
-      />
+      <input type="hidden" name="gender" [ngModel]="product.gender.id" />
+      <input type="hidden" name="category" [ngModel]="product.category.id" />
 
       <div class="product-detail-option-frame">
         <p>Choose your Color</p>
@@ -29,18 +25,20 @@
           <mat-radio-group
             aria-label="Select an option"
             name="color"
-            [(ngModel)]="productModel.color"
+            [(ngModel)]="product.color"
           >
             <div
               class="product-detail-option-color"
-              *ngFor="let color of colors"
-              [ngClass]="dynamicAddActiveCls(productModel.color, color.object)"
+              *ngFor="let colorAndImage of productDesign.colorsAndImages"
+              [ngClass]="
+                dynamicAddActiveCls(product.color, colorAndImage.color)
+              "
             >
               <mat-radio-button
-                [ngStyle]="dynamicBackgroundColor(color.object.code)"
-                [value]="color.object"
+                [ngStyle]="dynamicBackgroundColor(colorAndImage.color.code)"
+                [value]="colorAndImage.color"
                 disableRipple="true"
-                (click)="onColorClick(color.image.imageUrl)"
+                (click)="onColorClick(colorAndImage.image.imageUrl)"
               >
               </mat-radio-button>
             </div>
@@ -55,15 +53,15 @@
           <mat-radio-group
             aria-label="Select an option"
             name="size"
-            [(ngModel)]="productModel.size"
+            [(ngModel)]="product.size"
           >
             <div
               class="product-detail-option-size"
-              *ngFor="let size of sizes"
-              [ngClass]="dynamicAddActiveCls(productModel.size, size.object)"
+              *ngFor="let size of productDesign.sizes"
+              [ngClass]="dynamicAddActiveCls(product.size, size)"
             >
-              <mat-radio-button [value]="size.object" disableRipple="true">
-                {{ size.object.name | uppercase }}
+              <mat-radio-button [value]="size" disableRipple="true">
+                {{ size.name | uppercase }}
               </mat-radio-button>
             </div>
           </mat-radio-group>

@@ -24,7 +24,7 @@ import { WonderService } from '../../shared/services/wonder/wonder.service';
 import { LayerSwitch } from './ol-controls/layer-switch';
 import { SearchBar } from './ol-controls/search-bar';
 
-import { Wonder } from 'src/app/shared/models/wonder.model';
+import { Wonder } from 'src/app/shared/models/map/wonder.model';
 
 @Component({
   selector: 'app-map',

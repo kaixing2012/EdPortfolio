@@ -1,12 +1,8 @@
 import {
-  AfterViewInit,
   Component,
   HostListener,
-  Input,
-  OnChanges,
   OnInit,
   QueryList,
-  SimpleChanges,
   ViewChildren,
 } from '@angular/core';
 
@@ -15,6 +11,13 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+
+import { Size } from '../../../shared/models/shop/size.model';
+import { Color } from '../../../shared/models/shop/color.model';
+import { Gender } from '../../../shared/models/shop/gender.model';
+import { Product } from '../../../shared/models/shop/product.model';
+import { Category } from '../../../shared/models/shop/category.model';
+import { ProductDisplay } from '../../../shared/models/shop/product-display.model';
 
 import { AppService } from 'src/app/app.service';
 import { SizeService } from 'src/app/shared/services/size/size.service';
@@ -31,18 +34,17 @@ import { ProductService } from 'src/app/shared/services/product/product.service'
 export class ProductComponent implements OnInit {
   @ViewChildren('checkbox') checkboxes!: QueryList<any>;
 
-  products = [];
-  genders = [];
-  sizes = [];
-  colors = [];
-  categories = [];
-  displayList: any[] = [];
+  sizes: Size[] = [];
+  colors: Color[] = [];
+  genders: Gender[] = [];
+  products: Product[] = [];
+  categories: Category[] = [];
+  displayList: ProductDisplay[] = [];
 
   isFilterOpened: boolean = true;
   isMobileMode: boolean;
 
-  tabChangeEvent: MatTabChangeEvent;
-  genderStr: string;
+  private genderStr: string;
 
   constructor(
     public dialog: MatDialog,
@@ -55,19 +57,19 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSizes();
-    this.getColors();
-    this.getGenders();
-    this.getCategories();
-    this.getProducts();
+    this.requestSizes();
+    this.requestColors();
+    this.requestGenders();
+    this.requestCategories();
+    this.requestProducts();
     this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
-  getSizes() {
+  requestSizes() {
     this.sizeService
       .getSizeList(this.appService.getUseMockeService())
       .subscribe(
-        (sizes: any[]) => {
+        (sizes: Size[]) => {
           this.sizes = sizes;
         },
         (err) => {
@@ -76,11 +78,11 @@ export class ProductComponent implements OnInit {
       );
   }
 
-  getGenders() {
+  requestGenders() {
     this.genderService
       .getGenderList(this.appService.getUseMockeService())
       .subscribe(
-        (genders: any[]) => {
+        (genders: Gender[]) => {
           this.genders = genders;
         },
         (err) => {
@@ -89,11 +91,11 @@ export class ProductComponent implements OnInit {
       );
   }
 
-  getColors() {
+  requestColors() {
     this.colorService
       .getColorList(this.appService.getUseMockeService())
       .subscribe(
-        (colors: any[]) => {
+        (colors: Color[]) => {
           this.colors = colors;
         },
         (err) => {
@@ -102,11 +104,11 @@ export class ProductComponent implements OnInit {
       );
   }
 
-  getCategories() {
+  requestCategories() {
     this.categoryService
       .getCategoryList(this.appService.getUseMockeService())
       .subscribe(
-        (categories: any[]) => {
+        (categories: Category[]) => {
           this.categories = categories;
         },
         (err) => {
@@ -115,11 +117,11 @@ export class ProductComponent implements OnInit {
       );
   }
 
-  getProducts() {
+  requestProducts() {
     this.productService
       .getProductList(this.appService.getUseMockeService())
       .subscribe(
-        (products: any[]) => {
+        (products: Product[]) => {
           this.products = products;
           this.getDisplayItemsByCheckboxFilter();
         },
@@ -130,19 +132,19 @@ export class ProductComponent implements OnInit {
   }
 
   getDisplayItemsByGender(genderStr: string) {
-    let result = [];
+    let productDisplay: ProductDisplay[] = [];
 
     this.products
       .filter((product) => product.gender.name === genderStr)
       .forEach((product) => {
-        let itemAlreadyIn = result.find(
+        let itemAlreadyIn = productDisplay.find(
           (item) => item.productItem.id === product.productItem.id
         );
 
         if (itemAlreadyIn) {
           itemAlreadyIn.attribute += `-${product.color.name}-${product.size.name}-${product.category.name}`;
         } else {
-          result.push({
+          productDisplay.push({
             productItem: product.productItem,
             category: product.category,
             attribute: `${product.color.name}-${product.size.name}-${product.category.name}`,
@@ -150,7 +152,7 @@ export class ProductComponent implements OnInit {
         }
       });
 
-    return result;
+    return productDisplay;
   }
 
   getDisplayItemsByCheckboxFilter() {
@@ -164,7 +166,9 @@ export class ProductComponent implements OnInit {
       this.displayList = this.getDisplayItemsByGender(this.genderStr).filter(
         (displayItem) => {
           let box: MatCheckbox;
+
           let attributes = displayItem.attribute.split('-');
+
           for (let attr of attributes) {
             for (box of this.checkboxes) {
               if (attr === box.name && box.checked === true) {

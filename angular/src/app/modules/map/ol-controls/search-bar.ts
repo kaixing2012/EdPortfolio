@@ -20,7 +20,7 @@ export class SearchBar extends Control {
     let options = opt_options || {};
 
     let input = document.createElement('input');
-    input.style.width = '200px';
+    input.style.width = '160px';
     input.style.height = '30px';
     input.style.marginRight = '2px';
     input.placeholder = 'Select one wonder';
@@ -76,17 +76,13 @@ export class SearchBar extends Control {
     this.appService = options.appService;
 
     input.addEventListener('keyup', this.onSearch.bind(this), false);
-    input.addEventListener('focusout', this.onSearch.bind(this), false);
+    // input.addEventListener('focusout', this.onSearch.bind(this), false);
     searchBtn.addEventListener('click', this.onSearch.bind(this), false);
   }
 
   onSearch(event: KeyboardEvent) {
-    if (this.inputBox.value) {
-      if (
-        event.key === 'Enter' ||
-        event.code === 'Enter' ||
-        event.type === 'focusout'
-      ) {
+    if (event.key === 'Enter' || event.type === 'click') {
+      if (this.inputBox.value) {
         let datalist = document.querySelectorAll(
           `#${this.inputBox.getAttribute('list')} option`
         );
@@ -111,9 +107,9 @@ export class SearchBar extends Control {
               );
           }
         });
+      } else {
+        alert('Please, select your wonder place');
       }
-    } else {
-      alert('Please, select your wonder place');
     }
   }
 }

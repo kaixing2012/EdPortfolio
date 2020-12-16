@@ -2,22 +2,16 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { AppService } from 'src/app/app.service';
+import { Product } from 'src/app/shared/models/shop/product.model';
+import { ProductDesign } from 'src/app/shared/models/shop/product-design.model';
 
+import { AppService } from 'src/app/app.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 
-export interface DialogData {
+export interface DialogDat {
   productItem: any;
   category: any;
   gender: any;
-}
-
-export interface ProductModel {
-  productItem: any;
-  category: any;
-  gender: any;
-  color: any;
-  size: any;
 }
 
 @Component({
@@ -26,13 +20,15 @@ export interface ProductModel {
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  isMobileMode: boolean;
-  productModel: ProductModel;
+  productDesign: ProductDesign = {
+    colorsAndImages: [],
+    sizes: [],
+  };
 
-  products: any[];
-  colors: object[];
-  sizes: object[];
+  product: Product;
+
   imageUrl: string;
+  isMobileMode: boolean;
 
   clientColorOptions = [];
   currentColorIndex = 0;
@@ -41,7 +37,7 @@ export class ProductDetailComponent implements OnInit {
   currentSizeIndex = 0;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogDat,
     public dialogRef: MatDialogRef<ProductDetailComponent>,
     private appService: AppService,
     private productSetvice: ProductService
@@ -52,7 +48,7 @@ export class ProductDetailComponent implements OnInit {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
     this.imageUrl = this.data.productItem.coverUrl;
 
-    this.productModel = {
+    this.product = {
       productItem: this.data.productItem,
       category: this.data.category,
       gender: this.data.gender,
@@ -65,25 +61,25 @@ export class ProductDetailComponent implements OnInit {
     this.productSetvice
       .getProductList(this.appService.getUseMockeService())
       .subscribe(
-        (products: any) => {
-          this.products = products.filter(
+        (products: Product[]) => {
+          let filteredProducts = products.filter(
             (product) =>
               product.productItem.id === this.data.productItem.id &&
               product.gender.name === this.data.gender.name
           );
 
-          this.colors = [
+          this.productDesign.colorsAndImages = [
             ...new Map(
-              this.products.map((obj) => [
-                obj.color.name,
-                { object: obj.color, image: obj.productImage },
+              filteredProducts.map((product) => [
+                product.productItem.name,
+                { color: product.color, image: product.productImage },
               ])
             ).values(),
           ];
 
-          this.sizes = [
+          this.productDesign.sizes = [
             ...new Map(
-              this.products.map((obj) => [obj.size.name, { object: obj.size }])
+              filteredProducts.map((obj) => [obj.size.name, obj.size])
             ).values(),
           ];
         },
@@ -104,7 +100,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onAddToCart() {
-    if (!this.productModel.color || !this.productModel.size) {
+    if (!this.product.color || !this.product.size) {
       alert(`
         Please, select your 
         Color or Size or Both
@@ -114,11 +110,11 @@ export class ProductDetailComponent implements OnInit {
     } else {
       alert(`
         The following is your order:
-          Product Item: ${this.productModel.productItem.name}
-          category: ${this.productModel.category.name}
-          gender: ${this.productModel.gender.name}
-          color: ${this.productModel.color.name}
-          size: ${this.productModel.size.name.toUpperCase()}
+          Product Item: ${this.product.productItem.name}
+          category: ${this.product.category.name}
+          gender: ${this.product.gender.name}
+          color: ${this.product.color.name}
+          size: ${this.product.size.name.toUpperCase()}
 
         p.s. Cart function is coming soon
       `);
@@ -146,9 +142,9 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  dynamicAddActiveCls(model: any, object: any) {
-    if (model) {
-      if (model.id === object.id) return 'active';
+  dynamicAddActiveCls(currentObj: any, toActivateObj: any) {
+    if (currentObj) {
+      if (currentObj.id === toActivateObj.id) return 'active';
     }
   }
 

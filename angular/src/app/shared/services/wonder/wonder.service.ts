@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Wonder } from '../../models/wonder.model';
+import { Wonder } from '../../models/map/wonder.model';
 
 import wonders from '../../../../assets/mockbase/map/wonders.json';
 

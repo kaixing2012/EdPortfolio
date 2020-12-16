@@ -9,7 +9,7 @@ import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopp
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  innerWidth: any;
+  innerWidth: number;
   isMobileMode: boolean;
   shoppingItemCount: number;
 
