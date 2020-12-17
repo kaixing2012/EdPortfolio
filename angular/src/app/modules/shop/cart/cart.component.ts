@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppService } from 'src/app/app.service';
-import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopping-item.service';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private shoppingItemService: ShoppingItemService
+    private shoppingCartService: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
@@ -24,13 +24,16 @@ export class CartComponent implements OnInit {
   }
 
   getShoppingItems() {
-    this.shoppingItemService
-      .getShoppingItemList(this.appService.getUseMockeService())
+    this.shoppingCartService
+      .getShoppingCartList(this.appService.getUseMockeService())
       .subscribe(
-        (shoppingItems: []) => {
-          this.shoppingItems = shoppingItems;
+        (shoppingCarts: any[]) => {
+          this.shoppingItems = shoppingCarts[0].cartItems;
+          console.log(this.shoppingItems);
         },
-        (err) => {}
+        (err) => {
+          console.log(err);
+        }
       );
   }
 

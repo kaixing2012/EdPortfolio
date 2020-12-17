@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 import { AppService } from 'src/app/app.service';
-import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopping-item.service';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-shop',
@@ -15,14 +15,16 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private shoppingItemService: ShoppingItemService
+    private shoppingCartService: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
-    this.shoppingItemService
-      .getShoppingItemList(this.appService.getUseMockeService())
-      .subscribe((data: []) => (this.shoppingItemCount = data.length));
+    this.shoppingCartService
+      .getShoppingCartList(this.appService.getUseMockeService())
+      .subscribe(
+        (cart: any[]) => (this.shoppingItemCount = cart[0].cartItems.length)
+      );
   }
 
   @HostListener('window:resize', ['$event'])

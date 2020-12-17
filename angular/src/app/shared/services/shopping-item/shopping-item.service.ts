@@ -15,18 +15,18 @@ export class ShoppingItemService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getShoppingItemList(useMockService: boolean) {
-    if (useMockService) {
-      const shoppingItem = new Observable((observer) => {
-        setTimeout(() => {
-          observer.next(this.shoppingItemList);
-        }, 100);
-      });
+  // getShoppingItemList(useMockService: boolean) {
+  //   if (useMockService) {
+  //     const shoppingItem = new Observable((observer) => {
+  //       setTimeout(() => {
+  //         observer.next(this.shoppingItemList);
+  //       }, 100);
+  //     });
 
-      return shoppingItem;
-    } else {
-      let requestUri = `${this.baseUri}shop/product/`;
-      return this.httpClient.get(requestUri);
-    }
-  }
+  //     return shoppingItem;
+  //   } else {
+  //     let requestUri = `${this.baseUri}shop/product/`;
+  //     return this.httpClient.get(requestUri);
+  //   }
+  // }
 }
