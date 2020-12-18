@@ -29,7 +29,6 @@ export class CartComponent implements OnInit {
       .subscribe(
         (shoppingCarts: any[]) => {
           this.shoppingItems = shoppingCarts[0].cartItems;
-          console.log(this.shoppingItems);
         },
         (err) => {
           console.log(err);

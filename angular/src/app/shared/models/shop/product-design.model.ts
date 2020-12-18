@@ -5,7 +5,7 @@ import { Color } from './color.model';
 export class ProductDesign {
   colorsAndImages: {
     color: Color;
-    image: ProductImage;
+    productImage: ProductImage;
   }[];
   sizes: Size[];
 }

@@ -24,7 +24,7 @@ export class ShoppingCartService {
 
       return shoppingCart;
     } else {
-      let requestUri = `${this.baseUri}shop/product/`;
+      let requestUri = `${this.baseUri}shop/shopping-cart/`;
       return this.httpClient.get(requestUri);
     }
   }

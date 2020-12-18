@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "modules.shop.app_product",
     "modules.shop.app_product_item",
     "modules.shop.app_product_image",
+    "modules.shop.app_shopping_item",
+    "modules.shop.app_shopping_cart",
     "modules.shop.app_category",
     "modules.shop.app_gender",
     "modules.shop.app_color",
@@ -65,6 +67,19 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'djangorestframework_camel_case.parser.CamelCaseFormParser',
+        'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
+        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+    ),
+}
 
 CORS_ORIGIN_DOMAIN = os.environ.get("CORS_ORIGIN_DOMAIN", default="")
 

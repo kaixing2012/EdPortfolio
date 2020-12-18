@@ -9,20 +9,20 @@ from ..app_category.models import Category
 
 
 class Product(models.Model):
-    stock = models.PositiveIntegerField(default=0)
-
     product_item = models.ForeignKey(
-        ProductItem, on_delete=models.CASCADE, blank=False)
+        ProductItem, on_delete=models.CASCADE)
 
     product_image = models.ForeignKey(
-        ProductImage, on_delete=models.CASCADE, blank=False)
+        ProductImage, on_delete=models.CASCADE)
 
-    size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=False)
-    color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=False)
-    gender = models.ForeignKey(Gender, on_delete=models.CASCADE, blank=False)
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
 
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, blank=False)
+        Category, on_delete=models.CASCADE)
+
+    stock = models.PositiveIntegerField(default=0)
 
     # Meta data about the database table.
     class Meta:

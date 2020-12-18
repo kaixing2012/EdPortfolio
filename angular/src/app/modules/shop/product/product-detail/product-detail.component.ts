@@ -41,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getRelatedModels();
     this.isMobileMode = this.appService.checkUpMobileSize(window);
-    this.imageUrl = this.data.productItem.coverUrl;
+    this.imageUrl = this.data.productItem.cover;
 
     this.product = {
       productItem: this.data.productItem,
@@ -67,7 +67,10 @@ export class ProductDetailComponent implements OnInit {
             ...new Map(
               filteredProducts.map((product) => [
                 product.productItem.name,
-                { color: product.color, image: product.productImage },
+                {
+                  color: product.color,
+                  productImage: product.productImage,
+                },
               ])
             ).values(),
           ];
