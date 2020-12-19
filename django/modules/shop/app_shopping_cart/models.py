@@ -8,7 +8,7 @@ class ShoppingCart(models.Model):
 
     cart_serial_no = models.CharField(max_length=50)
     date_created = models.DateTimeField(default=timezone.now)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    session_key = models.CharField(max_length=40, null=True)
 
     # Meta data about the database table
     class Meta:

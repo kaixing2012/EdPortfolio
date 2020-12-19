@@ -2,10 +2,10 @@ from rest_framework import serializers
 
 from .models import ShoppingCart
 
-from ..app_shopping_item.serializers import ShoppingItemSerializer
+from ..app_shopping_item.serializers import ShoppingItemPerformGetSerializer
 
 
-class ShoppingCartSerializer(serializers.ModelSerializer):
+class ShoppingCartPerformGetSerializer(serializers.ModelSerializer):
     cart_items = serializers.SerializerMethodField()
 
     class Meta:
@@ -15,7 +15,8 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
     def get_cart_items(self, instance):
         request = self.context.get('request')
         shopping_items = instance.shoppingitem_set.all()
-        serializer = ShoppingItemSerializer(shopping_items, many=True)
+        serializer = ShoppingItemPerformGetSerializer(
+            shopping_items, many=True)
 
         for item in serializer.data:
             cover_url = item['product']['product_item']['cover']
@@ -27,3 +28,9 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
                 image_url)
 
         return serializer.data
+
+
+class ShoppingCartPerformOperateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShoppingCart
+        fields = "__all__"

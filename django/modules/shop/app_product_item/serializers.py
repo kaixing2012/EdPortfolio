@@ -3,7 +3,6 @@ from .models import ProductItem
 
 
 class ProductItemSerializer(serializers.ModelSerializer):
-    coverUrl = serializers.ImageField(source="cover")
 
     class Meta:
         model = ProductItem

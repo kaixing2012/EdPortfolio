@@ -13,7 +13,7 @@ class ShoppingItem(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-    amount = models.IntegerField(max_length=8)
+    amount = models.PositiveIntegerField()
 
     # Meta data about the database table
     class Meta:
