@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 import { Product } from '../../models/shop/product.model';
 
@@ -15,16 +16,14 @@ export class ShoppingItemService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'X-CSRFToken': this.cookieService.get('csrftoken'),
+      'X-CSRFToken': this.cookieService.get('csrftoken'),
     }),
-    withCredentials: true,
-    // observe: 'response' as 'response',
   };
 
   constructor(
-    private httpClient: HttpClient
-  ) // private cookieService: CookieService
-  {}
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   addShoppingItem(product: Product) {
     let requestUri = `${this.baseUri}shop/shopping-item/`;

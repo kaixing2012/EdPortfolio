@@ -24,6 +24,7 @@
     "@angular/router": "~11.0.5",
     "@types/ol": "^6.4.2",
     "nginx": "^0.0.0",
+    "ngx-cookie-service": "^11.0.2",
     "ol": "^6.4.3",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
