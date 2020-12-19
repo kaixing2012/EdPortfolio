@@ -83,6 +83,8 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_DOMAIN = os.environ.get("CORS_ORIGIN_DOMAIN", default="")
 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ORIGIN_WHITELIST = (
     CORS_ORIGIN_DOMAIN,
     "http://localhost",

@@ -21,10 +21,11 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
 
     # Define list, retrieve, create, update, partial_update, and destroy methods.
     def create(self, request, *args, **kwargs):
-        session_key = request.session.session_key
-        cart, created = ShoppingCart.objects.get_or_create(
-            cart_serial_no=session_key, session_key=session_key)
+        # session_key = request.session.session_key
+        # cart, created = ShoppingCart.objects.get_or_create(
+        #     cart_serial_no=session_key, session_key=session_key)
         print(request.data)
+        print(request.session.session_key)
 
     # serializer = self.get_serializer(
     #     data=request.data, many=isinstance(request.data, list))

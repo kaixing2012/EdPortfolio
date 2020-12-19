@@ -8,6 +8,7 @@ import { ProductDialog } from 'src/app/shared/models/shop/product-dialog.model';
 
 import { AppService } from 'src/app/app.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
+import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopping-item.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -35,7 +36,8 @@ export class ProductDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ProductDialog,
     public dialogRef: MatDialogRef<ProductDetailComponent>,
     private appService: AppService,
-    private productSetvice: ProductService
+    private productService: ProductService,
+    private shoppingItemService: ShoppingItemService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getRelatedModels() {
-    this.productSetvice
+    this.productService
       .getProductList(this.appService.getUseMockeService())
       .subscribe(
         (products: Product[]) => {
@@ -109,16 +111,17 @@ export class ProductDetailComponent implements OnInit {
         p.s. Cart function is coming soon
       `);
     } else {
-      alert(`
-        The following is your order:
-          Product Item: ${this.product.productItem.name}
-          category: ${this.product.category.name}
-          gender: ${this.product.gender.name}
-          color: ${this.product.color.name}
-          size: ${this.product.size.name.toUpperCase()}
+      // alert(`
+      //   The following is your order:
+      //     Product Item: ${this.product.productItem.name}
+      //     category: ${this.product.category.name}
+      //     gender: ${this.product.gender.name}
+      //     color: ${this.product.color.name}
+      //     size: ${this.product.size.name.toUpperCase()}
 
-        p.s. Cart function is coming soon
-      `);
+      //   p.s. Cart function is coming soon
+      // `);
+      this.shoppingItemService.addShoppingItem(this.product).subscribe();
     }
   }
 

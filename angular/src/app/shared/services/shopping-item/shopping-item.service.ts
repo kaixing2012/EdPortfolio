@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Product } from '../../models/shop/product.model';
+
 import shoppingItems from '../../../../assets/mockbase/shop/shopping-items.json';
 
 @Injectable({
@@ -10,10 +12,24 @@ import shoppingItems from '../../../../assets/mockbase/shop/shopping-items.json'
 export class ShoppingItemService {
   private shoppingItemList: any[] = shoppingItems;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'X-CSRFToken': this.cookieService.get('csrftoken'),
+    }),
+    withCredentials: true,
+    // observe: 'response' as 'response',
+  };
 
-  headers: HttpHeaders = new HttpHeaders({});
+  constructor(
+    private httpClient: HttpClient
+  ) // private cookieService: CookieService
+  {}
 
-  constructor(private httpClient: HttpClient) {}
+  addShoppingItem(product: Product) {
+    let requestUri = `${this.baseUri}shop/shopping-item/`;
+    return this.httpClient.post(requestUri, product, this.httpOptions);
+  }
 
   // getShoppingItemList(useMockService: boolean) {
   //   if (useMockService) {
