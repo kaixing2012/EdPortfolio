@@ -54,7 +54,12 @@
 
 .cart-list-detail-sub {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.cart-list-detail-sub button {
+  color: white;
+  background-color: #c44b3f;
 }
 
 .cart-pay {
@@ -82,13 +87,17 @@
   margin: 0;
 }
 
+.cart-pay section {
+  display: flex;
+  justify-content: space-between;
+}
+
 .cart-pay button {
-  float: right;
   font-size: 1.5em;
   font-weight: 900;
   color: white;
   background-color: #424242;
-  width: 50%;
+  width: 49%;
   margin-top: 3em;
   padding: 0.2em;
 }

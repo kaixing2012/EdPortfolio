@@ -14,13 +14,13 @@
           <div>{{ shoppingItem.product.productItem.name }}</div>
 
           <div>
-            <button mat-icon-button (click)="subtractAmount(shoppingItem)">
+            <button mat-icon-button (click)="onSubtractAmount(shoppingItem)">
               <i class="fas fa-minus"></i>
             </button>
 
             <small>{{ shoppingItem.amount }}</small>
 
-            <button mat-icon-button (click)="addAmount(shoppingItem)">
+            <button mat-icon-button (click)="onAddAmount(shoppingItem)">
               <i class="fas fa-plus"></i>
             </button>
           </div>
@@ -46,14 +46,20 @@
         </h2>
 
         <h2 class="cart-list-detail-sub">
+          <button mat-raised-button (click)="onRemoveItem(shoppingItem)">
+            Remove
+          </button>
+
           <span>
             Item Sub:
-            <b>{{
-              getItemSub(
-                shoppingItem.product.productItem.price,
-                shoppingItem.amount
-              )
-            }}</b>
+            <b>
+              {{
+                getItemSub(
+                  shoppingItem.product.productItem.price,
+                  shoppingItem.amount
+                )
+              }}
+            </b>
           </span>
         </h2>
       </div>
@@ -78,7 +84,10 @@
           <span> {{ getTotal() }} </span>
         </h1>
 
-        <button mat-raised-button (click)="onCheckOut()">Check Out</button>
+        <section>
+          <button mat-raised-button (click)="onSaveCart()">Save order</button>
+          <button mat-raised-button (click)="onCheckOut()">Check out</button>
+        </section>
       </div>
     </div>
   </div>

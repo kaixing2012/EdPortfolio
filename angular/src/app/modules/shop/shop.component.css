@@ -10,7 +10,7 @@
   top: 4.7em;
   height: calc((var(--vh, 1vh) * 100) - 5.1em);
   margin: 0em 0.4em;
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
 }
 
 .shop mat-drawer-content::-webkit-scrollbar {

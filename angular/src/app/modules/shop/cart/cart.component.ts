@@ -68,16 +68,24 @@ export class CartComponent implements OnInit {
     return `NT$${this.total}`;
   }
 
+  onRemoveItem(shoppingItem: ShoppingItem) {
+    alert('this function is coming soon');
+  }
+
   onCheckOut() {
     alert('this function is coming soon');
   }
 
-  addAmount(shoppingItem: ShoppingItem) {
+  onSaveCart() {
+    alert('this function is coming soon');
+  }
+
+  onAddAmount(shoppingItem: ShoppingItem) {
     if (shoppingItem.amount < shoppingItem.product.stock)
       shoppingItem.amount += 1;
   }
 
-  subtractAmount(shoppingItem: ShoppingItem) {
+  onSubtractAmount(shoppingItem: ShoppingItem) {
     if (shoppingItem.amount > 1) shoppingItem.amount -= 1;
   }
 
