@@ -11,6 +11,7 @@ class ProductItemAPIViewSet(viewsets.ModelViewSet):
     queryset = ProductItem.objects.all()
     serializer_class = ProductItemSerializer
 
+    # Define list, retrieve, create, update, partial_update, and destroy methods.
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(
             data=request.data, many=isinstance(request.data, list))

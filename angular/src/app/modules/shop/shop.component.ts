@@ -23,7 +23,7 @@ export class ShopComponent implements OnInit {
     this.shoppingCartService
       .getShoppingCartList(this.appService.getUseMockeService())
       .subscribe(
-        (cart: any[]) => (this.shoppingItemCount = cart[0].cartItems.length)
+        (cart: any) => (this.shoppingItemCount = cart.cartItems.length)
       );
   }
 

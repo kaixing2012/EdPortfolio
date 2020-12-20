@@ -22,6 +22,7 @@ export class ProductDetailComponent implements OnInit {
   };
 
   product: Product;
+  filteredProducts: Product[];
 
   imageUrl: string;
   isMobileMode: boolean;
@@ -59,7 +60,7 @@ export class ProductDetailComponent implements OnInit {
       .getProductList(this.appService.getUseMockeService())
       .subscribe(
         (products: Product[]) => {
-          let filteredProducts = products.filter(
+          this.filteredProducts = products.filter(
             (product) =>
               product.productItem.id === this.data.productItem.id &&
               product.gender.name === this.data.gender.name
@@ -67,8 +68,8 @@ export class ProductDetailComponent implements OnInit {
 
           this.productDesign.colorsAndImages = [
             ...new Map(
-              filteredProducts.map((product) => [
-                product.productItem.name,
+              this.filteredProducts.map((product) => [
+                product.color.id,
                 {
                   color: product.color,
                   productImage: product.productImage,
@@ -79,8 +80,8 @@ export class ProductDetailComponent implements OnInit {
 
           this.productDesign.sizes = [
             ...new Map(
-              filteredProducts.map((product) => [
-                product.productItem.name,
+              this.filteredProducts.map((product) => [
+                product.size.id,
                 product.size,
               ])
             ).values(),
@@ -111,17 +112,25 @@ export class ProductDetailComponent implements OnInit {
         p.s. Cart function is coming soon
       `);
     } else {
-      // alert(`
-      //   The following is your order:
-      //     Product Item: ${this.product.productItem.name}
-      //     category: ${this.product.category.name}
-      //     gender: ${this.product.gender.name}
-      //     color: ${this.product.color.name}
-      //     size: ${this.product.size.name.toUpperCase()}
+      let productPicked = this.filteredProducts.find(
+        (product) =>
+          product.productItem.id === this.product.productItem.id &&
+          product.category.id === this.product.category.id &&
+          product.gender.id === this.product.gender.id &&
+          product.color.id === this.product.color.id &&
+          product.size.id === this.product.size.id
+      );
 
-      //   p.s. Cart function is coming soon
-      // `);
-      this.shoppingItemService.addShoppingItem(this.product).subscribe();
+      let amount = 1;
+
+      this.shoppingItemService.addShoppingItem(productPicked, amount).subscribe(
+        (data: any) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
   }
 

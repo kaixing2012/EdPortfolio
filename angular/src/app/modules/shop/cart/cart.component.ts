@@ -27,8 +27,8 @@ export class CartComponent implements OnInit {
     this.shoppingCartService
       .getShoppingCartList(this.appService.getUseMockeService())
       .subscribe(
-        (shoppingCarts: any[]) => {
-          this.shoppingItems = shoppingCarts[0].cartItems;
+        (shoppingCarts: any) => {
+          this.shoppingItems = shoppingCarts.cartItems;
         },
         (err) => {
           console.log(err);

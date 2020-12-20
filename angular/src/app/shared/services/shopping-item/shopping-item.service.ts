@@ -18,6 +18,7 @@ export class ShoppingItemService {
       'Content-Type': 'application/json',
       'X-CSRFToken': this.cookieService.get('csrftoken'),
     }),
+    observe: 'events' as 'events',
   };
 
   constructor(
@@ -25,23 +26,12 @@ export class ShoppingItemService {
     private cookieService: CookieService
   ) {}
 
-  addShoppingItem(product: Product) {
-    let requestUri = `${this.baseUri}shop/shopping-item/`;
-    return this.httpClient.post(requestUri, product, this.httpOptions);
+  addShoppingItem(product: Product, amount: number) {
+    let requestUri = `${this.baseUri}shop/shopping-item/add-to-cart/`;
+    let body = JSON.stringify({
+      product: product,
+      amount: amount,
+    });
+    return this.httpClient.post(requestUri, body, this.httpOptions);
   }
-
-  // getShoppingItemList(useMockService: boolean) {
-  //   if (useMockService) {
-  //     const shoppingItem = new Observable((observer) => {
-  //       setTimeout(() => {
-  //         observer.next(this.shoppingItemList);
-  //       }, 100);
-  //     });
-
-  //     return shoppingItem;
-  //   } else {
-  //     let requestUri = `${this.baseUri}shop/product/`;
-  //     return this.httpClient.get(requestUri);
-  //   }
-  // }
 }
