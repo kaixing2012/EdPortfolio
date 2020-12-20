@@ -1,6 +1,7 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Product } from 'src/app/shared/models/shop/product.model';
 import { ProductDesign } from 'src/app/shared/models/shop/product-design.model';
@@ -36,6 +37,7 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductDialog,
     public dialogRef: MatDialogRef<ProductDetailComponent>,
+    private snackBar: MatSnackBar,
     private appService: AppService,
     private productService: ProductService,
     private shoppingItemService: ShoppingItemService
@@ -124,14 +126,28 @@ export class ProductDetailComponent implements OnInit {
       let amount = 1;
 
       this.shoppingItemService.addShoppingItem(productPicked, amount).subscribe(
-        (data: any) => {
-          console.log(data);
+        (response: any) => {
+          let body = response.body;
+
+          if (body) {
+            let msg = body.message;
+            this.onOpenSnackBar(msg, 'End Now');
+          }
         },
         (err) => {
           console.log(err);
         }
       );
     }
+  }
+
+  onOpenSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      // panelClass: 'snackbar',
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   productDetailCls() {

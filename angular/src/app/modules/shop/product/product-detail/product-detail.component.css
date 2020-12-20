@@ -19,6 +19,21 @@
   width: 0;
 }
 
+::ng-deep .mat-snack-bar-container {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border: 0.5px solid #8d8d8d !important;
+  min-width: 500px !important;
+}
+
+::ng-deep .mat-simple-snackbar {
+  font-size: 1.4em !important;
+}
+
+::ng-deep .mat-simple-snackbar-action {
+  color: #000000;
+}
+
 .desktop-product-detail {
   display: flex;
   justify-content: space-between;

@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const matModules = [
   FlexLayoutModule,
@@ -37,6 +38,7 @@ const matModules = [
   MatInputModule,
   MatDividerModule,
   MatBadgeModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

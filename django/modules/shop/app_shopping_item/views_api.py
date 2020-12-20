@@ -43,15 +43,13 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
             try:
                 shopping_item = ShoppingItem.objects.get(
                     product=data["product"], cart=data["cart"])
-                shopping_item.amount += data["amount"]
-                shopping_item.save()
 
                 serializer = ShoppingItemPerformOperateSerializer(
                     shopping_item)
 
                 response = dict(
                     data=serializer.data,
-                    message=f"Add more amount of the item to the cart"
+                    message=f"Item is already in the cart!"
                 )
 
                 headers = self.get_success_headers(response)
@@ -66,11 +64,14 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
 
                 response = dict(
                     data=serializer.data,
-                    message=f"Add new item to the cart"
+                    message=f"Add new {shopping_item.product} to your cart"
                 )
 
                 headers = self.get_success_headers(response)
 
                 return Response(response, status=status.HTTP_201_CREATED, headers=headers)
         else:
-            print('no key')
+            response = dict(
+                message=f"You are unauthenticated"
+            )
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
