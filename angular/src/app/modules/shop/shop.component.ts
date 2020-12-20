@@ -1,5 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
+import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
+
 import { AppService } from 'src/app/app.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopping-cart.service';
 
@@ -19,11 +21,16 @@ export class ShopComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getShoppingItemCount();
     this.isMobileMode = this.appService.checkUpMobileSize(window);
+  }
+
+  getShoppingItemCount() {
     this.shoppingCartService
-      .getShoppingCartList(this.appService.getUseMockeService())
+      .viewMyCart(this.appService.getUseMockeService())
       .subscribe(
-        (cart: any) => (this.shoppingItemCount = cart.cartItems.length)
+        (carts: ShoppingCart[]) =>
+          (this.shoppingItemCount = carts[0].cartItems.length)
       );
   }
 

@@ -10,6 +10,7 @@ import { ProductDialog } from 'src/app/shared/models/shop/product-dialog.model';
 import { AppService } from 'src/app/app.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopping-item.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-detail',
@@ -107,12 +108,8 @@ export class ProductDetailComponent implements OnInit {
 
   onAddToCart() {
     if (!this.product.color || !this.product.size) {
-      alert(`
-        Please, select your 
-        Color or Size or Both
-
-        p.s. Cart function is coming soon
-      `);
+      let msg = 'Please, select your Color or Size or Both';
+      this.onOpenSnackBar(msg, 'Close');
     } else {
       let productPicked = this.filteredProducts.find(
         (product) =>
@@ -126,12 +123,12 @@ export class ProductDetailComponent implements OnInit {
       let amount = 1;
 
       this.shoppingItemService.addShoppingItem(productPicked, amount).subscribe(
-        (response: any) => {
+        (response: HttpResponse<any>) => {
           let body = response.body;
 
           if (body) {
             let msg = body.message;
-            this.onOpenSnackBar(msg, 'End Now');
+            this.onOpenSnackBar(msg, 'Close');
           }
         },
         (err) => {

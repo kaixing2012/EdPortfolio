@@ -1,17 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { Product } from '../../models/shop/product.model';
-
-import shoppingItems from '../../../../assets/mockbase/shop/shopping-items.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingItemService {
-  private shoppingItemList: any[] = shoppingItems;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private httpOptions = {
     headers: new HttpHeaders({

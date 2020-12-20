@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
+import { ShoppingItem } from 'src/app/shared/models/shop/shopping-item.model';
+
 import { AppService } from 'src/app/app.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopping-cart.service';
 
@@ -9,7 +12,7 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopp
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  shoppingItems: [] = [];
+  shoppingItems: ShoppingItem[] = [];
   subtotal: number;
   shipping: number = 60;
   total: number;
@@ -25,10 +28,10 @@ export class CartComponent implements OnInit {
 
   getShoppingItems() {
     this.shoppingCartService
-      .getShoppingCartList(this.appService.getUseMockeService())
+      .viewMyCart(this.appService.getUseMockeService())
       .subscribe(
-        (shoppingCarts: any) => {
-          this.shoppingItems = shoppingCarts.cartItems;
+        (carts: ShoppingCart[]) => {
+          this.shoppingItems = carts[0].cartItems;
         },
         (err) => {
           console.log(err);
@@ -43,12 +46,12 @@ export class CartComponent implements OnInit {
   getSubtotal() {
     if (this.shoppingItems.length > 1)
       this.subtotal = this.shoppingItems
-        .map((item: any) => {
+        .map((item) => {
           return item.product.productItem.price * item.amount;
         })
         .reduce((prev, next) => prev + next);
     else
-      [this.subtotal] = this.shoppingItems.map((item: any) => {
+      [this.subtotal] = this.shoppingItems.map((item) => {
         return item.product.productItem.price * item.amount;
       });
 
@@ -69,12 +72,12 @@ export class CartComponent implements OnInit {
     alert('this function is coming soon');
   }
 
-  addAmount(shoppingItem) {
+  addAmount(shoppingItem: ShoppingItem) {
     if (shoppingItem.amount < shoppingItem.product.stock)
       shoppingItem.amount += 1;
   }
 
-  subtractAmount(shoppingItem) {
+  subtractAmount(shoppingItem: ShoppingItem) {
     if (shoppingItem.amount > 1) shoppingItem.amount -= 1;
   }
 

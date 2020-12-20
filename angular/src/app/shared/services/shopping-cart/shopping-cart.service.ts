@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
+import { ShoppingCart } from '../../models/shop/shopping-cart.model';
+
 import shoppingCarts from '../../../../assets/mockbase/shop/shopping-carts.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  private shoppingCartList: any[] = shoppingCarts;
+  private shoppingCartList: ShoppingCart[] = shoppingCarts;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -23,9 +25,9 @@ export class ShoppingCartService {
     private cookieService: CookieService
   ) {}
 
-  getShoppingCartList(useMockService: boolean) {
+  viewMyCart(useMockService: boolean) {
     if (useMockService) {
-      const shoppingCart = new Observable((observer) => {
+      const shoppingCart = new Observable<ShoppingCart[]>((observer) => {
         setTimeout(() => {
           observer.next(this.shoppingCartList);
         }, 100);
@@ -34,7 +36,7 @@ export class ShoppingCartService {
       return shoppingCart;
     } else {
       let requestUri = `${this.baseUri}shop/shopping-cart/view-my-cart/`;
-      return this.httpClient.get(requestUri, this.httpOptions);
+      return this.httpClient.get<ShoppingCart[]>(requestUri, this.httpOptions);
     }
   }
 }
