@@ -1,6 +1,6 @@
 # Stage 1
 # Create image based on the official Node 8 image from dockerhub
-FROM node:14.15.1-alpine as node
+FROM node:15.4.0-slim as node
 
 # Create a directory where our app will be placed
 RUN mkdir -p /usr/proj/angular
