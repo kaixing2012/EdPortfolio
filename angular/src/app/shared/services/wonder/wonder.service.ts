@@ -10,7 +10,7 @@ import wonders from '../../../../assets/mockbase/map/wonders.json';
   providedIn: 'root',
 })
 export class WonderService {
-  private wonderList: Wonder[] = wonders;
+  private wonderList: any[] = wonders;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private headers: HttpHeaders = new HttpHeaders({});
 
@@ -18,7 +18,7 @@ export class WonderService {
 
   getWonderList(useMockService: boolean) {
     if (useMockService) {
-      const nameSetObservable = new Observable((observer) => {
+      const nameSetObservable = new Observable<Wonder[]>((observer) => {
         setTimeout(() => {
           observer.next(this.wonderList);
         }, 100);
@@ -27,13 +27,13 @@ export class WonderService {
       return nameSetObservable;
     } else {
       let requestUri = `${this.baseUri}map/wonder/`;
-      return this.httpClient.get(requestUri);
+      return this.httpClient.get<Wonder[]>(requestUri);
     }
   }
 
   getWonderDetail(id: string, useMockService: boolean) {
     if (useMockService) {
-      const dataObservable = new Observable((observer) => {
+      const dataObservable = new Observable<Wonder>((observer) => {
         setTimeout(() => {
           let parsedId = parseInt(id);
           let names = this.wonderList.find((data) => data.id === parsedId);
@@ -44,7 +44,7 @@ export class WonderService {
       return dataObservable;
     } else {
       let requestUri = `${this.baseUri}map/wonder/${id}`;
-      return this.httpClient.get(requestUri);
+      return this.httpClient.get<Wonder>(requestUri);
     }
   }
 }

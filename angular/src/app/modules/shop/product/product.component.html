@@ -23,7 +23,7 @@
           <mat-checkbox
             #checkbox
             color="primary"
-            [value]="color.id"
+            [value]="color.id.toString()"
             [name]="color.name"
             (change)="onCheckChange($event)"
           >
@@ -39,7 +39,7 @@
           <mat-checkbox
             #checkbox
             color="primary"
-            [value]="size.id"
+            [value]="size.id.toString()"
             [name]="size.name"
             (change)="onCheckChange($event)"
           >
@@ -55,7 +55,7 @@
           <mat-checkbox
             #checkbox
             color="primary"
-            [value]="category.id"
+            [value]="category.id.toString()"
             [name]="category.name"
             (change)="onCheckChange($event)"
           >

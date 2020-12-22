@@ -6,7 +6,7 @@ import OSM from 'ol/source/OSM';
 import View from 'ol/View';
 import WMTS from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
-import Feature from 'ol/Feature';
+import Feature, { FeatureLike } from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 
@@ -32,7 +32,7 @@ import { Wonder } from 'src/app/shared/models/map/wonder.model';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements OnInit {
-  private map: Map;
+  private map: Map = new Map({});
   private lat: number = 23.6978;
   private lng: number = 120.9605;
   private zoom: number = 7;
@@ -71,26 +71,26 @@ export class MapComponent implements OnInit {
     this.wonderService
       .getWonderList(this.appService.getUseMockeService())
       .subscribe(
-        (data: Wonder) => {
-          this.map.addLayer(this.generateMarkerLayer(data));
+        (wonder: Wonder[]) => {
+          this.map.addLayer(this.generateMarkerLayer(wonder));
         },
         (err) => {
           console.log(err);
         }
       );
 
-    var selected = null;
-    var status = document.getElementById('status');
+    var selected: Feature = new Feature();
+    var status = document.getElementById('status') as HTMLElement;
 
     this.map.on('pointermove', (event) => {
       if (selected !== null) {
         selected.setStyle(this.initMarkerStyle);
-        selected = null;
+        selected = {} as Feature;
       }
 
-      this.map.forEachFeatureAtPixel(event.pixel, (feature: Feature) => {
-        selected = feature;
-        feature.setStyle(this.highlightMarkerStyle);
+      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+        selected = feature as Feature;
+        selected.setStyle(this.highlightMarkerStyle);
         return true;
       });
 
@@ -166,7 +166,7 @@ export class MapComponent implements OnInit {
   }
 
   generateMarkerLayer(dataSet: any) {
-    let markerFeatures = [];
+    let markerFeatures: Feature[] = [];
 
     dataSet.forEach((data: any) => {
       let feature = new Feature({

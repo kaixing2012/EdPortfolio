@@ -13,12 +13,12 @@ import { AppService } from '../../app.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('coverFrame') coverFrame: ElementRef;
-  @ViewChild('frontFrame') frontFrame: ElementRef;
-  @ViewChild('selfie') selfie: ElementRef;
-  @ViewChild('detail') detail: ElementRef;
+  @ViewChild('coverFrame') coverFrame: ElementRef = {} as ElementRef;
+  @ViewChild('frontFrame') frontFrame: ElementRef = {} as ElementRef;
+  @ViewChild('selfie') selfie: ElementRef = {} as ElementRef;
+  @ViewChild('detail') detail: ElementRef = {} as ElementRef;
 
-  isMobileMode: boolean;
+  isMobileMode: boolean = false;
 
   skillIcons = [
     {
@@ -52,31 +52,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
-
-  // @HostListener('window:scroll', ['$event'])
-  // onScroll(event: Event) {
-  //   console.log('fff');
-  //   if (this.frontFrame.nativeElement.getBoundingClientRect().top < 0) {
-  //     this.coverFrame.nativeElement.style.backgroundImage =
-  //       'url(/assets/images/home-dark-row.jpg)';
-  //     this.appService.isfrontFrameTouchTop = true;
-  //     if (!this.isMobileMode) {
-  //       this.selfie.nativeElement.style.display = 'initial';
-  //       this.detail.nativeElement.style.display = 'initial';
-
-  //       setTimeout(() => {
-  //         this.selfie.nativeElement.style.transform = 'scale(.7)';
-  //         this.selfie.nativeElement.style.boxShadow =
-  //           'inset 0 0 100px 50px #000000';
-  //         this.detail.nativeElement.style.transform = 'scale(.7)';
-  //       }, 100);
-  //     }
-  //   } else {
-  //     this.coverFrame.nativeElement.style.backgroundImage =
-  //       'url(/assets/images/home-cover.jpg)';
-  //     this.appService.isfrontFrameTouchTop = false;
-  //   }
-  // }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {

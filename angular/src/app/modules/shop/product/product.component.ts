@@ -43,9 +43,9 @@ export class ProductComponent implements OnInit {
   displayList: ProductDisplay[] = [];
 
   isFilterOpened: boolean = true;
-  isMobileMode: boolean;
+  isMobileMode: boolean = false;
 
-  private genderStr: string;
+  private genderStr: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -177,6 +177,8 @@ export class ProductComponent implements OnInit {
               }
             }
           }
+
+          return false;
         }
       );
     }
@@ -204,8 +206,10 @@ export class ProductComponent implements OnInit {
   }
 
   onTabChange(event?: MatTabChangeEvent) {
-    this.genderStr = event.tab.textLabel.toLowerCase();
-    this.getDisplayItemsByCheckboxFilter();
+    if (event) {
+      this.genderStr = event.tab.textLabel.toLowerCase();
+      this.getDisplayItemsByCheckboxFilter();
+    }
   }
 
   onCheckChange(event?: MatCheckboxChange) {

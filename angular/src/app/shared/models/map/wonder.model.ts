@@ -1,4 +1,4 @@
-export class Wonder {
+export interface Wonder {
   id: number;
   name: string;
   lat: string;

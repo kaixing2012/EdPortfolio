@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AppService {
-  private isMobileMode: boolean;
+  private isMobileMode: boolean = false;
   private useMockService: boolean = false;
 
   constructor() {}

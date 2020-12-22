@@ -5,10 +5,10 @@ import { Color } from './color.model';
 import { Gender } from './gender.model';
 import { Category } from './category.model';
 
-export class Product {
+export interface Product {
   id?: number;
   productItem: ProductItem;
-  productImage?: ProductImage;
+  productImage: ProductImage;
   size: Size;
   color: Color;
   gender: Gender;

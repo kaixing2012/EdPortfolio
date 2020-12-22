@@ -58,7 +58,7 @@
             <div
               class="product-detail-option-size"
               *ngFor="let size of productDesign.sizes"
-              [ngClass]="dynamicAddActiveCls(product.size, size)"
+              [ngClass]="[dynamicAddActiveCls(product.size, size)]"
             >
               <mat-radio-button [value]="size" disableRipple="true">
                 {{ size.name | uppercase }}

@@ -1,6 +1,6 @@
 import { ShoppingItem } from './shopping-item.model';
 
-export class ShoppingCart {
+export interface ShoppingCart {
   id: number;
   cartSerialNo: string;
   dateCreated: string;

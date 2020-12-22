@@ -11,9 +11,9 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopp
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  innerWidth: number;
-  isMobileMode: boolean;
-  shoppingItemCount: number;
+  innerWidth: number = 0;
+  shoppingItemCount: number = 0;
+  isMobileMode: boolean = false;
 
   constructor(
     private appService: AppService,

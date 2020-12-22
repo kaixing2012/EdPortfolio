@@ -1,7 +1,7 @@
 import { Product } from './product.model';
 import { ShoppingCart } from './shopping-cart.model';
 
-export class ShoppingItem {
+export interface ShoppingItem {
   id: number;
   itemNo: number;
   dateAdded: string;

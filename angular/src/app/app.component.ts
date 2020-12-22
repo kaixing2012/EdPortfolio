@@ -10,8 +10,8 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit {
   title = 'EdPortfolio';
-  innerWidth: any;
-  isMobileMode: boolean;
+  innerWidth: number = 0;
+  isMobileMode: boolean = false;
 
   constructor(private appService: AppService) {}
 

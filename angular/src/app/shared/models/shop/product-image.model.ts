@@ -1,4 +1,4 @@
-export class ProductImage {
+export interface ProductImage {
   id: number;
   name: string;
   image: string;

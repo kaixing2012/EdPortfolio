@@ -6,8 +6,8 @@ import { AppService } from 'src/app/app.service';
 import { WonderService } from 'src/app/shared/services/wonder/wonder.service';
 
 interface Options {
-  wonderService?: WonderService;
-  appService?: AppService;
+  wonderService: WonderService;
+  appService: AppService;
   target?: HTMLElement | string;
 }
 
@@ -17,7 +17,7 @@ export class SearchBar extends Control {
   private inputBox: HTMLInputElement;
 
   constructor(opt_options?: Options) {
-    let options = opt_options || {};
+    let options = opt_options as Options;
 
     let input = document.createElement('input');
     input.style.width = '160px';
@@ -77,7 +77,7 @@ export class SearchBar extends Control {
 
     input.addEventListener('keyup', this.onSearch.bind(this), false);
     // input.addEventListener('focusout', this.onSearch.bind(this), false);
-    searchBtn.addEventListener('click', this.onSearch.bind(this), false);
+    // searchBtn.addEventListener('click', this.onSearch.bind(this), false);
   }
 
   onSearch(event: KeyboardEvent) {
@@ -91,7 +91,7 @@ export class SearchBar extends Control {
           if (element.getAttribute('value') === this.inputBox.value) {
             this.wonderService
               .getWonderDetail(
-                element.getAttribute('data-value'),
+                element.getAttribute('data-value') as string,
                 this.appService.getUseMockeService()
               )
               .subscribe(

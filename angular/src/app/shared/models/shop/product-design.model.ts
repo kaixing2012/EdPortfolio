@@ -1,11 +1,7 @@
-import { ProductImage } from './product-image.model';
+import { ProductColorAndImage } from './product-color-and-image.model';
 import { Size } from './size.model';
-import { Color } from './color.model';
 
-export class ProductDesign {
-  colorsAndImages: {
-    color: Color;
-    productImage: ProductImage;
-  }[];
+export interface ProductDesign {
+  colorsAndImages: ProductColorAndImage[];
   sizes: Size[];
 }

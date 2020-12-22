@@ -13,9 +13,9 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopp
 })
 export class CartComponent implements OnInit {
   shoppingItems: ShoppingItem[] = [];
-  subtotal: number;
+  subtotal: number = 0;
   shipping: number = 60;
-  total: number;
+  total: number = 0;
 
   constructor(
     private appService: AppService,
@@ -37,6 +37,11 @@ export class CartComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  getImageUrl(image: string) {
+    console.log(image);
+    return image ? image : '';
   }
 
   getItemSub(price: number, amount: number) {
@@ -81,8 +86,10 @@ export class CartComponent implements OnInit {
   }
 
   onAddAmount(shoppingItem: ShoppingItem) {
-    if (shoppingItem.amount < shoppingItem.product.stock)
-      shoppingItem.amount += 1;
+    if (shoppingItem.product.stock) {
+      if (shoppingItem.amount < shoppingItem.product.stock)
+        shoppingItem.amount += 1;
+    }
   }
 
   onSubtractAmount(shoppingItem: ShoppingItem) {

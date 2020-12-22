@@ -11,7 +11,7 @@ import shoppingCarts from '../../../../assets/mockbase/shop/shopping-carts.json'
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  private shoppingCartList: ShoppingCart[] = shoppingCarts;
+  private shoppingCartList: any[] = shoppingCarts;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private httpOptions = {
     headers: new HttpHeaders({

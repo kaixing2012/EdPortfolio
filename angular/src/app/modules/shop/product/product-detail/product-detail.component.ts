@@ -4,8 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Product } from 'src/app/shared/models/shop/product.model';
+import { ProductImage } from 'src/app/shared/models/shop/product-image.model';
 import { ProductDesign } from 'src/app/shared/models/shop/product-design.model';
 import { ProductDialog } from 'src/app/shared/models/shop/product-dialog.model';
+import { ProductColorAndImage } from 'src/app/shared/models/shop/product-color-and-image.model';
 
 import { AppService } from 'src/app/app.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
@@ -18,16 +20,12 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  productDesign: ProductDesign = {
-    colorsAndImages: [],
-    sizes: [],
-  };
+  productDesign: ProductDesign = {} as ProductDesign;
+  product: Product = {} as Product;
+  filteredProducts: Product[] = [];
 
-  product: Product;
-  filteredProducts: Product[];
-
-  imageUrl: string;
-  isMobileMode: boolean;
+  imageUrl: string = '';
+  isMobileMode: boolean = false;
 
   clientColorOptions = [];
   currentColorIndex = 0;
@@ -51,6 +49,7 @@ export class ProductDetailComponent implements OnInit {
 
     this.product = {
       productItem: this.data.productItem,
+      productImage: {} as ProductImage,
       category: this.data.category,
       gender: this.data.gender,
       color: this.clientColorOptions[this.currentColorIndex],
@@ -76,7 +75,7 @@ export class ProductDetailComponent implements OnInit {
                 {
                   color: product.color,
                   productImage: product.productImage,
-                },
+                } as ProductColorAndImage,
               ])
             ).values(),
           ];
@@ -118,16 +117,16 @@ export class ProductDetailComponent implements OnInit {
           product.gender.id === this.product.gender.id &&
           product.color.id === this.product.color.id &&
           product.size.id === this.product.size.id
-      );
+      ) as Product;
 
       let amount = 1;
 
       this.shoppingItemService.addShoppingItem(productPicked, amount).subscribe(
-        (response: HttpResponse<any>) => {
-          let body = response.body;
+        (response) => {
+          let res = response as HttpResponse<any>;
 
-          if (body) {
-            let msg = body.message;
+          if (res.body) {
+            let msg = res.body.message;
             this.onOpenSnackBar(msg, 'Close');
           }
         },
@@ -172,6 +171,7 @@ export class ProductDetailComponent implements OnInit {
     if (currentObj) {
       if (currentObj.id === toActivateObj.id) return 'active';
     }
+    return '';
   }
 
   dynamicBackgroundColor(color: string) {
