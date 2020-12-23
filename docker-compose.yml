@@ -35,13 +35,6 @@ services:
     expose:
       - 8080
 
-  static-collect:
-    image: eddjango:latest
-    command: python manage.py collectstatic
-    volumes: *service-volumes
-    depends_on:
-      - postgres
-
   db-migrate:
     image: eddjango:latest
     command: python manage.py migrate
