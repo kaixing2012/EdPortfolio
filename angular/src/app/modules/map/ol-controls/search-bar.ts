@@ -75,41 +75,44 @@ export class SearchBar extends Control {
     this.wonderService = options.wonderService;
     this.appService = options.appService;
 
-    input.addEventListener('keyup', this.onSearch.bind(this), false);
-    // input.addEventListener('focusout', this.onSearch.bind(this), false);
-    // searchBtn.addEventListener('click', this.onSearch.bind(this), false);
+    input.addEventListener('keyup', (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        this.nevigateToLocation();
+      }
+    });
+    searchBtn.addEventListener('click', (event: MouseEvent) => {
+      this.nevigateToLocation();
+    });
   }
 
-  onSearch(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.type === 'click') {
-      if (this.inputBox.value) {
-        let datalist = document.querySelectorAll(
-          `#${this.inputBox.getAttribute('list')} option`
-        );
+  nevigateToLocation() {
+    if (this.inputBox.value) {
+      let datalist = document.querySelectorAll(
+        `#${this.inputBox.getAttribute('list')} option`
+      );
 
-        datalist.forEach((element) => {
-          if (element.getAttribute('value') === this.inputBox.value) {
-            this.wonderService
-              .getWonderDetail(
-                element.getAttribute('data-value') as string,
-                this.appService.getUseMockeService()
-              )
-              .subscribe(
-                (data: any) => {
-                  this.getMap()
-                    .getView()
-                    .setCenter(LngLat([data.lng, data.lat]));
-                  this.getMap().getView().setZoom(12);
-                },
-                (err) => {
-                  console.log(err);
-                }
-              );
-          }
-        });
-      } else {
-        alert('Please, select your wonder place');
-      }
+      datalist.forEach((element) => {
+        if (element.getAttribute('value') === this.inputBox.value) {
+          this.wonderService
+            .getWonderDetail(
+              element.getAttribute('data-value') as string,
+              this.appService.getUseMockeService()
+            )
+            .subscribe(
+              (data: any) => {
+                this.getMap()
+                  .getView()
+                  .setCenter(LngLat([data.lng, data.lat]));
+                this.getMap().getView().setZoom(12);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+        }
+      });
+    } else {
+      alert('Please, select your wonder place');
     }
   }
 }
