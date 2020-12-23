@@ -1,0 +1,52 @@
+version: "3.4"
+
+x-service-volumes: &service-volumes
+  - ./:/usr/proj/:rw,cached
+  - static-volume:/usr/proj/django/static
+  - media-volume:/usr/proj/django/media
+
+services:
+  angular:
+    image: edangular:latest
+    volumes:
+      - ./:/usr/proj/:rw,cached
+    depends_on:
+      - "django"
+    ports:
+      - "80:80"
+
+  nginx:
+    image: eddjnginx:latest
+    ports:
+      - 8000:8000
+    volumes: *service-volumes
+    depends_on:
+      - django
+
+  django:
+    image: eddjango:latest
+    command: gunicorn -w 2 -b 0.0.0.0:8080 --chdir /usr/proj/django root.wsgi:application --reload --timeout 900
+    volumes: *service-volumes
+    depends_on:
+      - "db-migrate"
+    expose:
+      - 8080
+
+  db-migrate:
+    image: eddjango:latest
+    command: python manage.py migrate
+    volumes: *service-volumes
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+  static-volume:
+  media-volume:
