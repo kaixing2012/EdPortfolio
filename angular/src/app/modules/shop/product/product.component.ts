@@ -5,17 +5,17 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 
+import { Observable } from 'rxjs';
+
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+
 import { Size } from '../../../shared/models/shop/size.model';
 import { Color } from '../../../shared/models/shop/color.model';
 import { Gender } from '../../../shared/models/shop/gender.model';
-import { Product } from '../../../shared/models/shop/product.model';
 import { Category } from '../../../shared/models/shop/category.model';
 import { ProductDisplay } from '../../../shared/models/shop/product-display.model';
 
@@ -33,14 +33,13 @@ import { ProductItem } from 'src/app/shared/models/shop/product-item.model';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  @ViewChildren('checkbox') checkboxes!: QueryList<any>;
+  @ViewChildren('checkbox') checkboxes = new QueryList<MatCheckbox>();
 
-  sizes: Size[] = [];
-  colors: Color[] = [];
-  genders: Gender[] = [];
-  products: Product[] = [];
-  categories: Category[] = [];
-  displayList: ProductDisplay[] = [];
+  sizes$ = new Observable<Size[]>();
+  colors$ = new Observable<Color[]>();
+  genders$ = new Observable<Gender[]>();
+  categories$ = new Observable<Category[]>();
+  displayProducts$ = new Observable<ProductDisplay[]>();
 
   isFilterOpened: boolean = true;
   isMobileMode: boolean = false;
@@ -58,130 +57,26 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.requestSizes();
-    this.requestColors();
-    this.requestGenders();
-    this.requestCategories();
-    this.requestProducts();
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
-  }
-
-  requestSizes() {
-    this.sizeService
-      .getSizeList(this.appService.getUseMockeService())
-      .subscribe(
-        (sizes: Size[]) => {
-          this.sizes = sizes;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-  requestGenders() {
-    this.genderService
-      .getGenderList(this.appService.getUseMockeService())
-      .subscribe(
-        (genders: Gender[]) => {
-          this.genders = genders;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-  requestColors() {
-    this.colorService
-      .getColorList(this.appService.getUseMockeService())
-      .subscribe(
-        (colors: Color[]) => {
-          this.colors = colors;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-  requestCategories() {
-    this.categoryService
-      .getCategoryList(this.appService.getUseMockeService())
-      .subscribe(
-        (categories: Category[]) => {
-          this.categories = categories;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-  requestProducts() {
-    this.productService
-      .getProductList(this.appService.getUseMockeService())
-      .subscribe(
-        (products: Product[]) => {
-          this.products = products;
-          this.getDisplayItemsByCheckboxFilter();
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-  getDisplayItemsByGender(genderStr: string) {
-    let productDisplay: ProductDisplay[] = [];
-
-    this.products
-      .filter((product) => product.gender.name === genderStr)
-      .forEach((product) => {
-        let itemAlreadyIn = productDisplay.find(
-          (item) => item.productItem.id === product.productItem.id
-        );
-
-        if (itemAlreadyIn) {
-          itemAlreadyIn.attribute += `-${product.color.name}-${product.size.name}-${product.category.name}`;
-        } else {
-          productDisplay.push({
-            productItem: product.productItem,
-            category: product.category,
-            attribute: `${product.color.name}-${product.size.name}-${product.category.name}`,
-          });
-        }
-      });
-
-    return productDisplay;
-  }
-
-  getDisplayItemsByCheckboxFilter() {
-    let allUnchecked = this.checkboxes.filter(
-      (box: MatCheckbox) => box.checked === false
+    this.sizes$ = this.sizeService.getSizeList(
+      this.appService.getUseMockeService()
     );
 
-    if (allUnchecked.length === this.checkboxes.length) {
-      this.displayList = this.getDisplayItemsByGender(this.genderStr);
-    } else {
-      this.displayList = this.getDisplayItemsByGender(this.genderStr).filter(
-        (displayItem) => {
-          let box: MatCheckbox;
+    this.colors$ = this.colorService.getColorList(
+      this.appService.getUseMockeService()
+    );
 
-          let attributes = displayItem.attribute.split('-');
+    this.genders$ = this.genderService.getGenderList(
+      this.appService.getUseMockeService()
+    );
 
-          for (let attr of attributes) {
-            for (box of this.checkboxes) {
-              if (attr === box.name && box.checked === true) {
-                return true;
-              }
-            }
-          }
+    this.categories$ = this.categoryService.getCategoryList(
+      this.appService.getUseMockeService()
+    );
 
-          return false;
-        }
-      );
-    }
+    this.displayProducts$ = this.productService.displayProducts;
+    this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
+
+    this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -205,14 +100,12 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  onTabChange(event?: MatTabChangeEvent) {
-    if (event) {
-      this.genderStr = event.tab.textLabel.toLowerCase();
-      this.getDisplayItemsByCheckboxFilter();
-    }
+  onTabChange(event: MatTabChangeEvent) {
+    this.genderStr = event.tab.textLabel.toLowerCase();
+    this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
   }
 
-  onCheckChange(event?: MatCheckboxChange) {
-    this.getDisplayItemsByCheckboxFilter();
+  onCheckChange(event: MatCheckboxChange) {
+    this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
   }
 }

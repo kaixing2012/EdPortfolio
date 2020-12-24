@@ -11,7 +11,8 @@
         </a>
         <a [routerLink]="['./cart']">
           <i
-            matBadge="{{ shoppingItemCount }}"
+            *ngIf="itemCount$ | async as itemCount"
+            matBadge="{{ itemCount }}"
             matBadgeColor="warn"
             class="fas fa-shopping-cart"
           ></i>

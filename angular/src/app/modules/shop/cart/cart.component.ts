@@ -4,7 +4,7 @@ import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
 import { ShoppingItem } from 'src/app/shared/models/shop/shopping-item.model';
 
 import { AppService } from 'src/app/app.service';
-import { ShoppingCartService } from 'src/app/shared/services/shopping-cart/shopping-cart.service';
+import { ShoppingService } from 'src/app/shared/services/shopping/shopping.service';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingService: ShoppingService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
   }
 
   getShoppingItems() {
-    this.shoppingCartService
+    this.shoppingService
       .viewMyCart(this.appService.getUseMockeService())
       .subscribe(
         (carts: ShoppingCart[]) => {

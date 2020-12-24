@@ -11,8 +11,7 @@ import { ProductColorAndImage } from 'src/app/shared/models/shop/product-color-a
 
 import { AppService } from 'src/app/app.service';
 import { ProductService } from 'src/app/shared/services/product/product.service';
-import { ShoppingItemService } from 'src/app/shared/services/shopping-item/shopping-item.service';
-import { HttpResponse } from '@angular/common/http';
+import { ShoppingService } from 'src/app/shared/services/shopping/shopping.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,7 +21,7 @@ import { HttpResponse } from '@angular/common/http';
 export class ProductDetailComponent implements OnInit {
   productDesign: ProductDesign = {} as ProductDesign;
   product: Product = {} as Product;
-  filteredProducts: Product[] = [];
+  filteredProducts: Product[] = [] as Product[];
 
   imageUrl: string = '';
   isMobileMode: boolean = false;
@@ -39,7 +38,7 @@ export class ProductDetailComponent implements OnInit {
     private snackBar: MatSnackBar,
     private appService: AppService,
     private productService: ProductService,
-    private shoppingItemService: ShoppingItemService
+    private shoppingService: ShoppingService
   ) {}
 
   ngOnInit(): void {
@@ -121,13 +120,12 @@ export class ProductDetailComponent implements OnInit {
 
       let amount = 1;
 
-      this.shoppingItemService.addShoppingItem(productPicked, amount).subscribe(
-        (response) => {
-          let res = response as HttpResponse<any>;
-
-          if (res.body) {
-            let msg = res.body.message;
+      this.shoppingService.addToCart(productPicked, amount).subscribe(
+        (response: any) => {
+          if (response) {
+            let msg = response.message;
             this.onOpenSnackBar(msg, 'Close');
+            this.shoppingService.getItemCount();
           }
         },
         (err) => {

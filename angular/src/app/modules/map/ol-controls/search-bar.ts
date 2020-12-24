@@ -77,15 +77,15 @@ export class SearchBar extends Control {
 
     input.addEventListener('keyup', (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
-        this.nevigateToLocation();
+        this.navigateToLocation();
       }
     });
     searchBtn.addEventListener('click', (event: MouseEvent) => {
-      this.nevigateToLocation();
+      this.navigateToLocation();
     });
   }
 
-  nevigateToLocation() {
+  navigateToLocation() {
     if (this.inputBox.value) {
       let datalist = document.querySelectorAll(
         `#${this.inputBox.getAttribute('list')} option`

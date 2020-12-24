@@ -75,3 +75,57 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
                 message=f"You are unauthenticated"
             )
             return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+    @action(detail=False, methods=["DELETE"], url_path='remove-from-cart')
+    def remove_from_cart(self, request, *args, **kwargs):
+        if request.session.session_key:
+            key = request.session.session_key
+        else:
+            key = self.request.META.get("HTTP_X_CSRFTOKEN", None)[0:32]
+
+        if key:
+            print(request.data)
+            # cart = ShoppingCart.objects.get(
+            #     cart_serial_no=key, session_key=key)
+
+            # data = dict(
+            #     item_no=request.data["product"]["id"],
+            #     cart=cart,
+            #     product=Product.objects.get(id=request.data["product"]["id"]),
+            # )
+
+            # try:
+            #     shopping_item = ShoppingItem.objects.get(
+            #         product=data["product"], cart=data["cart"])
+
+            #     serializer = ShoppingItemPerformOperateSerializer(
+            #         shopping_item)
+
+            #     response = dict(
+            #         data=serializer.data,
+            #         message=f"Item is already in the cart!"
+            #     )
+
+            #     headers = self.get_success_headers(response)
+
+            #     return Response(response, status=status.HTTP_200_OK, headers=headers)
+
+            # except ShoppingItem.DoesNotExist as ex:
+            #     shopping_item = ShoppingItem.objects.create(**data)
+
+            #     serializer = ShoppingItemPerformOperateSerializer(
+            #         shopping_item)
+
+            #     response = dict(
+            #         data=serializer.data,
+            #         message=f"Add new {shopping_item.product} to your cart"
+            #     )
+
+            #     headers = self.get_success_headers(response)
+
+            #     return Response(response, status=status.HTTP_201_CREATED, headers=headers)
+        else:
+            response = dict(
+                message=f"You are unauthenticated"
+            )
+            return Response(response, status=status.HTTP_403_FORBIDDEN)

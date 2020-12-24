@@ -18,7 +18,7 @@
     >
       <h1>Color</h1>
 
-      <ul>
+      <ul *ngIf="colors$ | async as colors">
         <li *ngFor="let color of colors">
           <mat-checkbox
             #checkbox
@@ -34,7 +34,7 @@
 
       <h1>Size</h1>
 
-      <ul>
+      <ul *ngIf="sizes$ | async as sizes">
         <li *ngFor="let size of sizes">
           <mat-checkbox
             #checkbox
@@ -50,7 +50,7 @@
 
       <h1>Category</h1>
 
-      <ul>
+      <ul *ngIf="categories$ | async as categories">
         <li *ngFor="let category of categories">
           <mat-checkbox
             #checkbox
@@ -67,6 +67,7 @@
 
     <mat-drawer-content class="product-collection">
       <mat-tab-group
+        *ngIf="genders$ | async as genders"
         mat-align-tabs="center"
         (selectedTabChange)="onTabChange($event)"
       >
@@ -74,12 +75,16 @@
           *ngFor="let gender of genders"
           label="{{ gender.name | titlecase }}"
         >
-          <div fxLayout="row wrap" class="row-wrap">
+          <div
+            *ngIf="displayProducts$ | async as displayProducts"
+            fxLayout="row wrap"
+            class="row-wrap"
+          >
             <div
               fxFlex="25%"
               fxFlex.sm="33%"
               fxFlex.xs="100%"
-              *ngFor="let product of displayList"
+              *ngFor="let product of displayProducts"
             >
               <mat-card
                 class="mat-elevation-z4"
