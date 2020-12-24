@@ -9,6 +9,7 @@ import { AppService } from 'src/app/app.service';
 
 import { Product } from '../../models/shop/product.model';
 import { ShoppingCart } from '../../models/shop/shopping-cart.model';
+import { ShoppingItem } from '../../models/shop/shopping-item.model';
 
 import shoppingCarts from '../../../../assets/mockbase/shop/shopping-carts.json';
 
@@ -25,7 +26,10 @@ export class ShoppingService {
     }),
   };
 
+  private cartItemBehaviour = new BehaviorSubject<ShoppingItem[]>([]);
   private itemCountBehaviour = new BehaviorSubject<number>(0);
+
+  cartItems = this.cartItemBehaviour.asObservable();
   itemCount = this.itemCountBehaviour.asObservable();
 
   constructor(
@@ -33,12 +37,23 @@ export class ShoppingService {
     private appService: AppService,
     private cookieService: CookieService
   ) {
+    this.getCartItems();
     this.getItemCount();
   }
 
+  getCartItems() {
+    this.viewMyCart(this.appService.getUseMockeService()).subscribe((carts) =>
+      this.setCartItems(carts[0].cartItems)
+    );
+  }
+
+  setCartItems(cartItems: ShoppingItem[]) {
+    this.cartItemBehaviour.next(cartItems);
+  }
+
   getItemCount() {
-    this.viewMyCart(this.appService.getUseMockeService()).subscribe((cart) =>
-      this.setItemCount(cart[0].cartItems.length)
+    this.viewMyCart(this.appService.getUseMockeService()).subscribe((carts) =>
+      this.setItemCount(carts[0].cartItems.length)
     );
   }
 
@@ -66,6 +81,14 @@ export class ShoppingService {
     let body = JSON.stringify({
       product: product,
       amount: amount,
+    });
+    return this.httpClient.post(requestUri, body, this.httpOptions);
+  }
+
+  removeFromCart(shoppingItem: ShoppingItem) {
+    let requestUri = `${this.baseUri}shop/shopping-item/remove-from-cart/`;
+    let body = JSON.stringify({
+      shoppingItem: shoppingItem,
     });
     return this.httpClient.post(requestUri, body, this.httpOptions);
   }

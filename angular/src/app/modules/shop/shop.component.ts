@@ -13,9 +13,10 @@ import { ShoppingService } from 'src/app/shared/services/shopping/shopping.servi
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
+  itemCount$: Observable<number> = new Observable();
+
   innerWidth: number = 0;
   isMobileMode: boolean = false;
-  itemCount$: Observable<number> = new Observable();
 
   constructor(
     private appService: AppService,

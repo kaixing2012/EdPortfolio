@@ -1,5 +1,5 @@
 <div class="cart-frame">
-  <div class="cart">
+  <div class="cart" *ngIf="shoppingItems$ | async as shoppingItems">
     <div class="cart-list" *ngFor="let shoppingItem of shoppingItems">
       <div class="cart-list-img">
         <img
@@ -69,7 +69,7 @@
       <div>
         <h2>
           <span> Subtotal: </span>
-          <span> {{ getSubtotal() }} </span>
+          <span> {{ getSubtotal(shoppingItems) }} </span>
         </h2>
 
         <h2>

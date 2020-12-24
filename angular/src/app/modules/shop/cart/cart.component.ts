@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Observable } from 'rxjs';
+
 import { ShoppingItem } from 'src/app/shared/models/shop/shopping-item.model';
 
 import { AppService } from 'src/app/app.service';
@@ -12,35 +15,22 @@ import { ShoppingService } from 'src/app/shared/services/shopping/shopping.servi
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  shoppingItems: ShoppingItem[] = [];
+  shoppingItems$ = new Observable<ShoppingItem[]>();
   subtotal: number = 0;
   shipping: number = 60;
   total: number = 0;
 
   constructor(
+    private snackBar: MatSnackBar,
     private appService: AppService,
     private shoppingService: ShoppingService
   ) {}
 
   ngOnInit(): void {
-    this.getShoppingItems();
-  }
-
-  getShoppingItems() {
-    this.shoppingService
-      .viewMyCart(this.appService.getUseMockeService())
-      .subscribe(
-        (carts: ShoppingCart[]) => {
-          this.shoppingItems = carts[0].cartItems;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    this.shoppingItems$ = this.shoppingService.cartItems;
   }
 
   getImageUrl(image: string) {
-    console.log(image);
     return image ? image : '';
   }
 
@@ -48,17 +38,14 @@ export class CartComponent implements OnInit {
     return `NT$${price * amount}`;
   }
 
-  getSubtotal() {
-    if (this.shoppingItems.length > 1)
-      this.subtotal = this.shoppingItems
+  getSubtotal(shoppingItems: ShoppingItem[]) {
+    if (shoppingItems.length > 0)
+      this.subtotal = shoppingItems
         .map((item) => {
           return item.product.productItem.price * item.amount;
         })
         .reduce((prev, next) => prev + next);
-    else
-      [this.subtotal] = this.shoppingItems.map((item) => {
-        return item.product.productItem.price * item.amount;
-      });
+    else this.subtotal = 0;
 
     return `NT$${this.subtotal}`;
   }
@@ -74,7 +61,19 @@ export class CartComponent implements OnInit {
   }
 
   onRemoveItem(shoppingItem: ShoppingItem) {
-    alert('this function is coming soon');
+    this.shoppingService.removeFromCart(shoppingItem).subscribe(
+      (response: any) => {
+        if (response) {
+          let msg = response.message;
+          this.onOpenSnackBar(msg, 'Close');
+          this.shoppingService.getItemCount();
+          this.shoppingService.getCartItems();
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   onCheckOut() {
@@ -83,6 +82,15 @@ export class CartComponent implements OnInit {
 
   onSaveCart() {
     alert('this function is coming soon');
+  }
+
+  onOpenSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      // panelClass: 'snackbar',
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   onAddAmount(shoppingItem: ShoppingItem) {

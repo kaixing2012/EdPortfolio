@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
   isFilterOpened: boolean = true;
   isMobileMode: boolean = false;
 
-  private genderStr: string = '';
+  private genderStr: string = 'women';
 
   constructor(
     public dialog: MatDialog,

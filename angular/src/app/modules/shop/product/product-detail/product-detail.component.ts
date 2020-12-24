@@ -126,6 +126,7 @@ export class ProductDetailComponent implements OnInit {
             let msg = response.message;
             this.onOpenSnackBar(msg, 'Close');
             this.shoppingService.getItemCount();
+            this.shoppingService.getCartItems();
           }
         },
         (err) => {

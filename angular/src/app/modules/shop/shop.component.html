@@ -6,9 +6,6 @@
       </div>
 
       <div class="nav-link">
-        <a [routerLink]="['./product']">
-          <i class="fas fa-store-alt"></i>
-        </a>
         <a [routerLink]="['./cart']">
           <i
             *ngIf="itemCount$ | async as itemCount"
@@ -16,6 +13,10 @@
             matBadgeColor="warn"
             class="fas fa-shopping-cart"
           ></i>
+        </a>
+
+        <a [routerLink]="['./product']">
+          <i class="fas fa-store-alt"></i>
         </a>
       </div>
     </mat-toolbar>
