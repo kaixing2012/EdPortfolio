@@ -6,15 +6,16 @@
 .filter-btn {
   position: absolute;
   right: 2.5em;
-  font-size: 1.1em;
   z-index: 5;
+  font-size: 0.9em;
+  transform: scale(1.2);
   -webkit-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
 }
 
 .filter-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.3);
 }
 
 .filter-btn i {
@@ -121,6 +122,6 @@
   }
 
   .filter-btn {
-    top: 3em;
+    top: 4em;
   }
 }

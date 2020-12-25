@@ -11,21 +11,25 @@
 
       <div class="cart-list-detail">
         <h1>
-          <div>{{ shoppingItem.product.productItem.name }}</div>
+          <span style="font-size: larger">
+            {{ shoppingItem.product.productItem.name }}
+          </span>
 
-          <div>
+          <small>
             <button mat-icon-button (click)="onSubtractAmount(shoppingItem)">
               <i class="fas fa-minus"></i>
             </button>
 
-            <small>{{ shoppingItem.amount }}</small>
+            <span>{{ shoppingItem.amount }}</span>
 
             <button mat-icon-button (click)="onAddAmount(shoppingItem)">
               <i class="fas fa-plus"></i>
             </button>
-          </div>
+          </small>
 
-          <small>NT${{ shoppingItem.product.productItem.price }}</small>
+          <span>
+            NT${{ shoppingItem.product.productItem.price | number }}
+          </span>
         </h1>
 
         <h2>
@@ -47,11 +51,11 @@
 
         <h2 class="cart-list-detail-sub">
           <button mat-raised-button (click)="onRemoveItem(shoppingItem)">
-            Remove
+            <i class="fas fa-trash-alt"></i>
           </button>
 
           <span>
-            Item Sub:
+            Sub:
             <b>
               {{
                 getItemSub(

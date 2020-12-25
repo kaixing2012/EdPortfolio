@@ -73,6 +73,8 @@
 }
 
 .cart-list-detail-sub button {
+  min-width: auto;
+  line-height: 0;
   color: white;
   background-color: #c44b3f;
 }
@@ -145,6 +147,10 @@
     width: 80%;
     margin: 3em auto 0em;
     padding: 0em;
+  }
+
+  .cart-list-detail h1 {
+    font-size: 1.5em;
   }
 }
 
