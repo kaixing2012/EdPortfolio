@@ -7,7 +7,7 @@ x-service-volumes: &service-volumes
 
 services:
   angular:
-    image: edangular:latest
+    image: ${ANGULAR_IMAGE}
     volumes:
       - ./:/usr/proj/:rw,cached
     depends_on:
@@ -16,7 +16,7 @@ services:
       - "80:80"
 
   nginx:
-    image: eddjnginx:latest
+    image: ${DJ_NGINX_IMAGE}
     ports:
       - 8000:8000
     volumes: *service-volumes
@@ -24,7 +24,7 @@ services:
       - django
 
   django:
-    image: eddjango:latest
+    image: ${DJANGO_IMAGE}
     command: gunicorn -w 2 -b 0.0.0.0:8080 --chdir /usr/proj/django root.wsgi:application --reload --timeout 900
     volumes: *service-volumes
     depends_on:
@@ -33,7 +33,7 @@ services:
       - 8080
 
   db-migrate:
-    image: eddjango:latest
+    image: ${DJANGO_IMAGE}
     command: python manage.py migrate
     volumes: *service-volumes
     depends_on:
