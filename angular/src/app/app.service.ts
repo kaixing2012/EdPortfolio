@@ -21,4 +21,12 @@ export class AppService {
   getUseMockeService() {
     return this.useMockService;
   }
+
+  generateRandomToken(length: number, tokenSource: string) {
+    var token = '';
+    for (var i = length; i > 0; i--) {
+      token += tokenSource[Math.floor(Math.random() * tokenSource.length)];
+    }
+    return token;
+  }
 }
