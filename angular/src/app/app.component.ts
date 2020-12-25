@@ -32,8 +32,6 @@ export class AppComponent implements OnInit {
       let token = this.appService.generateRandomToken(31, tokenSource);
 
       this.cookieService.set('csrftoken', token);
-    } else {
-      console.log(this.cookieService.get('csrftoken'));
     }
   }
 

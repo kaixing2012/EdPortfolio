@@ -79,23 +79,24 @@ export class MapComponent implements OnInit {
         }
       );
 
-    var selected: Feature = new Feature();
+    var hit: any = null;
     var status = document.getElementById('status') as HTMLElement;
 
     this.map.on('pointermove', (event) => {
-      if (selected !== null) {
-        selected.setStyle(this.initMarkerStyle);
-        selected = {} as Feature;
+      if (hit !== null) {
+        hit.setStyle(this.initMarkerStyle);
+        hit = null;
       }
 
       this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
-        selected = feature as Feature;
-        selected.setStyle(this.highlightMarkerStyle);
+        hit = feature;
+        hit.setStyle(this.highlightMarkerStyle);
         return true;
       });
 
-      if (selected) {
-        status.innerHTML = '&nbsp;Hovering: ' + selected.get('name');
+      if (hit) {
+        status.innerHTML = '&nbsp;Hovering: ' + hit.get('name');
+        status.style.cursor = 'pointer';
       } else {
         status.innerHTML = '&nbsp;';
       }

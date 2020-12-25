@@ -156,6 +156,10 @@
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
+  ::ng-deep .mat-snack-bar-container {
+    min-width: 300px !important;
+  }
+
   .cart-list {
     margin: 0 2em;
   }
