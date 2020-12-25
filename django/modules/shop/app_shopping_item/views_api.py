@@ -47,14 +47,9 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
                 serializer = ShoppingItemPerformOperateSerializer(
                     shopping_item)
 
-                response = dict(
-                    data=serializer.data,
-                    message=f"Item is already in the cart!"
-                )
+                headers = self.get_success_headers(serializer.data)
 
-                headers = self.get_success_headers(response)
-
-                return Response(response, status=status.HTTP_200_OK, headers=headers)
+                return Response(serializer.data, status=status.HTTP_302_FOUND, headers=headers)
 
             except ShoppingItem.DoesNotExist as ex:
                 shopping_item = ShoppingItem.objects.create(**data)
@@ -62,19 +57,11 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
                 serializer = ShoppingItemPerformOperateSerializer(
                     shopping_item)
 
-                response = dict(
-                    data=serializer.data,
-                    message=f"Add new {shopping_item.product} to your cart"
-                )
+                headers = self.get_success_headers(serializer.data)
 
-                headers = self.get_success_headers(response)
-
-                return Response(response, status=status.HTTP_201_CREATED, headers=headers)
+                return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
         else:
-            response = dict(
-                message=f"You are unauthenticated"
-            )
-            return Response(response, status=status.HTTP_403_FORBIDDEN)
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
 
     @action(detail=False, methods=["POST"], url_path='remove-from-cart')
     def remove_from_cart(self, request, *args, **kwargs):
@@ -99,26 +86,15 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
                 serializer = ShoppingItemPerformOperateSerializer(
                     shopping_item)
 
-                response = dict(
-                    data=serializer.data,
-                    message=f"Remove {shopping_item.product} from your cart"
-                )
-
-                headers = self.get_success_headers(response)
+                headers = self.get_success_headers(serializer.data)
 
                 shopping_item.delete()
 
-                return Response(response, status=status.HTTP_200_OK, headers=headers)
+                HTTP_209_CONTENT_DELETED = 209
+
+                return Response(serializer.data, status=HTTP_209_CONTENT_DELETED, headers=headers)
 
             except ShoppingItem.DoesNotExist as ex:
-                response = dict(
-                    data=None,
-                    message=f"Cannot find item to delete"
-                )
-
-                return Response({}, status=status.HTTP_404_NOT_FOUND, headers=headers)
+                return Response({}, status=status.HTTP_404_NOT_FOUND)
         else:
-            response = dict(
-                message=f"You are unauthenticated"
-            )
-            return Response(response, status=status.HTTP_403_FORBIDDEN)
+            return Response({}, status=status.HTTP_403_FORBIDDEN)

@@ -5,9 +5,6 @@ x-service-volumes: &service-volumes
   - static-volume:/usr/proj/django/static
   - media-volume:/usr/proj/django/media
 
-x-service-volumes: &collect-volumes
-  - static-volume:/usr/proj/django/static
-
 services:
   angular:
     image: edangular:latest
@@ -38,7 +35,7 @@ services:
   db-migrate:
     image: eddjango:latest
     command: python manage.py migrate
-    volumes: *collect-volumes
+    volumes: *service-volumes
     depends_on:
       - postgres
 

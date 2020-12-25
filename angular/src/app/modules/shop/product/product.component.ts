@@ -77,6 +77,7 @@ export class ProductComponent implements OnInit {
     this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
 
     this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isFilterOpened = this.isMobileMode ? false : true;
   }
 
   @HostListener('window:resize', ['$event'])

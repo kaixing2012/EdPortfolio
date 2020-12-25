@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -24,6 +24,7 @@ export class ShoppingService {
       'Content-Type': 'application/json',
       'X-CSRFToken': this.cookieService.get('csrftoken'),
     }),
+    observe: 'response' as 'body',
   };
 
   private cartItemBehaviour = new BehaviorSubject<ShoppingItem[]>([]);
@@ -42,8 +43,14 @@ export class ShoppingService {
   }
 
   getCartItems() {
-    this.viewMyCart(this.appService.getUseMockeService()).subscribe((carts) =>
-      this.setCartItems(carts[0].cartItems)
+    this.viewMyCart(this.appService.getUseMockeService()).subscribe(
+      (response) =>
+        this.setCartItems(
+          response.body ? response.body[0].cartItems : ([] as ShoppingItem[])
+        ),
+      (err) => {
+        console.log(err);
+      }
     );
   }
 
@@ -52,8 +59,14 @@ export class ShoppingService {
   }
 
   getItemCount() {
-    this.viewMyCart(this.appService.getUseMockeService()).subscribe((carts) =>
-      this.setItemCount(carts[0].cartItems.length)
+    this.viewMyCart(this.appService.getUseMockeService()).subscribe(
+      (response) =>
+        this.setItemCount(
+          response.body ? response.body[0].cartItems.length : 0
+        ),
+      (err) => {
+        console.log(err);
+      }
     );
   }
 
@@ -63,16 +76,24 @@ export class ShoppingService {
 
   viewMyCart(useMockService: boolean) {
     if (useMockService) {
-      const shoppingCart = new Observable<ShoppingCart[]>((observer) => {
-        setTimeout(() => {
-          observer.next(this.shoppingCartList);
-        }, 100);
-      });
+      const shoppingCart = new Observable<HttpResponse<ShoppingCart[]>>(
+        (observer) => {
+          setTimeout(() => {
+            let httpResponse = new HttpResponse<ShoppingCart[]>({
+              body: this.shoppingCartList,
+            });
+            observer.next(httpResponse);
+          }, 100);
+        }
+      );
 
       return shoppingCart;
     } else {
       let requestUri = `${this.baseUri}shop/shopping-cart/view-my-cart/`;
-      return this.httpClient.get<ShoppingCart[]>(requestUri, this.httpOptions);
+      return this.httpClient.get<HttpResponse<ShoppingCart[]>>(
+        requestUri,
+        this.httpOptions
+      );
     }
   }
 
@@ -82,7 +103,11 @@ export class ShoppingService {
       product: product,
       amount: amount,
     });
-    return this.httpClient.post(requestUri, body, this.httpOptions);
+    return this.httpClient.post<HttpResponse<ShoppingItem>>(
+      requestUri,
+      body,
+      this.httpOptions
+    );
   }
 
   removeFromCart(shoppingItem: ShoppingItem) {
@@ -90,6 +115,41 @@ export class ShoppingService {
     let body = JSON.stringify({
       shoppingItem: shoppingItem,
     });
-    return this.httpClient.post(requestUri, body, this.httpOptions);
+    return this.httpClient.post<HttpResponse<ShoppingItem>>(
+      requestUri,
+      body,
+      this.httpOptions
+    );
+  }
+
+  getMsgByStatus(status: number) {
+    let msg = '';
+
+    switch (status) {
+      case 201:
+        msg = 'New item is added to your cart';
+        break;
+
+      case 209:
+        msg = 'Item was successfully remove from your cart';
+        break;
+
+      case 302:
+        msg = 'Found same item in your cart';
+        break;
+
+      case 403:
+        msg = 'You are Forbidden';
+        break;
+
+      case 404:
+        msg = 'Cannot found the item you requested';
+        break;
+
+      default:
+        break;
+    }
+
+    return msg;
   }
 }

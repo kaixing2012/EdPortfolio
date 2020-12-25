@@ -3,18 +3,6 @@
   font-weight: 900;
 }
 
-::ng-deep .mat-checkbox-inner-container {
-  /* display: none !important; */
-}
-
-/* ::ng-deep .mat-tab-body-content {
-
-} */
-
-/* ::ng-deep .mat-drawer-inner-container {
-
-} */
-
 .filter-btn {
   position: absolute;
   right: 2.5em;
@@ -130,5 +118,9 @@
   ::ng-deep .mat-tab-label {
     font-size: 0.9em;
     padding: 0 0.1em !important;
+  }
+
+  .filter-btn {
+    top: 3em;
   }
 }

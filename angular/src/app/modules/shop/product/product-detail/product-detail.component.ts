@@ -121,15 +121,15 @@ export class ProductDetailComponent implements OnInit {
       let amount = 1;
 
       this.shoppingService.addToCart(productPicked, amount).subscribe(
-        (response: any) => {
-          if (response) {
-            let msg = response.message;
-            this.onOpenSnackBar(msg, 'Close');
-            this.shoppingService.getItemCount();
-            this.shoppingService.getCartItems();
-          }
+        (response) => {
+          let msg = this.shoppingService.getMsgByStatus(response.status);
+          this.onOpenSnackBar(msg, 'Close');
+          this.shoppingService.getItemCount();
+          this.shoppingService.getCartItems();
         },
         (err) => {
+          let msg = this.shoppingService.getMsgByStatus(err.status);
+          this.onOpenSnackBar(msg, 'Close');
           console.log(err);
         }
       );

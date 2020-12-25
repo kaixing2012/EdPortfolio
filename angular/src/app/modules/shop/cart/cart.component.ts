@@ -62,15 +62,15 @@ export class CartComponent implements OnInit {
 
   onRemoveItem(shoppingItem: ShoppingItem) {
     this.shoppingService.removeFromCart(shoppingItem).subscribe(
-      (response: any) => {
-        if (response) {
-          let msg = response.message;
-          this.onOpenSnackBar(msg, 'Close');
-          this.shoppingService.getItemCount();
-          this.shoppingService.getCartItems();
-        }
+      (response) => {
+        let msg = this.shoppingService.getMsgByStatus(response.status);
+        this.onOpenSnackBar(msg, 'Close');
+        this.shoppingService.getItemCount();
+        this.shoppingService.getCartItems();
       },
       (err) => {
+        let msg = this.shoppingService.getMsgByStatus(err.status);
+        this.onOpenSnackBar(msg, 'Close');
         console.log(err);
       }
     );
