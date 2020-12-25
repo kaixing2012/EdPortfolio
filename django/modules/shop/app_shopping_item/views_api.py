@@ -74,14 +74,14 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
             data = dict(
                 item_no=request.data["shopping_item"]["item_no"],
                 cart=ShoppingCart.objects.get(
-                    cart_serial_no=key, session_key=key),
+                    id=request.data["shopping_item"]["cart"]["id"], cart_serial_no=key, session_key=key),
                 product=Product.objects.get(
                     id=request.data["shopping_item"]["product"]["id"]),
             )
 
             try:
-                shopping_item = ShoppingItem.objects.get(item_no=data["item_no"],
-                                                         product=data["product"], cart=data["cart"])
+                shopping_item = ShoppingItem.objects.get(
+                    item_no=data["item_no"], product=data["product"], cart=data["cart"])
 
                 serializer = ShoppingItemPerformOperateSerializer(
                     shopping_item)
@@ -96,5 +96,47 @@ class ShoppingItemAPIViewSet(viewsets.ModelViewSet):
 
             except ShoppingItem.DoesNotExist as ex:
                 return Response({}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
+
+    @action(detail=False, methods=["POST"], url_path='update-your-cart')
+    def update_your_cart(self, request, *args, **kwargs):
+        if request.session.session_key:
+            key = request.session.session_key
+        else:
+            key = self.request.META.get("HTTP_X_CSRFTOKEN", None)[0:32]
+
+        if key:
+            serializer_data_set = []
+
+            for index, item in enumerate(request.data["shopping_items"], 1):
+                data = dict(
+                    item_no=item["item_no"],
+                    cart=ShoppingCart.objects.get(
+                        id=item["cart"]["id"], cart_serial_no=key, session_key=key),
+                    product=Product.objects.get(id=item["product"]["id"]),
+                    amount=item["amount"]
+                )
+
+                try:
+                    shopping_item = ShoppingItem.objects.get(
+                        item_no=data["item_no"], product=data["product"], cart=data["cart"])
+                    shopping_item.amount = data["amount"]
+                    shopping_item.save()
+
+                    serializer = ShoppingItemPerformOperateSerializer(
+                        shopping_item)
+
+                    headers = self.get_success_headers(serializer.data)
+
+                    HTTP_210_UPDATE_CONTENT = 210
+
+                    serializer_data_set.append(serializer.data)
+
+                    if index == len(request.data["shopping_items"]):
+                        return Response(serializer_data_set, status=HTTP_210_UPDATE_CONTENT, headers=headers)
+
+                except ShoppingItem.DoesNotExist as ex:
+                    return Response(data, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({}, status=status.HTTP_403_FORBIDDEN)

@@ -1,6 +1,6 @@
 <div class="cart-frame">
-  <div class="cart" *ngIf="shoppingItems$ | async as shoppingItems">
-    <div class="cart-list" *ngFor="let shoppingItem of shoppingItems">
+  <div class="cart" *ngIf="shoppingCart$ | async as shoppingCart">
+    <div class="cart-list" *ngFor="let shoppingItem of shoppingCart.cartItems">
       <div class="cart-list-img">
         <img
           src="{{ shoppingItem.product.productImage.image }}"
@@ -73,7 +73,7 @@
       <div>
         <h2>
           <span> Subtotal: </span>
-          <span> {{ getSubtotal(shoppingItems) }} </span>
+          <span> {{ getSubtotal(shoppingCart.cartItems) }} </span>
         </h2>
 
         <h2>
@@ -89,8 +89,15 @@
         </h1>
 
         <section>
-          <button mat-raised-button (click)="onSaveCart()">Save order</button>
-          <button mat-raised-button (click)="onCheckOut()">Check out</button>
+          <button
+            mat-raised-button
+            (click)="onSaveItems(shoppingCart.cartItems)"
+          >
+            Save order
+          </button>
+          <button mat-raised-button (click)="onCheckOut(shoppingCart)">
+            Check out
+          </button>
         </section>
       </div>
     </div>

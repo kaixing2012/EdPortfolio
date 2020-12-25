@@ -8,6 +8,7 @@ import { ShoppingItem } from 'src/app/shared/models/shop/shopping-item.model';
 
 import { AppService } from 'src/app/app.service';
 import { ShoppingService } from 'src/app/shared/services/shopping/shopping.service';
+import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ import { ShoppingService } from 'src/app/shared/services/shopping/shopping.servi
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  shoppingItems$ = new Observable<ShoppingItem[]>();
+  shoppingCart$ = new Observable<ShoppingCart>();
   subtotal: number = 0;
   shipping: number = 60;
   total: number = 0;
@@ -27,7 +28,7 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.shoppingItems$ = this.shoppingService.cartItems;
+    this.shoppingCart$ = this.shoppingService.cart;
   }
 
   getImageUrl(image: string) {
@@ -39,13 +40,16 @@ export class CartComponent implements OnInit {
   }
 
   getSubtotal(shoppingItems: ShoppingItem[]) {
-    if (shoppingItems.length > 0)
-      this.subtotal = shoppingItems
-        .map((item) => {
-          return item.product.productItem.price * item.amount;
-        })
-        .reduce((prev, next) => prev + next);
-    else this.subtotal = 0;
+    if (shoppingItems) {
+      this.subtotal =
+        shoppingItems.length > 0
+          ? shoppingItems
+              .map((item) => {
+                return item.product.productItem.price * item.amount;
+              })
+              .reduce((prev, next) => prev + next)
+          : (this.subtotal = 0);
+    }
 
     return `NT$${this.subtotal}`;
   }
@@ -66,7 +70,7 @@ export class CartComponent implements OnInit {
         let msg = this.shoppingService.getMsgByStatus(response.status);
         this.onOpenSnackBar(msg, 'Close');
         this.shoppingService.getItemCount();
-        this.shoppingService.getCartItems();
+        this.shoppingService.getCart();
       },
       (err) => {
         let msg = this.shoppingService.getMsgByStatus(err.status);
@@ -76,12 +80,31 @@ export class CartComponent implements OnInit {
     );
   }
 
-  onCheckOut() {
-    alert('this function is coming soon');
+  onSaveItems(shoppingItems: ShoppingItem[]) {
+    this.shoppingService.updateYourCart(shoppingItems).subscribe(
+      (response) => {
+        let msg = this.shoppingService.getMsgByStatus(response.status);
+        this.onOpenSnackBar(msg, 'Close');
+        this.shoppingService.getCart();
+      },
+      (err) => {
+        let msg = this.shoppingService.getMsgByStatus(err.status);
+        this.onOpenSnackBar(msg, 'Close');
+        console.log(err);
+      }
+    );
   }
 
-  onSaveCart() {
-    alert('this function is coming soon');
+  onCheckOut(cart: ShoppingCart) {
+    let result = `
+      Cart No.: ${cart.cartSerialNo}
+      Customer: ${cart.sessionKey}
+      Date Created: ${cart.dateCreated}
+      Items: ${cart.cartItems.length} pcs
+      Functionality is coming soon
+    `;
+
+    alert(result);
   }
 
   onOpenSnackBar(message: string, action: string) {

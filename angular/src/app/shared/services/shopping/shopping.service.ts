@@ -17,7 +17,7 @@ import shoppingCarts from '../../../../assets/mockbase/shop/shopping-carts.json'
   providedIn: 'root',
 })
 export class ShoppingService {
-  private shoppingCartList: any[] = shoppingCarts;
+  private shoppingCartList: any = shoppingCarts;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -27,10 +27,10 @@ export class ShoppingService {
     observe: 'response' as 'body',
   };
 
-  private cartItemBehaviour = new BehaviorSubject<ShoppingItem[]>([]);
+  private cartBehaviour = new BehaviorSubject<ShoppingCart>({} as ShoppingCart);
   private itemCountBehaviour = new BehaviorSubject<number>(0);
 
-  cartItems = this.cartItemBehaviour.asObservable();
+  cart = this.cartBehaviour.asObservable();
   itemCount = this.itemCountBehaviour.asObservable();
 
   constructor(
@@ -38,32 +38,28 @@ export class ShoppingService {
     private appService: AppService,
     private cookieService: CookieService
   ) {
-    this.getCartItems();
+    this.getCart();
     this.getItemCount();
   }
 
-  getCartItems() {
+  getCart() {
     this.viewMyCart(this.appService.getUseMockeService()).subscribe(
       (response) =>
-        this.setCartItems(
-          response.body ? response.body[0].cartItems : ([] as ShoppingItem[])
-        ),
+        this.setCart(response.body ? response.body : ({} as ShoppingCart)),
       (err) => {
         console.log(err);
       }
     );
   }
 
-  setCartItems(cartItems: ShoppingItem[]) {
-    this.cartItemBehaviour.next(cartItems);
+  setCart(cart: ShoppingCart) {
+    this.cartBehaviour.next(cart);
   }
 
   getItemCount() {
     this.viewMyCart(this.appService.getUseMockeService()).subscribe(
       (response) =>
-        this.setItemCount(
-          response.body ? response.body[0].cartItems.length : 0
-        ),
+        this.setItemCount(response.body ? response.body.cartItems.length : 0),
       (err) => {
         console.log(err);
       }
@@ -76,10 +72,10 @@ export class ShoppingService {
 
   viewMyCart(useMockService: boolean) {
     if (useMockService) {
-      const shoppingCart = new Observable<HttpResponse<ShoppingCart[]>>(
+      const shoppingCart = new Observable<HttpResponse<ShoppingCart>>(
         (observer) => {
           setTimeout(() => {
-            let httpResponse = new HttpResponse<ShoppingCart[]>({
+            let httpResponse = new HttpResponse<ShoppingCart>({
               body: this.shoppingCartList,
             });
             observer.next(httpResponse);
@@ -90,7 +86,7 @@ export class ShoppingService {
       return shoppingCart;
     } else {
       let requestUri = `${this.baseUri}shop/shopping-cart/view-my-cart/`;
-      return this.httpClient.get<HttpResponse<ShoppingCart[]>>(
+      return this.httpClient.get<HttpResponse<ShoppingCart>>(
         requestUri,
         this.httpOptions
       );
@@ -122,16 +118,32 @@ export class ShoppingService {
     );
   }
 
+  updateYourCart(shoppingItems: ShoppingItem[]) {
+    let requestUri = `${this.baseUri}shop/shopping-item/update-your-cart/`;
+    let body = JSON.stringify({
+      shoppingItems: shoppingItems,
+    });
+    return this.httpClient.post<HttpResponse<ShoppingItem[]>>(
+      requestUri,
+      body,
+      this.httpOptions
+    );
+  }
+
   getMsgByStatus(status: number) {
     let msg = '';
 
     switch (status) {
       case 201:
-        msg = 'New item is added to your cart';
+        msg = 'New item was just added to your cart';
         break;
 
       case 209:
-        msg = 'Item was successfully remove from your cart';
+        msg = 'Item was successfully removed from your cart';
+        break;
+
+      case 210:
+        msg = 'Items were successfully updated in your cart';
         break;
 
       case 302:
@@ -147,6 +159,7 @@ export class ShoppingService {
         break;
 
       default:
+        if (status >= 500) msg = 'Somthing happened in server side';
         break;
     }
 

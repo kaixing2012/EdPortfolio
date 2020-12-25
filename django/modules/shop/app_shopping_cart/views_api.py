@@ -41,15 +41,13 @@ class ShoppingCartAPIViewSet(viewsets.ModelViewSet):
                 item['product']['product_image']['image'] = request.build_absolute_uri(
                     image_url)
 
-            data = [
-                dict(
-                    id=shopping_cart.id,
-                    cart_serial_no=shopping_cart.cart_serial_no,
-                    session_key=shopping_cart.session_key,
-                    date_created=shopping_cart.date_created,
-                    cart_items=item_serializer.data
-                )
-            ]
+            data = dict(
+                id=shopping_cart.id,
+                cart_serial_no=shopping_cart.cart_serial_no,
+                session_key=shopping_cart.session_key,
+                date_created=shopping_cart.date_created,
+                cart_items=item_serializer.data
+            )
 
             headers = self.get_success_headers(data)
             return Response(data, status=status.HTTP_200_OK, headers=headers)
