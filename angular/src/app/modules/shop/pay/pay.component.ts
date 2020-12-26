@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AppService } from 'src/app/app.service';
@@ -14,6 +14,7 @@ import { PaymentService } from '../../../shared/services/payment/payment.service
 export class PayComponent implements OnInit {
   payment$ = new Observable<HttpResponse<any>>();
   isLinear = false;
+  isMobileMode = false;
   customerFormGroup: FormGroup = new FormGroup({});
   shippingFormGroup: FormGroup = new FormGroup({});
   paymentFormGroup: FormGroup = new FormGroup({});
@@ -130,11 +131,20 @@ export class PayComponent implements OnInit {
       expiration: ['01/20', Validators.required],
       cvv: ['123', Validators.required],
     });
+
+    this.isMobileMode = this.appService.checkUpMobileSize(window);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    let window = event.target as Window;
+    this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
   onPay(payment: any) {
     // payment.body.customerName = this.customerFormGroup.value.fullName;
     console.log(this.customerFormGroup);
     console.log(payment);
+    alert('Functionality for this is coming soon');
   }
 }

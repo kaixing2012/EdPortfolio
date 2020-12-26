@@ -1,3 +1,7 @@
+::ng-deep .mat-step-label {
+  font-size: 1em;
+}
+
 .pay-frame {
   position: relative;
   top: 5em;
@@ -17,7 +21,7 @@
 }
 
 .pay-left mat-card {
-  width: 324px;
+  max-width: 324px;
   height: 204px;
   margin: 2em auto;
   color: aliceblue;
@@ -35,17 +39,15 @@
   text-align: center;
   top: 25%;
   transform: translateY(-25%);
+  -webkit-transform: translateY(-25%);
+  -moz-transform: translateY(-25%);
+  -o-transform: translateY(-25%);
 }
 
 .pay-right {
   overflow: hidden;
   width: 55%;
   font-size: 1.3em;
-  height: 100%;
-}
-
-.pay-right mat-horizontal-stepper {
-  overflow: hidden;
   height: 100%;
 }
 
@@ -61,6 +63,10 @@
   height: 16em;
 }
 
+.pay-right tr {
+  height: 3em;
+}
+
 .pay-right h1 {
   margin: 0.8em 0em 1.6em;
 }
@@ -70,6 +76,52 @@
   float: right;
 }
 
-.pay-right-btn button {
+.pay-right-action button {
   margin-left: 1em;
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+  .pay {
+    display: block;
+    justify-content: space-between;
+    overflow: auto;
+    margin: auto;
+  }
+
+  .pay-left {
+    width: 100%;
+    height: auto;
+  }
+
+  .pay-left mat-card {
+    transform: scale(0.7);
+    margin: auto;
+  }
+
+  .pay-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .pay-right h1 {
+    font-size: 1.1em;
+  }
+
+  .pay-right section {
+    padding: 0;
+    height: auto;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
 }
