@@ -46,10 +46,11 @@ INSTALLED_APPS = [
     "modules.shop.app_product_image",
     "modules.shop.app_shopping_item",
     "modules.shop.app_shopping_cart",
+    "modules.shop.app_payment",
     "modules.shop.app_category",
     "modules.shop.app_gender",
     "modules.shop.app_color",
-    "modules.shop.app_size"
+    "modules.shop.app_size",
 ]
 
 MIDDLEWARE = [

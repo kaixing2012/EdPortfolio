@@ -14,7 +14,7 @@
   "shippingStreet": "No. 1 Main St.",
   "shippingDistrict": "Wanhua Dist.",
   "shippingCity": "Taipei City",
-  "shoppingCart": {
+  "cart": {
     "id": 1,
     "cartSerialNo": 1,
     "dateCreated": "2020-12-8T21:36:43.511Z",

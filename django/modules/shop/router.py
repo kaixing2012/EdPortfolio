@@ -12,6 +12,7 @@ from .app_product_item.views_api import ProductItemAPIViewSet
 from .app_product_image.views_api import ProductImageAPIViewSet
 from .app_shopping_item.views_api import ShoppingItemAPIViewSet
 from .app_shopping_cart.views_api import ShoppingCartAPIViewSet
+from .app_payment.views_api import PaymentAPIViewSet
 
 
 router = routers.DefaultRouter()
@@ -24,6 +25,7 @@ router.register("product-item", ProductItemAPIViewSet)
 router.register("product-image", ProductImageAPIViewSet)
 router.register("shopping-item", ShoppingItemAPIViewSet)
 router.register("shopping-cart", ShoppingCartAPIViewSet)
+router.register("payment", PaymentAPIViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
