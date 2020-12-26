@@ -1,8 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
-import { observable, Observable } from 'rxjs';
-
-import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
+import { Observable } from 'rxjs';
 
 import { AppService } from 'src/app/app.service';
 import { ShoppingService } from 'src/app/shared/services/shopping/shopping.service';

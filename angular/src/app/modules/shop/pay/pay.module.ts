@@ -4,11 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../../../modules/material/material.module';
 
-import { ProductComponent } from './product.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { PayComponent } from './pay.component';
 
 @NgModule({
-  declarations: [ProductComponent, ProductDetailComponent],
+  declarations: [PayComponent],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
 })
-export class ProductModule {}
+export class PayModule {}

@@ -5,6 +5,7 @@ import { AppRoutingModule } from '../routing/app-routing.module';
 import { MaterialModule } from '../../modules/material/material.module';
 import { ProductModule } from './product/product.module';
 import { CartModule } from './cart/cart.module';
+import { PayModule } from './pay/pay.module';
 
 import { ShopComponent } from './shop.component';
 
@@ -16,6 +17,7 @@ import { ShopComponent } from './shop.component';
     MaterialModule,
     ProductModule,
     CartModule,
+    PayModule,
   ],
 })
 export class ShopModule {}

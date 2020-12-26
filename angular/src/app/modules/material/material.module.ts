@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const matModules = [
   FlexLayoutModule,
@@ -39,6 +40,7 @@ const matModules = [
   MatDividerModule,
   MatBadgeModule,
   MatSnackBarModule,
+  MatStepperModule,
 ];
 
 @NgModule({

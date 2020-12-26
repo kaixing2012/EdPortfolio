@@ -109,7 +109,8 @@
   justify-content: space-between;
 }
 
-.cart-pay button {
+.cart-pay button,
+a {
   font-size: 1.5em;
   font-weight: 900;
   color: white;
@@ -168,7 +169,8 @@
     margin: 0 2em;
   }
 
-  .cart-pay button {
+  .cart-pay button,
+  a {
     font-size: 1.2em;
   }
 }

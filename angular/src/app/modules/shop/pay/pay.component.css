@@ -1,0 +1,10 @@
+.pay-frame {
+  position: relative;
+  top: 5em;
+}
+
+.pay {
+  height: calc((var(--vh, 1vh) * 100) - 10.1em);
+  overflow: auto;
+  margin: auto 5em;
+}

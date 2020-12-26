@@ -18,8 +18,8 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
-    BrowserAnimationsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
     HomeModule,

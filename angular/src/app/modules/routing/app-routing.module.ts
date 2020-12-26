@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ShopComponent } from '../shop/shop.component';
-import { CartComponent } from '../shop/cart/cart.component';
-import { ProductComponent } from '../shop/product/product.component';
-import { LifestyleComponent } from '../lifestyle/lifestyle.component';
 import { HomeComponent } from 'src/app/modules/home/home.component';
+import { LifestyleComponent } from '../lifestyle/lifestyle.component';
 import { MapComponent } from '../map/map.component';
+import { ShopComponent } from '../shop/shop.component';
+import { ProductComponent } from '../shop/product/product.component';
+import { CartComponent } from '../shop/cart/cart.component';
+import { PayComponent } from '../shop/pay/pay.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'cart',
         component: CartComponent,
+      },
+      {
+        path: 'pay',
+        component: PayComponent,
       },
     ],
   },
