@@ -1,51 +1,162 @@
 <div class="pay-frame">
-  <div class="pay">
-    <mat-vertical-stepper [linear]="isLinear" #stepper>
-      <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Fill out your name</ng-template>
-          <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input
-              matInput
-              placeholder="Last name, First name"
-              formControlName="firstCtrl"
-              required
-            />
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-
-      <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Fill out your address</ng-template>
-          <mat-form-field>
-            <mat-label>Address</mat-label>
-            <input
-              matInput
-              formControlName="secondCtrl"
-              placeholder="Ex. 1 Main St, New York, NY"
-              required
-            />
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+  <div class="pay" *ngIf="payment$ | async as payment">
+    <div class="pay-left">
+      <mat-card>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <h2>Total Amount</h2>
+
+          <h1>
+            <small>NT$</small>
+            {{ payment.body.totalAmount }}
+          </h1>
         </div>
-      </mat-step>
-    </mat-vertical-stepper>
+      </mat-card>
+    </div>
+
+    <div class="pay-right">
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="customerFormGroup">
+          <form [formGroup]="customerFormGroup">
+            <ng-template matStepLabel> Contact </ng-template>
+
+            <h1>Please, fill out your contact infomation</h1>
+
+            <mat-form-field *ngFor="let field of customerFormFields">
+              <mat-label>{{ field.label }}</mat-label>
+
+              <input
+                matInput
+                placeholder="{{ field.placeholder }}"
+                formControlName="{{ field.formControlName }}"
+                required
+              />
+            </mat-form-field>
+
+            <div class="pay-right-action">
+              <button matStepperNext mat-raised-button color="primary">
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="shippingFormGroup">
+          <form [formGroup]="shippingFormGroup">
+            <ng-template matStepLabel> Shipping </ng-template>
+
+            <h1>Please, fill out your address</h1>
+
+            <mat-form-field *ngFor="let field of shippingFormFields">
+              <mat-label>{{ field.label }}</mat-label>
+
+              <input
+                matInput
+                placeholder="{{ field.placeholder }}"
+                formControlName="{{ field.formControlName }}"
+                required
+              />
+            </mat-form-field>
+
+            <div class="pay-right-action">
+              <button matStepperPrevious mat-raised-button color="primary">
+                Back
+              </button>
+
+              <button matStepperNext mat-raised-button color="primary">
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="paymentFormGroup">
+          <form [formGroup]="paymentFormGroup">
+            <ng-template matStepLabel> Payment </ng-template>
+
+            <h1>Please, fill out your payment into</h1>
+
+            <mat-form-field *ngFor="let field of paymentFormFields">
+              <mat-label>{{ field.label }}</mat-label>
+
+              <input
+                matInput
+                placeholder="{{ field.placeholder }}"
+                formControlName="{{ field.formControlName }}"
+                required
+                readonly
+              />
+            </mat-form-field>
+
+            <div class="pay-right-action">
+              <button matStepperPrevious mat-raised-button color="primary">
+                Back
+              </button>
+
+              <button matStepperNext mat-raised-button color="primary">
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+
+          <h1>The following are your payment infomation...</h1>
+
+          <section>
+            <div>
+              <h2>Recipient:</h2>
+              <h2>Contact No:</h2>
+              <h2>Email:</h2>
+              <h2>Shipping Address:</h2>
+              <h2>Cardholder Name:</h2>
+              <h2>Card Number:</h2>
+              <h2>Expiration:</h2>
+              <h2>CVV:</h2>
+            </div>
+
+            <div>
+              <h2>
+                {{ customerFormGroup.value.fullName }}
+              </h2>
+
+              <h2>
+                {{ customerFormGroup.value.phoneNumber }}
+              </h2>
+
+              <h2>
+                {{ customerFormGroup.value.emailAddress }}
+              </h2>
+
+              <h2>
+                {{ shippingFormGroup.value.street }}
+                {{ shippingFormGroup.value.district }}
+                {{ shippingFormGroup.value.city }}
+                {{ shippingFormGroup.value.code }}
+              </h2>
+
+              <h2>{{ paymentFormGroup.value.cardholderName }}</h2>
+
+              <h2>{{ paymentFormGroup.value.cardNumber }}</h2>
+
+              <h2>{{ paymentFormGroup.value.expiration }}</h2>
+
+              <h2>{{ paymentFormGroup.value.cvv }}</h2>
+            </div>
+          </section>
+
+          <div class="pay-right-action">
+            <button matStepperPrevious mat-raised-button color="primary">
+              Back
+            </button>
+
+            <button mat-raised-button color="primary" (click)="onPay(payment)">
+              Pay
+            </button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
   </div>
 </div>

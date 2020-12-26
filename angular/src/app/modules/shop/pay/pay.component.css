@@ -4,7 +4,72 @@
 }
 
 .pay {
-  height: calc((var(--vh, 1vh) * 100) - 10.1em);
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  height: calc((var(--vh, 1vh) * 100) - 11.1em);
+  margin: auto 2em;
+}
+
+.pay-left {
+  height: 100%;
+  width: 45%;
+}
+
+.pay-left mat-card {
+  width: 324px;
+  height: 204px;
+  margin: 2em auto;
+  color: aliceblue;
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom right, #161a1b, #3c4c5c);
+}
+
+.pay-left div {
+  height: 100%;
+}
+
+.pay-left h1 {
+  position: relative;
+  font-size: 3.5em;
+  text-align: center;
+  top: 25%;
+  transform: translateY(-25%);
+}
+
+.pay-right {
+  overflow: hidden;
+  width: 55%;
+  font-size: 1.3em;
+  height: 100%;
+}
+
+.pay-right mat-horizontal-stepper {
+  overflow: hidden;
+  height: 100%;
+}
+
+.pay-right mat-form-field {
+  width: 100%;
+}
+
+.pay-right section {
+  display: flex;
+  justify-content: space-between;
   overflow: auto;
-  margin: auto 5em;
+  padding: 0em 1em;
+  height: 16em;
+}
+
+.pay-right h1 {
+  margin: 0.8em 0em 1.6em;
+}
+
+.pay-right-action {
+  margin-top: 1em;
+  float: right;
+}
+
+.pay-right-btn button {
+  margin-left: 1em;
 }

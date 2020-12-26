@@ -11,13 +11,13 @@ import { Product } from '../../models/shop/product.model';
 import { ShoppingCart } from '../../models/shop/shopping-cart.model';
 import { ShoppingItem } from '../../models/shop/shopping-item.model';
 
-import shoppingCarts from '../../../../assets/mockbase/shop/shopping-carts.json';
+import shoppingCart from '../../../../assets/mockbase/shop/shopping-carts.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingService {
-  private shoppingCartList: any = shoppingCarts;
+  private shoppingCart: any = shoppingCart;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -76,7 +76,7 @@ export class ShoppingService {
         (observer) => {
           setTimeout(() => {
             let httpResponse = new HttpResponse<ShoppingCart>({
-              body: this.shoppingCartList,
+              body: this.shoppingCart,
             });
             observer.next(httpResponse);
           }, 100);

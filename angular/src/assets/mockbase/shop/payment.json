@@ -1,0 +1,100 @@
+{
+  "id": 1,
+  "paymentSerialNo": 1,
+  "totalAmount": 698,
+  "isPaid": false,
+  "customerName": "Edward Y. Rogers",
+  "contactNo": "0910234567",
+  "contactEmail": "example.email.com",
+  "cardholderName": "Edward Y. Rogers",
+  "cardNumber": "4012-3456-7890-0000",
+  "cardExpiration": "01/20",
+  "cardCVV": "123",
+  "shippingPostalCode": "100",
+  "shippingStreet": "No. 1 Main St.",
+  "shippingDistrict": "Wanhua Dist.",
+  "shippingCity": "Taipei City",
+  "shoppingCart": {
+    "id": 1,
+    "cartSerialNo": 1,
+    "dateCreated": "2020-12-8T21:36:43.511Z",
+    "cartItems": [
+      {
+        "id": 1,
+        "itemNo": 1,
+        "isAdded": true,
+        "dateAdded": "2020-12-8T21:36:43.511Z",
+        "product": {
+          "productItem": {
+            "id": 1,
+            "name": "M-1",
+            "price": 399,
+            "cover": "/assets/images/product-m1.jpeg"
+          },
+          "gender": {
+            "id": 3,
+            "name": "both"
+          },
+          "color": {
+            "id": 4,
+            "name": "grey nevada",
+            "code": "#5E6A6B"
+          },
+          "size": {
+            "id": 2,
+            "name": "m"
+          },
+          "category": {
+            "id": 2,
+            "name": "outdoor"
+          },
+          "productImage": {
+            "id": 1,
+            "name": "grey nevada",
+            "image": "/assets/images/product-m1-grey-nevada.jpeg"
+          },
+          "stock": 8
+        },
+        "amount": 1
+      },
+      {
+        "id": 2,
+        "itemNo": 2,
+        "isAdded": true,
+        "dateAdded": "2020-12-8T21:36:43.511Z",
+        "product": {
+          "productItem": {
+            "id": 2,
+            "name": "B-8",
+            "price": 299,
+            "cover": "/assets/images/product-b8.jpeg"
+          },
+          "gender": {
+            "id": 1,
+            "name": "women"
+          },
+          "color": {
+            "id": 1,
+            "name": "red jazz",
+            "code": "#5b3337"
+          },
+          "size": {
+            "id": 2,
+            "name": "m"
+          },
+          "category": {
+            "id": 2,
+            "name": "outdoor"
+          },
+          "productImage": {
+            "id": 5,
+            "name": "red jazz",
+            "image": "/assets/images/product-b8-red-jazz.jpeg"
+          },
+          "stock": 10
+        },
+        "amount": 1
+      }
+    ]
+  }
+}
