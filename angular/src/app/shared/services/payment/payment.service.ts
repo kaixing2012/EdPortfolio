@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { CookieService } from 'ngx-cookie-service';
 
+import { Payment } from '../../models/shop/payment.model';
+
 import { AppService } from 'src/app/app.service';
 
 import payment from '../../../../assets/mockbase/shop/payment.json';
@@ -13,7 +15,7 @@ import payment from '../../../../assets/mockbase/shop/payment.json';
   providedIn: 'root',
 })
 export class PaymentService {
-  private payment: any = payment;
+  private mockPayment: any = payment;
   private baseUri = `http://${window.location.hostname}:8000/api/`;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -23,9 +25,9 @@ export class PaymentService {
     observe: 'response' as 'body',
   };
 
-  // private cartBehaviour = new BehaviorSubject<any>({} as any);
+  private paymentBehaviour = new BehaviorSubject<Payment>({} as Payment);
 
-  // cart = this.cartBehaviour.asObservable();
+  payment = this.paymentBehaviour.asObservable();
 
   constructor(
     private httpClient: HttpClient,
@@ -33,12 +35,36 @@ export class PaymentService {
     private cookieService: CookieService
   ) {}
 
+  getPayment() {
+    this.viewMyPayment(this.appService.getUseMockeService()).subscribe(
+      (response) =>
+        this.setPayment(response.body ? response.body : ({} as Payment)),
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  setPayment(payment: Payment) {
+    this.paymentBehaviour.next(payment);
+  }
+
+  careteMyPayment() {
+    let requestUri = `${this.baseUri}shop/payment/create-my-payment/`;
+    let body = {};
+    return this.httpClient.post<HttpResponse<Payment>>(
+      requestUri,
+      body,
+      this.httpOptions
+    );
+  }
+
   viewMyPayment(useMockService: boolean) {
     if (useMockService) {
-      const shoppingCart = new Observable<HttpResponse<any>>((observer) => {
+      const shoppingCart = new Observable<HttpResponse<Payment>>((observer) => {
         setTimeout(() => {
-          let httpResponse = new HttpResponse<any>({
-            body: this.payment,
+          let httpResponse = new HttpResponse<Payment>({
+            body: this.mockPayment,
           });
           observer.next(httpResponse);
         }, 100);
@@ -46,11 +72,47 @@ export class PaymentService {
 
       return shoppingCart;
     } else {
-      let requestUri = `${this.baseUri}shop/payment/view-my-payment/`;
-      return this.httpClient.get<HttpResponse<any>>(
+      let requestUri = `${this.baseUri}shop/payment/view-my-payment`;
+      return this.httpClient.get<HttpResponse<Payment>>(
         requestUri,
         this.httpOptions
       );
     }
+  }
+
+  getMsgByStatus(status: number) {
+    let msg = '';
+
+    switch (status) {
+      // case 201:
+      //   msg = 'New item was just added to your cart';
+      //   break;
+
+      // case 209:
+      //   msg = 'Item was successfully removed from your cart';
+      //   break;
+
+      // case 210:
+      //   msg = 'Items were successfully updated in your cart';
+      //   break;
+
+      // case 302:
+      //   msg = 'Found same item in your cart';
+      //   break;
+
+      case 403:
+        msg = 'You are Forbidden';
+        break;
+
+      case 404:
+        msg = 'Cannot found your shopping cart!';
+        break;
+
+      default:
+        if (status >= 500) msg = 'Somthing happened in server side';
+        break;
+    }
+
+    return msg;
   }
 }

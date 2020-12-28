@@ -1,9 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { AppService } from 'src/app/app.service';
 
+import { Observable } from 'rxjs';
+
+import { Payment } from 'src/app/shared/models/shop/payment.model';
+
+import { AppService } from 'src/app/app.service';
 import { PaymentService } from '../../../shared/services/payment/payment.service';
 
 @Component({
@@ -12,7 +14,7 @@ import { PaymentService } from '../../../shared/services/payment/payment.service
   styleUrls: ['./pay.component.css'],
 })
 export class PayComponent implements OnInit {
-  payment$ = new Observable<HttpResponse<any>>();
+  payment$ = new Observable<Payment>();
   isLinear = false;
   isMobileMode = false;
   customerFormGroup: FormGroup = new FormGroup({});
@@ -90,23 +92,21 @@ export class PayComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.payment$ = this.paymentService.viewMyPayment(
-      this.appService.getUseMockeService()
-    );
+    this.payment$ = this.paymentService.payment;
 
     this.payment$.subscribe(
       (payment) => {
         this.customerFormGroup.patchValue({
-          fullName: payment.body.customerName,
-          phoneNumber: payment.body.contactNo,
-          emailAddress: payment.body.contactEmail,
+          fullName: payment.customerName,
+          phoneNumber: payment.contactNo,
+          emailAddress: payment.contactEmail,
         });
 
         this.shippingFormGroup.patchValue({
-          code: payment.body.shippingPostalCode,
-          street: payment.body.shippingStreet,
-          district: payment.body.shippingDistrict,
-          city: payment.body.shippingCity,
+          code: payment.shippingPostalCode,
+          street: payment.shippingStreet,
+          district: payment.shippingDistrict,
+          city: payment.shippingCity,
         });
       },
       (err) => {}

@@ -96,7 +96,13 @@
             Save order
           </button>
 
-          <a mat-raised-button [routerLink]="['../pay']"> Check out </a>
+          <a
+            mat-raised-button
+            [routerLink]="['../pay']"
+            (click)="onCheckOut(shoppingCart)"
+          >
+            Check out
+          </a>
         </section>
       </div>
     </div>

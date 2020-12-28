@@ -9,6 +9,7 @@ import { ShoppingItem } from 'src/app/shared/models/shop/shopping-item.model';
 import { AppService } from 'src/app/app.service';
 import { ShoppingService } from 'src/app/shared/services/shopping/shopping.service';
 import { ShoppingCart } from 'src/app/shared/models/shop/shopping-cart.model';
+import { PaymentService } from 'src/app/shared/services/payment/payment.service';
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +25,8 @@ export class CartComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private appService: AppService,
-    private shoppingService: ShoppingService
+    private shoppingService: ShoppingService,
+    private payement: PaymentService
   ) {}
 
   ngOnInit(): void {
@@ -96,15 +98,29 @@ export class CartComponent implements OnInit {
   }
 
   onCheckOut(cart: ShoppingCart) {
-    let result = `
-      Cart No.: ${cart.cartSerialNo}
-      Customer: ${cart.sessionKey}
-      Date Created: ${cart.dateCreated}
-      Items: ${cart.cartItems.length} pcs
-      Functionality is coming soon
-    `;
+    this.shoppingService.updateYourCart(cart.cartItems).subscribe(
+      (response) => {
+        let msg = this.shoppingService.getMsgByStatus(response.status);
+        this.onOpenSnackBar(msg, 'Close');
+        this.shoppingService.getCart();
 
-    alert(result);
+        this.payement.careteMyPayment().subscribe(
+          (response) => {
+            this.payement.getPayment();
+          },
+          (err) => {
+            let msg = this.payement.getMsgByStatus(err.status);
+            this.onOpenSnackBar(msg, 'Close');
+            console.log(err);
+          }
+        );
+      },
+      (err) => {
+        let msg = this.shoppingService.getMsgByStatus(err.status);
+        this.onOpenSnackBar(msg, 'Close');
+        console.log(err);
+      }
+    );
   }
 
   onOpenSnackBar(message: string, action: string) {
