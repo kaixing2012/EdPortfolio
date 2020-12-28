@@ -57,8 +57,13 @@ export class CartComponent implements OnInit {
   }
 
   getShipping() {
-    if (this.subtotal > 1000) return 'Free';
-    else return `NT$${this.shipping}`;
+    if (this.subtotal > 1000) {
+      this.shipping = 0;
+      return 'Free';
+    } else {
+      this.shipping = 60;
+      return `NT$${this.shipping}`;
+    }
   }
 
   getTotal() {
