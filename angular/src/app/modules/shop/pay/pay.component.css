@@ -2,6 +2,21 @@
   font-size: 1em;
 }
 
+::ng-deep .mat-snack-bar-container {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border: 0.5px solid #8d8d8d !important;
+  min-width: 500px !important;
+}
+
+::ng-deep .mat-simple-snackbar {
+  font-size: 1.3em !important;
+}
+
+::ng-deep .mat-simple-snackbar-action {
+  color: #000000;
+}
+
 .pay-frame {
   position: relative;
   top: 5em;
@@ -59,7 +74,6 @@
   display: flex;
   justify-content: space-between;
   overflow: auto;
-  padding: 0em 1em;
   height: 16em;
 }
 
@@ -117,11 +131,13 @@
   }
 
   .pay-right section {
-    padding: 0;
     height: auto;
   }
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
+  ::ng-deep .mat-snack-bar-container {
+    min-width: 300px !important;
+  }
 }

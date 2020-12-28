@@ -33,7 +33,9 @@ export class PaymentService {
     private httpClient: HttpClient,
     private appService: AppService,
     private cookieService: CookieService
-  ) {}
+  ) {
+    this.getPayment();
+  }
 
   getPayment() {
     this.viewMyPayment(this.appService.getUseMockeService()).subscribe(
@@ -80,6 +82,18 @@ export class PaymentService {
     }
   }
 
+  updateMyPayment(payment: Payment) {
+    let requestUri = `${this.baseUri}shop/payment/update-my-payment/`;
+    let body = {
+      payment: payment,
+    };
+    return this.httpClient.post<HttpResponse<Payment>>(
+      requestUri,
+      body,
+      this.httpOptions
+    );
+  }
+
   getMsgByStatus(status: number) {
     let msg = '';
 
@@ -92,9 +106,9 @@ export class PaymentService {
       //   msg = 'Item was successfully removed from your cart';
       //   break;
 
-      // case 210:
-      //   msg = 'Items were successfully updated in your cart';
-      //   break;
+      case 210:
+        msg = "You've just seccessfully save your payment information";
+        break;
 
       // case 302:
       //   msg = 'Found same item in your cart';

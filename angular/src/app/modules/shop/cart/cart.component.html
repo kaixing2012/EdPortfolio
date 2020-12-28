@@ -91,6 +91,7 @@
         <section>
           <button
             mat-raised-button
+            color="primary"
             (click)="onSaveItems(shoppingCart.cartItems)"
           >
             Save order
@@ -98,6 +99,7 @@
 
           <a
             mat-raised-button
+            color="primary"
             [routerLink]="['../pay']"
             (click)="onCheckOut(shoppingCart)"
           >

@@ -24,7 +24,7 @@ class Payment(models.Model):
     shipping_postal_code = models.PositiveIntegerField(default=0)
     shipping_street = models.CharField(max_length=50, blank=True)
     shipping_district = models.CharField(max_length=50, blank=True)
-    shipping_ciry = models.CharField(max_length=50, blank=True)
+    shipping_city = models.CharField(max_length=50, blank=True)
 
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
 

@@ -7,6 +7,7 @@ import { Payment } from 'src/app/shared/models/shop/payment.model';
 
 import { AppService } from 'src/app/app.service';
 import { PaymentService } from '../../../shared/services/payment/payment.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pay',
@@ -15,7 +16,7 @@ import { PaymentService } from '../../../shared/services/payment/payment.service
 })
 export class PayComponent implements OnInit {
   payment$ = new Observable<Payment>();
-  isLinear = false;
+  isLinear = true;
   isMobileMode = false;
   customerFormGroup: FormGroup = new FormGroup({});
   shippingFormGroup: FormGroup = new FormGroup({});
@@ -25,17 +26,17 @@ export class PayComponent implements OnInit {
     {
       label: 'Full Name',
       placeholder: 'Ex. Edward Y. Rogers',
-      formControlName: 'fullName',
+      formControlName: 'customerName',
     },
     {
       label: 'Phone Number',
       placeholder: 'Ex. 0901234567',
-      formControlName: 'phoneNumber',
+      formControlName: 'contactNo',
     },
     {
       label: 'Email Address',
       placeholder: 'Ex. example@email.com',
-      formControlName: 'emailAddress',
+      formControlName: 'contactEmail',
     },
   ];
 
@@ -43,22 +44,22 @@ export class PayComponent implements OnInit {
     {
       label: 'Zip/Postal Code',
       placeholder: 'Ex. 100',
-      formControlName: 'code',
+      formControlName: 'shippingPostalCode',
     },
     {
       label: 'Street',
       placeholder: 'Ex. 1 Main St.',
-      formControlName: 'street',
+      formControlName: 'shippingStreet',
     },
     {
       label: 'District',
       placeholder: 'Ex. Wanhua Dist.',
-      formControlName: 'district',
+      formControlName: 'shippingDistrict',
     },
     {
       label: 'City',
       placeholder: 'Ex. Taipei City',
-      formControlName: 'city',
+      formControlName: 'shippingCity',
     },
   ];
 
@@ -76,16 +77,17 @@ export class PayComponent implements OnInit {
     {
       label: 'Expiration',
       placeholder: 'Ex. 01/20',
-      formControlName: 'expiration',
+      formControlName: 'cardExpiration',
     },
     {
       label: 'CVV',
       placeholder: 'Ex. 123',
-      formControlName: 'cvv',
+      formControlName: 'cardCvv',
     },
   ];
 
   constructor(
+    private snackBar: MatSnackBar,
     private _formBuilder: FormBuilder,
     private appService: AppService,
     private paymentService: PaymentService
@@ -97,39 +99,39 @@ export class PayComponent implements OnInit {
     this.payment$.subscribe(
       (payment) => {
         this.customerFormGroup.patchValue({
-          fullName: payment.customerName,
-          phoneNumber: payment.contactNo,
-          emailAddress: payment.contactEmail,
+          customerName: payment.customerName,
+          contactNo: payment.contactNo,
+          contactEmail: payment.contactEmail,
         });
 
         this.shippingFormGroup.patchValue({
-          code: payment.shippingPostalCode,
-          street: payment.shippingStreet,
-          district: payment.shippingDistrict,
-          city: payment.shippingCity,
+          shippingPostalCode: payment.shippingPostalCode,
+          shippingStreet: payment.shippingStreet,
+          shippingDistrict: payment.shippingDistrict,
+          shippingCity: payment.shippingCity,
         });
       },
       (err) => {}
     );
 
     this.customerFormGroup = this._formBuilder.group({
-      fullName: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      emailAddress: ['', Validators.required],
+      customerName: ['', Validators.required],
+      contactNo: ['', Validators.required],
+      contactEmail: ['', Validators.required],
     });
 
     this.shippingFormGroup = this._formBuilder.group({
-      code: ['', Validators.required],
-      street: ['', Validators.required],
-      district: ['', Validators.required],
-      city: ['', Validators.required],
+      shippingPostalCode: ['', Validators.required],
+      shippingStreet: ['', Validators.required],
+      shippingDistrict: ['', Validators.required],
+      shippingCity: ['', Validators.required],
     });
 
     this.paymentFormGroup = this._formBuilder.group({
       cardholderName: ['Edward Y. Rogers', Validators.required],
       cardNumber: ['4012-3456-7890-0000', Validators.required],
-      expiration: ['01/20', Validators.required],
-      cvv: ['123', Validators.required],
+      cardExpiration: ['01/20', Validators.required],
+      cardCvv: ['123', Validators.required],
     });
 
     this.isMobileMode = this.appService.checkUpMobileSize(window);
@@ -141,10 +143,50 @@ export class PayComponent implements OnInit {
     this.isMobileMode = this.appService.checkUpMobileSize(window);
   }
 
-  onPay(payment: any) {
-    // payment.body.customerName = this.customerFormGroup.value.fullName;
-    console.log(this.customerFormGroup);
-    console.log(payment);
+  onOpenSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      // panelClass: 'snackbar',
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
+  onSave(payment: Payment) {
+    payment = this.mapFormsToPaymentObj(payment);
+    this.paymentService.updateMyPayment(payment).subscribe(
+      (response) => {
+        let msg = this.paymentService.getMsgByStatus(response.status);
+        this.onOpenSnackBar(msg, 'Close');
+        this.paymentService.getPayment();
+      },
+      (err) => {
+        let msg = this.paymentService.getMsgByStatus(err.status);
+        this.onOpenSnackBar(msg, 'Close');
+        console.log(err);
+      }
+    );
+  }
+
+  onPay(payment: Payment) {
     alert('Functionality for this is coming soon');
+  }
+
+  mapFormsToPaymentObj(payment: Payment) {
+    payment.customerName = this.customerFormGroup.value.customerName;
+    payment.contactNo = this.customerFormGroup.value.contactNo;
+    payment.contactEmail = this.customerFormGroup.value.contactEmail;
+
+    payment.shippingPostalCode = this.shippingFormGroup.value.shippingPostalCode;
+    payment.shippingStreet = this.shippingFormGroup.value.shippingStreet;
+    payment.shippingDistrict = this.shippingFormGroup.value.shippingDistrict;
+    payment.shippingCity = this.shippingFormGroup.value.shippingCity;
+
+    payment.cardholderName = this.paymentFormGroup.value.cardholderName;
+    payment.cardNumber = this.paymentFormGroup.value.cardNumber;
+    payment.cardExpiration = this.paymentFormGroup.value.cardExpiration;
+    payment.cardCvv = this.paymentFormGroup.value.cardCvv;
+
+    return payment;
   }
 }

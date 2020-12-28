@@ -110,31 +110,31 @@
                 <tr>
                   <td>Recipient:</td>
                   <td>
-                    {{ customerFormGroup.value.fullName }}
+                    {{ customerFormGroup.value.customerName }}
                   </td>
                 </tr>
 
                 <tr>
                   <td>Contact No:</td>
                   <td>
-                    {{ customerFormGroup.value.phoneNumber }}
+                    {{ customerFormGroup.value.contactNo }}
                   </td>
                 </tr>
 
                 <tr>
                   <td>Email:</td>
                   <td>
-                    {{ customerFormGroup.value.emailAddress }}
+                    {{ customerFormGroup.value.contactEmail }}
                   </td>
                 </tr>
 
                 <tr>
                   <td>Shipping Address:</td>
                   <td>
-                    {{ shippingFormGroup.value.street }}
-                    {{ shippingFormGroup.value.district }}
-                    {{ shippingFormGroup.value.city }}
-                    {{ shippingFormGroup.value.code }}
+                    {{ shippingFormGroup.value.shippingStreet }}
+                    {{ shippingFormGroup.value.shippingDistrict }}
+                    {{ shippingFormGroup.value.shippingCity }}
+                    {{ shippingFormGroup.value.shippingPostalCode }}
                   </td>
                 </tr>
 
@@ -150,12 +150,12 @@
 
                 <tr>
                   <td>Expiration:</td>
-                  <td>{{ paymentFormGroup.value.expiration }}</td>
+                  <td>{{ paymentFormGroup.value.cardExpiration }}</td>
                 </tr>
 
                 <tr>
                   <td>CVV:</td>
-                  <td>{{ paymentFormGroup.value.cvv }}</td>
+                  <td>{{ paymentFormGroup.value.cardCvv }}</td>
                 </tr>
               </table>
             </section>
@@ -163,6 +163,14 @@
             <div class="pay-right-action">
               <button matStepperPrevious mat-raised-button color="primary">
                 Back
+              </button>
+
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="onSave(payment)"
+              >
+                Save
               </button>
 
               <button
@@ -273,31 +281,31 @@
                 <tr>
                   <td>Recipient:</td>
                   <td>
-                    {{ customerFormGroup.value.fullName }}
+                    {{ customerFormGroup.value.customerName }}
                   </td>
                 </tr>
 
                 <tr>
                   <td>Contact No:</td>
                   <td>
-                    {{ customerFormGroup.value.phoneNumber }}
+                    {{ customerFormGroup.value.contactNo }}
                   </td>
                 </tr>
 
                 <tr>
                   <td>Email:</td>
                   <td>
-                    {{ customerFormGroup.value.emailAddress }}
+                    {{ customerFormGroup.value.contactEmail }}
                   </td>
                 </tr>
 
                 <tr>
                   <td>Shipping Address:</td>
                   <td>
-                    {{ shippingFormGroup.value.street }}
-                    {{ shippingFormGroup.value.district }}
-                    {{ shippingFormGroup.value.city }}
-                    {{ shippingFormGroup.value.code }}
+                    {{ shippingFormGroup.value.shippingStreet }}
+                    {{ shippingFormGroup.value.shippingDistrict }}
+                    {{ shippingFormGroup.value.shippingCity }}
+                    {{ shippingFormGroup.value.shippingPostalCode }}
                   </td>
                 </tr>
 
@@ -313,12 +321,12 @@
 
                 <tr>
                   <td>Expiration:</td>
-                  <td>{{ paymentFormGroup.value.expiration }}</td>
+                  <td>{{ paymentFormGroup.value.cardExpiration }}</td>
                 </tr>
 
                 <tr>
                   <td>CVV:</td>
-                  <td>{{ paymentFormGroup.value.cvv }}</td>
+                  <td>{{ paymentFormGroup.value.cardCvv }}</td>
                 </tr>
               </table>
             </section>
@@ -326,6 +334,14 @@
             <div class="pay-right-action">
               <button matStepperPrevious mat-raised-button color="primary">
                 Back
+              </button>
+
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="onSave(payment)"
+              >
+                Save
               </button>
 
               <button
