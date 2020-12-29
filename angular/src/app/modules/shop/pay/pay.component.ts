@@ -22,7 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PayComponent implements OnInit {
   payment$ = new Observable<Payment>();
 
-  isLinear = false;
+  isLinear = true;
   isMobileMode = false;
 
   customerFormGroup: FormGroup = new FormGroup({});
