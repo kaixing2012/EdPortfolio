@@ -8,11 +8,12 @@ import {
 
 import { Observable } from 'rxjs';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Payment } from 'src/app/shared/models/shop/payment.model';
 
 import { AppService } from 'src/app/app.service';
 import { PaymentService } from '../../../shared/services/payment/payment.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pay',

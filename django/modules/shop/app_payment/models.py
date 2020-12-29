@@ -38,4 +38,4 @@ class Payment(models.Model):
 
     # Define what to output when the model is printed as string
     def __str__(self):
-        return self.cart_serial_no
+        return self.payment_serial_no
