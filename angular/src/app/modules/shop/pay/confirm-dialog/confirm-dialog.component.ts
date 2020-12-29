@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmPaymentDialog } from 'src/app/shared/models/shop/confirm-payment-dialog.model';
 
 import { PaymentService } from 'src/app/shared/services/payment/payment.service';
+import { ShoppingService } from 'src/app/shared/services/shopping/shopping.service';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -18,6 +19,7 @@ export class ConfirmDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ConfirmPaymentDialog,
     private _snackBar: MatSnackBar,
     private _paymentService: PaymentService,
+    private _shoppingService: ShoppingService,
     private _router: Router
   ) {}
 
@@ -28,6 +30,9 @@ export class ConfirmDialogComponent implements OnInit {
       (response) => {
         let msg = this._paymentService.getMsgByStatus(response.status);
         this.onOpenSnackBar(msg, 'Close');
+
+        this._shoppingService.getCart();
+        this._shoppingService.getItemCount();
 
         this._router.navigateByUrl('/portfolio/shop/product');
       },

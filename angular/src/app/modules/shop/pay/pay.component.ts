@@ -131,7 +131,7 @@ export class PayComponent implements OnInit {
 
   onOpenConfirmPayDialog(payment: Payment) {
     this.dialog.open(ConfirmDialogComponent, {
-      width: '100%',
+      width: '70%',
       data: {
         payment: payment,
       },

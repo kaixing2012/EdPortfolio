@@ -42,6 +42,7 @@ export class PaymentService {
       (response) =>
         this.setPayment(response.body ? response.body : ({} as Payment)),
       (err) => {
+        this.setPayment({} as Payment);
         console.log(err);
       }
     );

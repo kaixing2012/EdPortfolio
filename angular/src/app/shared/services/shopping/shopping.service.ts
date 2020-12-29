@@ -47,6 +47,7 @@ export class ShoppingService {
       (response) =>
         this.setCart(response.body ? response.body : ({} as ShoppingCart)),
       (err) => {
+        this.setCart({} as ShoppingCart);
         console.log(err);
       }
     );
@@ -61,6 +62,7 @@ export class ShoppingService {
       (response) =>
         this.setItemCount(response.body ? response.body.cartItems.length : 0),
       (err) => {
+        this.setItemCount(0);
         console.log(err);
       }
     );
