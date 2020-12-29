@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+
 import { AppService } from '../../app.service';
 
 @Component({
@@ -47,15 +48,15 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor(private appService: AppService) {}
+  constructor(private _appService: AppService) {}
 
   ngOnInit(): void {
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     let window = event.target as Window;
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 }

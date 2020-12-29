@@ -17,18 +17,18 @@ export class ShopComponent implements OnInit {
   isMobileMode: boolean = false;
 
   constructor(
-    private appService: AppService,
-    private shoppingService: ShoppingService
+    private _appService: AppService,
+    private _shoppingService: ShoppingService
   ) {}
 
   ngOnInit(): void {
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
-    this.itemCount$ = this.shoppingService.itemCount;
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
+    this.itemCount$ = this._shoppingService.itemCount;
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     let window = event.target as Window;
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 }

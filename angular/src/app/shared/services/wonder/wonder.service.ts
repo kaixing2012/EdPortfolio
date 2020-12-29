@@ -10,24 +10,24 @@ import wonders from '../../../../assets/mockbase/map/wonders.json';
   providedIn: 'root',
 })
 export class WonderService {
-  private wonderList: any[] = wonders;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private headers: HttpHeaders = new HttpHeaders({});
+  private _wonderList: any[] = wonders;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _headers: HttpHeaders = new HttpHeaders({});
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   getWonderList(useMockService: boolean) {
     if (useMockService) {
       const nameSetObservable = new Observable<Wonder[]>((observer) => {
         setTimeout(() => {
-          observer.next(this.wonderList);
+          observer.next(this._wonderList);
         }, 100);
       });
 
       return nameSetObservable;
     } else {
-      let requestUri = `${this.baseUri}map/wonder/`;
-      return this.httpClient.get<Wonder[]>(requestUri);
+      let requestUri = `${this._baseUri}map/wonder/`;
+      return this._httpClient.get<Wonder[]>(requestUri);
     }
   }
 
@@ -36,15 +36,15 @@ export class WonderService {
       const dataObservable = new Observable<Wonder>((observer) => {
         setTimeout(() => {
           let parsedId = parseInt(id);
-          let names = this.wonderList.find((data) => data.id === parsedId);
+          let names = this._wonderList.find((data) => data.id === parsedId);
           observer.next(names);
         }, 100);
       });
 
       return dataObservable;
     } else {
-      let requestUri = `${this.baseUri}map/wonder/${id}`;
-      return this.httpClient.get<Wonder>(requestUri);
+      let requestUri = `${this._baseUri}map/wonder/${id}`;
+      return this._httpClient.get<Wonder>(requestUri);
     }
   }
 }

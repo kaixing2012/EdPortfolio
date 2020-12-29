@@ -16,28 +16,28 @@ export class AppComponent implements OnInit {
   isMobileMode: boolean = false;
 
   constructor(
-    private appService: AppService,
-    private cookieService: CookieService
+    private _appService: AppService,
+    private _cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
     this.setCsrfToken();
   }
 
   setCsrfToken() {
-    if (this.cookieService.get('csrftoken') === '') {
+    if (this._cookieService.get('csrftoken') === '') {
       let tokenSource =
         '!@#$%^&*()0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-      let token = this.appService.generateRandomToken(31, tokenSource);
+      let token = this._appService.generateRandomToken(31, tokenSource);
 
-      this.cookieService.set('csrftoken', token);
+      this._cookieService.set('csrftoken', token);
     }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     let window = event.target as Window;
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 }

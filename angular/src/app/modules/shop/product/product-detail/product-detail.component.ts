@@ -35,15 +35,15 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ProductDialog,
     public dialogRef: MatDialogRef<ProductDetailComponent>,
-    private snackBar: MatSnackBar,
-    private appService: AppService,
-    private productService: ProductService,
-    private shoppingService: ShoppingService
+    private _snackBar: MatSnackBar,
+    private _appService: AppService,
+    private _productService: ProductService,
+    private _shoppingService: ShoppingService
   ) {}
 
   ngOnInit(): void {
     this.getRelatedModels();
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
     this.imageUrl = this.data.productItem.cover;
 
     this.product = {
@@ -57,8 +57,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getRelatedModels() {
-    this.productService
-      .getProductList(this.appService.getUseMockeService())
+    this._productService
+      .getProductList(this._appService.getUseMockeService())
       .subscribe(
         (products: Product[]) => {
           this.filteredProducts = products.filter(
@@ -97,7 +97,7 @@ export class ProductDetailComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     let window = event.target as Window;
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 
   onColorClick(imageUrlIn: string) {
@@ -120,15 +120,15 @@ export class ProductDetailComponent implements OnInit {
 
       let amount = 1;
 
-      this.shoppingService.addToCart(productPicked, amount).subscribe(
+      this._shoppingService.addToCart(productPicked, amount).subscribe(
         (response) => {
-          let msg = this.shoppingService.getMsgByStatus(response.status);
+          let msg = this._shoppingService.getMsgByStatus(response.status);
           this.onOpenSnackBar(msg, 'Close');
-          this.shoppingService.getItemCount();
-          this.shoppingService.getCart();
+          this._shoppingService.getItemCount();
+          this._shoppingService.getCart();
         },
         (err) => {
-          let msg = this.shoppingService.getMsgByStatus(err.status);
+          let msg = this._shoppingService.getMsgByStatus(err.status);
           this.onOpenSnackBar(msg, 'Close');
           console.log(err);
         }
@@ -137,7 +137,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onOpenSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
+    this._snackBar.open(message, action, {
       // panelClass: 'snackbar',
       duration: 5000,
       horizontalPosition: 'center',

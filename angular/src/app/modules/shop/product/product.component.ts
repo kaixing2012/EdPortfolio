@@ -44,46 +44,46 @@ export class ProductComponent implements OnInit {
   isFilterOpened: boolean = true;
   isMobileMode: boolean = false;
 
-  private genderStr: string = 'women';
+  private _genderStr: string = 'women';
 
   constructor(
     public dialog: MatDialog,
-    private appService: AppService,
-    private sizeService: SizeService,
-    private colorService: ColorService,
-    private genderService: GenderService,
-    private categoryService: CategoryService,
-    private productService: ProductService
+    private _appService: AppService,
+    private _sizeService: SizeService,
+    private _colorService: ColorService,
+    private _genderService: GenderService,
+    private _categoryService: CategoryService,
+    private _productService: ProductService
   ) {}
 
   ngOnInit(): void {
-    this.sizes$ = this.sizeService.getSizeList(
-      this.appService.getUseMockeService()
+    this.sizes$ = this._sizeService.getSizeList(
+      this._appService.getUseMockeService()
     );
 
-    this.colors$ = this.colorService.getColorList(
-      this.appService.getUseMockeService()
+    this.colors$ = this._colorService.getColorList(
+      this._appService.getUseMockeService()
     );
 
-    this.genders$ = this.genderService.getGenderList(
-      this.appService.getUseMockeService()
+    this.genders$ = this._genderService.getGenderList(
+      this._appService.getUseMockeService()
     );
 
-    this.categories$ = this.categoryService.getCategoryList(
-      this.appService.getUseMockeService()
+    this.categories$ = this._categoryService.getCategoryList(
+      this._appService.getUseMockeService()
     );
 
-    this.displayProducts$ = this.productService.displayProducts;
-    this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
+    this.displayProducts$ = this._productService.displayProducts;
+    this._productService.getDisplayProducts(this._genderStr, this.checkboxes);
 
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
     this.isFilterOpened = this.isMobileMode ? false : true;
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     let window = event.target as Window;
-    this.isMobileMode = this.appService.checkUpMobileSize(window);
+    this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 
   onOpenFilter() {
@@ -102,11 +102,11 @@ export class ProductComponent implements OnInit {
   }
 
   onTabChange(event: MatTabChangeEvent) {
-    this.genderStr = event.tab.textLabel.toLowerCase();
-    this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
+    this._genderStr = event.tab.textLabel.toLowerCase();
+    this._productService.getDisplayProducts(this._genderStr, this.checkboxes);
   }
 
   onCheckChange(event: MatCheckboxChange) {
-    this.productService.getDisplayProducts(this.genderStr, this.checkboxes);
+    this._productService.getDisplayProducts(this._genderStr, this.checkboxes);
   }
 }

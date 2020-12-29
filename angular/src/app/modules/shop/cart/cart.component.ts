@@ -23,14 +23,14 @@ export class CartComponent implements OnInit {
   total: number = 0;
 
   constructor(
-    private snackBar: MatSnackBar,
-    private appService: AppService,
-    private shoppingService: ShoppingService,
-    private payement: PaymentService
+    private _snackBar: MatSnackBar,
+    private _appService: AppService,
+    private _shoppingService: ShoppingService,
+    private _payementService: PaymentService
   ) {}
 
   ngOnInit(): void {
-    this.shoppingCart$ = this.shoppingService.cart;
+    this.shoppingCart$ = this._shoppingService.cart;
   }
 
   getImageUrl(image: string) {
@@ -72,15 +72,15 @@ export class CartComponent implements OnInit {
   }
 
   onRemoveItem(shoppingItem: ShoppingItem) {
-    this.shoppingService.removeFromCart(shoppingItem).subscribe(
+    this._shoppingService.removeFromCart(shoppingItem).subscribe(
       (response) => {
-        let msg = this.shoppingService.getMsgByStatus(response.status);
+        let msg = this._shoppingService.getMsgByStatus(response.status);
         this.onOpenSnackBar(msg, 'Close');
-        this.shoppingService.getItemCount();
-        this.shoppingService.getCart();
+        this._shoppingService.getItemCount();
+        this._shoppingService.getCart();
       },
       (err) => {
-        let msg = this.shoppingService.getMsgByStatus(err.status);
+        let msg = this._shoppingService.getMsgByStatus(err.status);
         this.onOpenSnackBar(msg, 'Close');
         console.log(err);
       }
@@ -88,14 +88,14 @@ export class CartComponent implements OnInit {
   }
 
   onSaveItems(shoppingItems: ShoppingItem[]) {
-    this.shoppingService.updateYourCart(shoppingItems).subscribe(
+    this._shoppingService.updateYourCart(shoppingItems).subscribe(
       (response) => {
-        let msg = this.shoppingService.getMsgByStatus(response.status);
+        let msg = this._shoppingService.getMsgByStatus(response.status);
         this.onOpenSnackBar(msg, 'Close');
-        this.shoppingService.getCart();
+        this._shoppingService.getCart();
       },
       (err) => {
-        let msg = this.shoppingService.getMsgByStatus(err.status);
+        let msg = this._shoppingService.getMsgByStatus(err.status);
         this.onOpenSnackBar(msg, 'Close');
         console.log(err);
       }
@@ -103,25 +103,25 @@ export class CartComponent implements OnInit {
   }
 
   onCheckOut(cart: ShoppingCart) {
-    this.shoppingService.updateYourCart(cart.cartItems).subscribe(
+    this._shoppingService.updateYourCart(cart.cartItems).subscribe(
       (response) => {
-        let msg = this.shoppingService.getMsgByStatus(response.status);
+        let msg = this._shoppingService.getMsgByStatus(response.status);
         this.onOpenSnackBar(msg, 'Close');
-        this.shoppingService.getCart();
+        this._shoppingService.getCart();
 
-        this.payement.careteMyPayment().subscribe(
+        this._payementService.careteMyPayment().subscribe(
           (response) => {
-            this.payement.getPayment();
+            this._payementService.getPayment();
           },
           (err) => {
-            let msg = this.payement.getMsgByStatus(err.status);
+            let msg = this._payementService.getMsgByStatus(err.status);
             this.onOpenSnackBar(msg, 'Close');
             console.log(err);
           }
         );
       },
       (err) => {
-        let msg = this.shoppingService.getMsgByStatus(err.status);
+        let msg = this._shoppingService.getMsgByStatus(err.status);
         this.onOpenSnackBar(msg, 'Close');
         console.log(err);
       }
@@ -129,7 +129,7 @@ export class CartComponent implements OnInit {
   }
 
   onOpenSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
+    this._snackBar.open(message, action, {
       // panelClass: 'snackbar',
       duration: 5000,
       horizontalPosition: 'center',

@@ -10,24 +10,24 @@ import sizes from '../../../../assets/mockbase/shop/sizes.json';
   providedIn: 'root',
 })
 export class SizeService {
-  private sizeList: Size[] = sizes;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private headers: HttpHeaders = new HttpHeaders({});
+  private _sizeList: Size[] = sizes;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _headers: HttpHeaders = new HttpHeaders({});
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   getSizeList(useMockService: boolean) {
     if (useMockService) {
       const sizeObservable = new Observable<Size[]>((observer) => {
         setTimeout(() => {
-          observer.next(this.sizeList);
+          observer.next(this._sizeList);
         }, 100);
       });
 
       return sizeObservable;
     } else {
-      let requestUri = `${this.baseUri}shop/size/`;
-      return this.httpClient.get<Size[]>(requestUri);
+      let requestUri = `${this._baseUri}shop/size/`;
+      return this._httpClient.get<Size[]>(requestUri);
     }
   }
 }

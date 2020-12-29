@@ -10,24 +10,24 @@ import genders from '../../../../assets/mockbase/shop/genders.json';
   providedIn: 'root',
 })
 export class GenderService {
-  private genderList: Gender[] = genders;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private headers: HttpHeaders = new HttpHeaders({});
+  private _genderList: Gender[] = genders;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _headers: HttpHeaders = new HttpHeaders({});
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   getGenderList(useMockService: boolean) {
     if (useMockService) {
       const genderObservable = new Observable<Gender[]>((observer) => {
         setTimeout(() => {
-          observer.next(this.genderList);
+          observer.next(this._genderList);
         }, 100);
       });
 
       return genderObservable;
     } else {
-      let requestUri = `${this.baseUri}shop/gender/`;
-      return this.httpClient.get<Gender[]>(requestUri);
+      let requestUri = `${this._baseUri}shop/gender/`;
+      return this._httpClient.get<Gender[]>(requestUri);
     }
   }
 }

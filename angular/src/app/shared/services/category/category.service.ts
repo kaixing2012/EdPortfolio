@@ -10,24 +10,24 @@ import categories from '../../../../assets/mockbase/shop/categories.json';
   providedIn: 'root',
 })
 export class CategoryService {
-  private categoryList: Category[] = categories;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private headers: HttpHeaders = new HttpHeaders({});
+  private _categoryList: Category[] = categories;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _headers: HttpHeaders = new HttpHeaders({});
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   getCategoryList(useMockService: boolean) {
     if (useMockService) {
       const categoryObservable = new Observable<Category[]>((observer) => {
         setTimeout(() => {
-          observer.next(this.categoryList);
+          observer.next(this._categoryList);
         }, 100);
       });
 
       return categoryObservable;
     } else {
-      let requestUri = `${this.baseUri}shop/category/`;
-      return this.httpClient.get<Category[]>(requestUri);
+      let requestUri = `${this._baseUri}shop/category/`;
+      return this._httpClient.get<Category[]>(requestUri);
     }
   }
 }

@@ -17,33 +17,35 @@ import shoppingCart from '../../../../assets/mockbase/shop/shopping-carts.json';
   providedIn: 'root',
 })
 export class ShoppingService {
-  private shoppingCart: any = shoppingCart;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private httpOptions = {
+  private _shoppingCart: any = shoppingCart;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'X-CSRFToken': this.cookieService.get('csrftoken'),
+      'X-CSRFToken': this._cookieService.get('csrftoken'),
     }),
     observe: 'response' as 'body',
   };
 
-  private cartBehaviour = new BehaviorSubject<ShoppingCart>({} as ShoppingCart);
-  private itemCountBehaviour = new BehaviorSubject<number>(0);
+  private _cartBehaviour = new BehaviorSubject<ShoppingCart>(
+    {} as ShoppingCart
+  );
+  private _itemCountBehaviour = new BehaviorSubject<number>(0);
 
-  cart = this.cartBehaviour.asObservable();
-  itemCount = this.itemCountBehaviour.asObservable();
+  cart = this._cartBehaviour.asObservable();
+  itemCount = this._itemCountBehaviour.asObservable();
 
   constructor(
-    private httpClient: HttpClient,
-    private appService: AppService,
-    private cookieService: CookieService
+    private _httpClient: HttpClient,
+    private _appService: AppService,
+    private _cookieService: CookieService
   ) {
     this.getCart();
     this.getItemCount();
   }
 
   getCart() {
-    this.viewMyCart(this.appService.getUseMockeService()).subscribe(
+    this.viewMyCart(this._appService.getUseMockeService()).subscribe(
       (response) =>
         this.setCart(response.body ? response.body : ({} as ShoppingCart)),
       (err) => {
@@ -54,11 +56,11 @@ export class ShoppingService {
   }
 
   setCart(cart: ShoppingCart) {
-    this.cartBehaviour.next(cart);
+    this._cartBehaviour.next(cart);
   }
 
   getItemCount() {
-    this.viewMyCart(this.appService.getUseMockeService()).subscribe(
+    this.viewMyCart(this._appService.getUseMockeService()).subscribe(
       (response) =>
         this.setItemCount(response.body ? response.body.cartItems.length : 0),
       (err) => {
@@ -69,66 +71,66 @@ export class ShoppingService {
   }
 
   setItemCount(count: number) {
-    this.itemCountBehaviour.next(count);
+    this._itemCountBehaviour.next(count);
   }
 
   viewMyCart(useMockService: boolean) {
     if (useMockService) {
-      const shoppingCart = new Observable<HttpResponse<ShoppingCart>>(
+      const _shoppingCart = new Observable<HttpResponse<ShoppingCart>>(
         (observer) => {
           setTimeout(() => {
             let httpResponse = new HttpResponse<ShoppingCart>({
-              body: this.shoppingCart,
+              body: this._shoppingCart,
             });
             observer.next(httpResponse);
           }, 100);
         }
       );
 
-      return shoppingCart;
+      return _shoppingCart;
     } else {
-      let requestUri = `${this.baseUri}shop/shopping-cart/view-my-cart/`;
-      return this.httpClient.get<HttpResponse<ShoppingCart>>(
+      let requestUri = `${this._baseUri}shop/shopping-cart/view-my-cart/`;
+      return this._httpClient.get<HttpResponse<ShoppingCart>>(
         requestUri,
-        this.httpOptions
+        this._httpOptions
       );
     }
   }
 
   addToCart(product: Product, amount: number) {
-    let requestUri = `${this.baseUri}shop/shopping-item/add-to-cart/`;
+    let requestUri = `${this._baseUri}shop/shopping-item/add-to-cart/`;
     let body = JSON.stringify({
       product: product,
       amount: amount,
     });
-    return this.httpClient.post<HttpResponse<ShoppingItem>>(
+    return this._httpClient.post<HttpResponse<ShoppingItem>>(
       requestUri,
       body,
-      this.httpOptions
+      this._httpOptions
     );
   }
 
   removeFromCart(shoppingItem: ShoppingItem) {
-    let requestUri = `${this.baseUri}shop/shopping-item/remove-from-cart/`;
+    let requestUri = `${this._baseUri}shop/shopping-item/remove-from-cart/`;
     let body = JSON.stringify({
       shoppingItem: shoppingItem,
     });
-    return this.httpClient.post<HttpResponse<ShoppingItem>>(
+    return this._httpClient.post<HttpResponse<ShoppingItem>>(
       requestUri,
       body,
-      this.httpOptions
+      this._httpOptions
     );
   }
 
   updateYourCart(shoppingItems: ShoppingItem[]) {
-    let requestUri = `${this.baseUri}shop/shopping-item/update-your-cart/`;
+    let requestUri = `${this._baseUri}shop/shopping-item/update-your-cart/`;
     let body = JSON.stringify({
       shoppingItems: shoppingItems,
     });
-    return this.httpClient.post<HttpResponse<ShoppingItem[]>>(
+    return this._httpClient.post<HttpResponse<ShoppingItem[]>>(
       requestUri,
       body,
-      this.httpOptions
+      this._httpOptions
     );
   }
 

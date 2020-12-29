@@ -15,20 +15,23 @@ import products from '../../../../assets/mockbase/shop/products.json';
   providedIn: 'root',
 })
 export class ProductService {
-  private productList: any[] = products;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private headers: HttpHeaders = new HttpHeaders({});
+  private _productList: any[] = products;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _headers: HttpHeaders = new HttpHeaders({});
 
-  private displayProductBehaviour = new BehaviorSubject<ProductDisplay[]>(
+  private _displayProductBehaviour = new BehaviorSubject<ProductDisplay[]>(
     [] as ProductDisplay[]
   );
 
-  displayProducts = this.displayProductBehaviour.asObservable();
+  displayProducts = this._displayProductBehaviour.asObservable();
 
-  constructor(private httpClient: HttpClient, private appService: AppService) {}
+  constructor(
+    private _httpClient: HttpClient,
+    private _appService: AppService
+  ) {}
 
   getDisplayProducts(genderStr: string, checkboxes: QueryList<MatCheckbox>) {
-    this.getProductList(this.appService.getUseMockeService()).subscribe(
+    this.getProductList(this._appService.getUseMockeService()).subscribe(
       (products) => {
         let displayProducts = [] as ProductDisplay[];
 
@@ -61,21 +64,21 @@ export class ProductService {
   }
 
   setDisplayProducts(displayProducts: ProductDisplay[]) {
-    this.displayProductBehaviour.next(displayProducts);
+    this._displayProductBehaviour.next(displayProducts);
   }
 
   getProductList(useMockService: boolean) {
     if (useMockService) {
       const productObservable = new Observable<Product[]>((observer) => {
         setTimeout(() => {
-          observer.next(this.productList);
+          observer.next(this._productList);
         }, 100);
       });
 
       return productObservable;
     } else {
-      let requestUri = `${this.baseUri}shop/product/`;
-      return this.httpClient.get<Product[]>(requestUri);
+      let requestUri = `${this._baseUri}shop/product/`;
+      return this._httpClient.get<Product[]>(requestUri);
     }
   }
 

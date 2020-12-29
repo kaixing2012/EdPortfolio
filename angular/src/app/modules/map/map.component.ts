@@ -32,19 +32,19 @@ import { Wonder } from 'src/app/shared/models/map/wonder.model';
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements OnInit {
-  private map: Map = new Map({});
-  private lat: number = 23.6978;
-  private lng: number = 120.9605;
-  private zoom: number = 7;
+  private _map: Map = new Map({});
+  private _lat: number = 23.6978;
+  private _lng: number = 120.9605;
+  private _zoom: number = 7;
 
-  private initMarkerStyle = new Style({
+  private _initMarkerStyle = new Style({
     image: new Icon({
       src: 'assets/icons/placeholder.png',
       scale: 0.08,
     }),
   });
 
-  private highlightMarkerStyle = new Style({
+  private _highlightMarkerStyle = new Style({
     image: new Icon({
       src: 'assets/icons/placeholder.png',
       scale: 0.1,
@@ -52,8 +52,8 @@ export class MapComponent implements OnInit {
   });
 
   constructor(
-    private appService: AppService,
-    private wonderService: WonderService
+    private _appService: AppService,
+    private _wonderService: WonderService
   ) {}
 
   ngOnInit(): void {
@@ -61,18 +61,18 @@ export class MapComponent implements OnInit {
     let mapControls = this.initMapControls();
     let mapView = this.initMapView();
 
-    this.map = new Map({
+    this._map = new Map({
       controls: mapControls,
       layers: mapLayers,
       target: 'map',
       view: mapView,
     });
 
-    this.wonderService
-      .getWonderList(this.appService.getUseMockeService())
+    this._wonderService
+      .getWonderList(this._appService.getUseMockeService())
       .subscribe(
         (wonder: Wonder[]) => {
-          this.map.addLayer(this.generateMarkerLayer(wonder));
+          this._map.addLayer(this.generateMarkerLayer(wonder));
         },
         (err) => {
           console.log(err);
@@ -82,15 +82,15 @@ export class MapComponent implements OnInit {
     var hit: any = null;
     var status = document.getElementById('status') as HTMLElement;
 
-    this.map.on('pointermove', (event) => {
+    this._map.on('pointermove', (event) => {
       if (hit !== null) {
-        hit.setStyle(this.initMarkerStyle);
+        hit.setStyle(this._initMarkerStyle);
         hit = null;
       }
 
-      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+      this._map.forEachFeatureAtPixel(event.pixel, (feature) => {
         hit = feature;
-        hit.setStyle(this.highlightMarkerStyle);
+        hit.setStyle(this._highlightMarkerStyle);
         return true;
       });
 
@@ -102,8 +102,8 @@ export class MapComponent implements OnInit {
       }
     });
 
-    this.map.on('click', (event) => {
-      let feature = this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+    this._map.on('click', (event) => {
+      let feature = this._map.forEachFeatureAtPixel(event.pixel, (feature) => {
         return feature;
       });
 
@@ -160,8 +160,8 @@ export class MapComponent implements OnInit {
       new ScaleLine(),
       new LayerSwitch(),
       new SearchBar({
-        wonderService: this.wonderService,
-        appService: this.appService,
+        wonderService: this._wonderService,
+        appService: this._appService,
       }),
     ];
   }
@@ -173,7 +173,7 @@ export class MapComponent implements OnInit {
       let feature = new Feature({
         geometry: new Point(LngLat([data.lng, data.lat])),
       });
-      feature.setStyle(this.initMarkerStyle);
+      feature.setStyle(this._initMarkerStyle);
 
       markerFeatures.push(feature);
     });
@@ -189,8 +189,8 @@ export class MapComponent implements OnInit {
 
   initMapView() {
     return new View({
-      center: LngLat([this.lng, this.lat]),
-      zoom: this.zoom,
+      center: LngLat([this._lng, this._lat]),
+      zoom: this._zoom,
     });
   }
 }

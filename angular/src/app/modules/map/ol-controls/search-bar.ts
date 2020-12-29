@@ -12,9 +12,9 @@ interface Options {
 }
 
 export class SearchBar extends Control {
-  private appService: AppService;
-  private wonderService: WonderService;
-  private inputBox: HTMLInputElement;
+  private _appService: AppService;
+  private _wonderService: WonderService;
+  private _inputBox: HTMLInputElement;
 
   constructor(opt_options?: Options) {
     let options = opt_options as Options;
@@ -71,9 +71,9 @@ export class SearchBar extends Control {
       target: options.target,
     });
 
-    this.inputBox = input;
-    this.wonderService = options.wonderService;
-    this.appService = options.appService;
+    this._inputBox = input;
+    this._wonderService = options.wonderService;
+    this._appService = options.appService;
 
     input.addEventListener('keyup', (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
@@ -86,17 +86,17 @@ export class SearchBar extends Control {
   }
 
   navigateToLocation() {
-    if (this.inputBox.value) {
+    if (this._inputBox.value) {
       let datalist = document.querySelectorAll(
-        `#${this.inputBox.getAttribute('list')} option`
+        `#${this._inputBox.getAttribute('list')} option`
       );
 
       datalist.forEach((element) => {
-        if (element.getAttribute('value') === this.inputBox.value) {
-          this.wonderService
+        if (element.getAttribute('value') === this._inputBox.value) {
+          this._wonderService
             .getWonderDetail(
               element.getAttribute('data-value') as string,
-              this.appService.getUseMockeService()
+              this._appService.getUseMockeService()
             )
             .subscribe(
               (data: any) => {

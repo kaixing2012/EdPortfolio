@@ -10,24 +10,24 @@ import colors from '../../../../assets/mockbase/shop/colors.json';
   providedIn: 'root',
 })
 export class ColorService {
-  private colorList: Color[] = colors;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private headers: HttpHeaders = new HttpHeaders({});
+  private _colorList: Color[] = colors;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _headers: HttpHeaders = new HttpHeaders({});
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   getColorList(useMockService: boolean) {
     if (useMockService) {
       const colorObservable = new Observable<Color[]>((observer) => {
         setTimeout(() => {
-          observer.next(this.colorList);
+          observer.next(this._colorList);
         }, 100);
       });
 
       return colorObservable;
     } else {
-      let requestUri = `${this.baseUri}shop/color/`;
-      return this.httpClient.get<Color[]>(requestUri);
+      let requestUri = `${this._baseUri}shop/color/`;
+      return this._httpClient.get<Color[]>(requestUri);
     }
   }
 }

@@ -15,30 +15,30 @@ import payment from '../../../../assets/mockbase/shop/payment.json';
   providedIn: 'root',
 })
 export class PaymentService {
-  private mockPayment: any = payment;
-  private baseUri = `http://${window.location.hostname}:8000/api/`;
-  private httpOptions = {
+  private _mockPayment: any = payment;
+  private _baseUri = `http://${window.location.hostname}:8000/api/`;
+  private _httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'X-CSRFToken': this.cookieService.get('csrftoken'),
+      'X-CSRFToken': this._cookieService.get('csrftoken'),
     }),
     observe: 'response' as 'body',
   };
 
-  private paymentBehaviour = new BehaviorSubject<Payment>({} as Payment);
+  private _paymentBehaviour = new BehaviorSubject<Payment>({} as Payment);
 
-  payment = this.paymentBehaviour.asObservable();
+  payment = this._paymentBehaviour.asObservable();
 
   constructor(
-    private httpClient: HttpClient,
-    private appService: AppService,
-    private cookieService: CookieService
+    private _httpClient: HttpClient,
+    private _appService: AppService,
+    private _cookieService: CookieService
   ) {
     this.getPayment();
   }
 
   getPayment() {
-    this.viewMyPayment(this.appService.getUseMockeService()).subscribe(
+    this.viewMyPayment(this._appService.getUseMockeService()).subscribe(
       (response) =>
         this.setPayment(response.body ? response.body : ({} as Payment)),
       (err) => {
@@ -49,16 +49,16 @@ export class PaymentService {
   }
 
   setPayment(payment: Payment) {
-    this.paymentBehaviour.next(payment);
+    this._paymentBehaviour.next(payment);
   }
 
   careteMyPayment() {
-    let requestUri = `${this.baseUri}shop/payment/create-my-payment/`;
+    let requestUri = `${this._baseUri}shop/payment/create-my-payment/`;
     let body = {};
-    return this.httpClient.post<HttpResponse<Payment>>(
+    return this._httpClient.post<HttpResponse<Payment>>(
       requestUri,
       body,
-      this.httpOptions
+      this._httpOptions
     );
   }
 
@@ -67,7 +67,7 @@ export class PaymentService {
       const shoppingCart = new Observable<HttpResponse<Payment>>((observer) => {
         setTimeout(() => {
           let httpResponse = new HttpResponse<Payment>({
-            body: this.mockPayment,
+            body: this._mockPayment,
           });
           observer.next(httpResponse);
         }, 100);
@@ -75,36 +75,36 @@ export class PaymentService {
 
       return shoppingCart;
     } else {
-      let requestUri = `${this.baseUri}shop/payment/view-my-payment`;
-      return this.httpClient.get<HttpResponse<Payment>>(
+      let requestUri = `${this._baseUri}shop/payment/view-my-payment`;
+      return this._httpClient.get<HttpResponse<Payment>>(
         requestUri,
-        this.httpOptions
+        this._httpOptions
       );
     }
   }
 
   updateMyPayment(payment: Payment) {
-    let requestUri = `${this.baseUri}shop/payment/update-my-payment/`;
+    let requestUri = `${this._baseUri}shop/payment/update-my-payment/`;
     let body = {
       payment: payment,
     };
-    return this.httpClient.post<HttpResponse<Payment>>(
+    return this._httpClient.post<HttpResponse<Payment>>(
       requestUri,
       body,
-      this.httpOptions
+      this._httpOptions
     );
   }
 
   confirmMyPayment(payment: Payment) {
     console.log(payment);
-    let requestUri = `${this.baseUri}shop/payment/confirm-my-payment/`;
+    let requestUri = `${this._baseUri}shop/payment/confirm-my-payment/`;
     let body = {
       payment: payment,
     };
-    return this.httpClient.post<HttpResponse<Payment>>(
+    return this._httpClient.post<HttpResponse<Payment>>(
       requestUri,
       body,
-      this.httpOptions
+      this._httpOptions
     );
   }
 
