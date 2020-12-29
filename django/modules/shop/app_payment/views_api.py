@@ -43,7 +43,9 @@ class PaymentAPIViewSet(viewsets.ModelViewSet):
             payment.total_amount = total_amount + 60 if total_amount < 1000 else total_amount
             payment.save()
 
-            serializer = PaymentPerformGetSerializer(payment)
+            serializer = PaymentPerformGetSerializer(
+                payment, context={"request": request})
+
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
         else:
@@ -109,7 +111,9 @@ class PaymentAPIViewSet(viewsets.ModelViewSet):
                 payment.card_cvv = data['customer_name']
                 payment.save()
 
-                serializer = PaymentPerformGetSerializer(payment)
+                serializer = PaymentPerformGetSerializer(
+                    payment, context={"request": request})
+
                 headers = self.get_success_headers(serializer.data)
 
                 HTTP_210_UPDATE_CONTENT = 210
