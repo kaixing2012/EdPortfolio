@@ -28,28 +28,12 @@ class ShoppingCartAPIViewSet(viewsets.ModelViewSet):
 
         try:
             shopping_cart = ShoppingCart.objects.get(session_key=key)
-            shopping_items = shopping_cart.shoppingitem_set.all()
-            item_serializer = ShoppingItemPerformGetSerializer(
-                shopping_items, many=True)
 
-            for item in item_serializer.data:
-                cover_url = item['product']['product_item']['cover']
-                item['product']['product_item']['cover'] = request.build_absolute_uri(
-                    cover_url)
+            serializer = ShoppingCartPerformGetSerializer(
+                shopping_cart, context={"request": request})
 
-                image_url = item['product']['product_image']['image']
-                item['product']['product_image']['image'] = request.build_absolute_uri(
-                    image_url)
+            headers = self.get_success_headers(serializer.data)
 
-            data = dict(
-                id=shopping_cart.id,
-                cart_serial_no=shopping_cart.cart_serial_no,
-                session_key=shopping_cart.session_key,
-                date_created=shopping_cart.date_created,
-                cart_items=item_serializer.data
-            )
-
-            headers = self.get_success_headers(data)
-            return Response(data, status=status.HTTP_200_OK, headers=headers)
+            return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
         except ShoppingCart.DoesNotExist as ex:
             return Response(status=status.HTTP_404_NOT_FOUND)

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 
 from ..app_shopping_cart.models import ShoppingCart
+from ..app_shopping_cart.serializers import ShoppingCartPerformGetSerializer
 
 from .models import Payment
 from .serializers import PaymentPerformGetSerializer, PaymentPerformOperateSerializer
@@ -58,8 +59,12 @@ class PaymentAPIViewSet(viewsets.ModelViewSet):
         if key:
             try:
                 payment = Payment.objects.get(session_key=key)
-                serializer = PaymentPerformGetSerializer(payment)
+
+                serializer = PaymentPerformGetSerializer(
+                    payment, context={"request": request})
+
                 headers = self.get_success_headers(serializer.data)
+
                 return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
             except Payment.DoesNotExist as ex:
                 return Response(status=status.HTTP_404_NOT_FOUND)
