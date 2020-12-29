@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Payment Confirm</h1>
+
+<div mat-dialog-content>
+  To confirm this, the system will delete the shopping items and cart also
+  payment infomation that you just add
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="onConfirm()"
+  >
+    Confirm
+  </button>
+</mat-dialog-actions>

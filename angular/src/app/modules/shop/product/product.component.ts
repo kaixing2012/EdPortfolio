@@ -91,7 +91,7 @@ export class ProductComponent implements OnInit {
   }
 
   onOpenDialog(productItem: ProductItem, category: Category, gender: Gender) {
-    const dialogRef = this.dialog.open(ProductDetailComponent, {
+    this.dialog.open(ProductDetailComponent, {
       width: '100%',
       data: {
         productItem: productItem,

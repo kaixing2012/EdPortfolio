@@ -8,7 +8,10 @@ import {
 
 import { Observable } from 'rxjs';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { Payment } from 'src/app/shared/models/shop/payment.model';
 
@@ -31,6 +34,7 @@ export class PayComponent implements OnInit {
   paymentFormGroup: FormGroup = new FormGroup({});
 
   constructor(
+    public dialog: MatDialog,
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private _appService: AppService,
@@ -125,6 +129,15 @@ export class PayComponent implements OnInit {
     this.isMobileMode = this._appService.checkUpMobileSize(window);
   }
 
+  onOpenConfirmPayDialog(payment: Payment) {
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '100%',
+      data: {
+        payment: payment,
+      },
+    });
+  }
+
   onOpenSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       // panelClass: 'snackbar',
@@ -148,11 +161,6 @@ export class PayComponent implements OnInit {
         console.log(err);
       }
     );
-  }
-
-  onPay(payment: Payment) {
-    payment = this.mapFormsToPaymentObj(payment);
-    alert('Functionality for this is coming soon');
   }
 
   mapFormsToPaymentObj(payment: Payment) {
