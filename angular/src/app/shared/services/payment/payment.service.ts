@@ -94,6 +94,19 @@ export class PaymentService {
     );
   }
 
+  confirmMyPayment(payment: Payment) {
+    console.log(payment);
+    let requestUri = `${this.baseUri}shop/payment/confirm-my-payment/`;
+    let body = {
+      payment: payment,
+    };
+    return this.httpClient.post<HttpResponse<Payment>>(
+      requestUri,
+      body,
+      this.httpOptions
+    );
+  }
+
   getMsgByStatus(status: number) {
     let msg = '';
 
@@ -102,9 +115,9 @@ export class PaymentService {
       //   msg = 'New item was just added to your cart';
       //   break;
 
-      // case 209:
-      //   msg = 'Item was successfully removed from your cart';
-      //   break;
+      case 209:
+        msg = 'Payment was successfully confirmed and deleted';
+        break;
 
       case 210:
         msg = "You've just seccessfully save your payment information";

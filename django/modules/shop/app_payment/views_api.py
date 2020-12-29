@@ -124,3 +124,33 @@ class PaymentAPIViewSet(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({}, status=status.HTTP_403_FORBIDDEN)
+
+    @action(detail=False, methods=["POST"], url_path='confirm-my-payment')
+    def confirm_my_payment(self, request, *args, **kwargs):
+        if request.session.session_key:
+            key = request.session.session_key
+        else:
+            key = self.request.META.get("HTTP_X_CSRFTOKEN", None)[0:32]
+
+        if key:
+
+            try:
+                payment = Payment.objects.get(
+                    payment_serial_no=key, session_key=key)
+
+                serializer = PaymentPerformGetSerializer(
+                    payment, context={"request": request})
+
+                headers = self.get_success_headers(serializer.data)
+
+                if (payment.cart.session_key == key):
+                    payment.cart.delete()
+
+                HTTP_209_CONTENT_DELETED = 209
+
+                return Response(serializer.data, status=HTTP_209_CONTENT_DELETED, headers=headers)
+
+            except ShoppingCart.DoesNotExist as ex:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({}, status=status.HTTP_403_FORBIDDEN)
