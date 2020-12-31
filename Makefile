@@ -1,5 +1,5 @@
 login:
-	docker login -u $(u) -p $(p)
+	docker login -u $(u)
 
 build-dj:
 	docker build --force-rm $(options) -t eddjango:latest ./django/
